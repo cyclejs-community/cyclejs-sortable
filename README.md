@@ -3,6 +3,7 @@ Makes all children of a selected component sortable
 
 ## Usage
 
+```
 function main(sources)
 {
     return {
@@ -15,11 +16,12 @@ function main(sources)
         .compose(makeSortable(DOM))
     }
 }
+```
 
 ## Options
 
-´restrictMovementArea´: A selector that defines the area in which the children can be dragged
+`restrictMovementArea`: A selector that defines the area in which the children can be dragged
 
-´handle´: A sector to define a handle for moving the items
+`handle`: A sector to define a handle for moving the items
 
-´ghostClass´: A classname to be applied to the ghost
+`ghostClass`: A classname to be applied to the ghost
