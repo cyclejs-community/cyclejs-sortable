@@ -1,0 +1,30 @@
+{
+  "name": "cyclejs-sortable",
+  "version": "1.0.0",
+  "description": "Makes all children of a vdom-node sortable via drag and drop",
+  "main": "makeSortable.js",
+  "scripts": {
+    "build": "tsc -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperManitu/cyclejs-sortable.git"
+  },
+  "keywords": [
+    "cyclejs",
+    "sortable"
+  ],
+  "author": "Jan van Brügge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SuperManitu/cyclejs-sortable/issues"
+  },
+  "homepage": "https://github.com/SuperManitu/cyclejs-sortable#readme",
+  "dependencies": {
+    "xstream": "^6.2.0"
+  },
+  "devDependencies": {
+    "@cycle/base": "^4.1.1",
+    "@cycle/dom": "^12.2.4"
+  }
+}
