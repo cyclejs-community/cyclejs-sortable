@@ -5,7 +5,8 @@
   "main": "build/makeSortable.js",
   "typings": "build/makeSortable.d.ts",
   "scripts": {
-    "build": "tsc -d"
+    "build": "tsc -d src/makeSortable.ts",
+    "examples:simple": "tsc && browserify build/examples/simple/src/index.js -o examples/simple/build/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,9 @@
   },
   "devDependencies": {
     "@cycle/base": "^4.1.1",
-    "@cycle/dom": "^12.2.4"
+    "@cycle/dom": "^12.2.5",
+    "@cycle/xstream-run": "^3.1.0",
+    "browserify": "^13.1.0",
+    "typescript": "^2.0.0"
   }
 }
