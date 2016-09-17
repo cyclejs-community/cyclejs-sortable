@@ -213,9 +213,6 @@ export function getIntersection(e1 : Element, e2 : Element) : Intersection
         ymax: Math.min(c1.bottom, c2.bottom)
     };
 
-    if (intersection.xmin >= intersection.xmax || intersection.ymin >= intersection.ymax) {
-        return undefined;
-    }
     return intersection;
 }
 
@@ -224,7 +221,6 @@ export function getIntersection(e1 : Element, e2 : Element) : Intersection
  */
 export function getArea(intersection : Intersection) : number
 {
-    if (intersection === undefined) { return 0; }
     return (intersection.xmax - intersection.xmin) * (intersection.ymax - intersection.ymin);
 }
 

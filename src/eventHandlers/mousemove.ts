@@ -52,8 +52,8 @@ export const mousemoveHandler : EventHandler = (node, event, options) => {
     const newChildren : VNode[] = itemIndex === newIndex ? parent.children.slice(0, -1) : [
         ...parent.children.slice(0, min),
         parent.children[max],
-        ...parent.children.slice(min + 1, max),
         parent.children[min],
+        ...parent.children.slice(min + 1, max),
         ...filteredChildren.slice(max, filteredChildren.length - 1)
     ];
 
