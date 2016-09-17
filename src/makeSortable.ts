@@ -1,30 +1,19 @@
 import xs, { Stream } from 'xstream';
 import { DOMSource, VNode, VNodeData } from '@cycle/dom';
 
-export interface SortableOptions
-{
-    restrictMovementArea? : string; //has to be a selector
-    handle? : string; //has to be a selector
-    ghostClass? : string;
-}
-
-interface Dimensions
-{
-    xmin : number;
-    ymin : number;
-    xmax : number;
-    ymax : number;
-}
+import { SortableOptions, itemClassName, Transform } from './definitions';
 
 export type Event = [any, number, string];
-export type Transform = (s : Stream<VNode>) => Stream<VNode>;
 export type EventHandler =
     (i : number, event : any, node : VNode, options? : SortableOptions) => VNode;
 
-const itemClassName : string = 'x-sortable-item';
-const itemSelector : string = '.' + itemClassName;
-
-export function makeSortable(dom : DOMSource, options? : SortableOptions) : Transform
+/**
+ * Can be composed with a Stream of VNodes to make them sortable via drag&drop
+ * @param {DOMSource} dom The preselected root VNode of the sortable, also indicates the area in which the ghost can be dragged
+ * @param {SortableOptions} options  @see {SortableOptions}
+ * @return {Transform<VNode, VNode>} A function to be composed with a view VNode stream
+ */
+export function makeSortable(dom : DOMSource, options? : SortableOptions) : Transform<VNode, VNode>
 {
     return function(sortable : Stream<VNode>) : Stream<VNode>
     {
