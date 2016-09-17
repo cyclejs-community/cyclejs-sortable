@@ -1,12 +1,10 @@
 import xs, { Stream } from 'xstream';
 import { DOMSource, VNode, VNodeData } from '@cycle/dom';
 
-import { SortableOptions, itemClassName, Transform } from './definitions';
+import { SortableOptions, Transform, EventHandler } from './definitions';
 import { applyDefaults } from './helpers';
-
-type EventHandler = any;
-type Dimensions = any;
-const itemSelector : string = '.' + itemClassName;
+import { handleEvent } from './eventHandlers';
+import { emitBetween } from './xstreamHelpers';
 
 /**
  * Can be composed with a Stream of VNodes to make them sortable via drag&drop
@@ -19,17 +17,21 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
     return sortable => sortable
         .map(node => {
             const defaults : SortableOptions = applyDefaults(options, node);
+
+            const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
+                .events('mousedown');
+
+            const event$ : Stream<MouseEvent> = xs.merge(mousedown$);
+
+            return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), node);
+        })
+        .flatten();
+}
 /*
 * Old code
-*
-*/
-
             const items : DOMSource = dom.select('.' + itemClassName);
             const handles : DOMSource = options && options.handle ?
                 dom.select(options.handle) : undefined;
-
-            const mousedown$ : Stream<Event> =
-                getEventStream(handles ? handles : items, 'mousedown');
             const noselect$ : Stream<Event> = mousedown$
                 .mapTo(getEventNameStream(dom.select('body'), 'mousedown', 'noselect'))
                 .flatten()
@@ -61,21 +63,6 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
                 .fold((acc, curr) => applyEvent(curr, acc, options), node);
         })
         .flatten();
-}
-
-export function emitBetween(start$ : Stream<any>, end$ : Stream<any>)
-    : (s : Stream<any>) => Stream<any>
-{
-    return s => xs.combine(s, start$.startWith(undefined), end$.startWith(undefined))
-        .fold((acc, curr) => {
-            const startChanged : boolean = curr[1] !== acc[2];
-            const endChanged : boolean = curr[2] !== acc[3];
-            const shouldEmit : boolean = startChanged ? true
-                : (endChanged ? false : acc[0]);
-            return [shouldEmit, curr[0], curr[1], curr[2]];
-        }, [false, undefined, undefined, undefined])
-        .filter(arr => arr[0])
-        .map(arr => arr[1]);
 }
 
 const transformMouseUp : EventHandler = (index, event, node, options) => {
@@ -166,40 +153,9 @@ const transformMouseMove : EventHandler = (index, event, node, options) => {
         return Object.assign({}, node, { children: swappedChildren });
 };
 
-const transformMouseDown : EventHandler = (index, event, node, options) => {
-    const itemClientRect : ClientRect = findParent(event.target, itemSelector)
-        .getBoundingClientRect();
-
-    const scrollOffset : number = findParent(event.target, 'body').scrollTop;
-
-    const mouseOffset : any = {
-        x: itemClientRect.left - event.clientX,
-        y: itemClientRect.top - event.clientY
-    };
-
-    const restriction : ClientRect = options && options.restrictMovementArea ?
-        findParent(event.target, options.restrictMovementArea).getBoundingClientRect() : undefined;
-
-    const restrictionObj : Dimensions = !restriction ? undefined : {
-        xmin: restriction.left,
-        xmax: restriction.left + restriction.width,
-        ymin: restriction.top,
-        ymax: restriction.top + restriction.height
-    };
-
-    const dimensions : any = {
-        xmin: itemClientRect.left,
-        xmax: itemClientRect.left + itemClientRect.width,
-        ymin: itemClientRect.top,
-        ymax: itemClientRect.top + itemClientRect.height,
-        width: itemClientRect.width,
-        height: itemClientRect.height
-    };
+const transformMouseDown : EventHandler = (node, event, options) => {
 
     const attrs : any = {
-        'data-mouseoffset': JSON.stringify(mouseOffset),
-        'data-restriction': JSON.stringify(restrictionObj),
-        'data-dimensions': JSON.stringify(dimensions),
         'data-originalIndex': index,
         'style': 'z-index: 5; margin: 0; pointer-events: none; position: absolute; width: '
             + itemClientRect.width + 'px; ' + 'height: ' + itemClientRect.height + 'px; top: '
@@ -208,8 +164,6 @@ const transformMouseDown : EventHandler = (index, event, node, options) => {
     };
 
     const dragging : any = { style: 'opacity: 0;' };
-    const className : string = (options && options.ghostClass ? options.ghostClass + ' ' : '')
-        + 'x-ghost';
 
     const sortable : any = findParent(event.target, itemSelector).parentNode;
     const items : any[] = [].slice.call(sortable.children);
@@ -236,17 +190,6 @@ const transformMouseDown : EventHandler = (index, event, node, options) => {
         ]
     });
 };
-
-function applyEvent(event : Event, node : VNode, options? : SortableOptions) : VNode
-{
-    const mapping : { [key : string]: EventHandler } = {
-        'mousedown': transformMouseDown,
-        'mouseup': transformMouseUp,
-        'mousemove': transformMouseMove
-    };
-
-    return mapping[event[2]] ? mapping[event[2]](event[1], event[0], node, options) : node;
-}
 
 function getEventStream(items : DOMSource, eventName : string, customName? : string) : Stream<Event>
 {
@@ -354,3 +297,5 @@ export function getIndex(node : any) : number
 {
     return Array.prototype.indexOf.call(node.parentNode.children, node);
 }
+
+*/

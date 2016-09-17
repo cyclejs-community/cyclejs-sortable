@@ -1,12 +1,8 @@
 import { Stream } from 'xstream';
-
-/**
- * CSS class name that is added to every item
- * @type {string}
- */
-export const itemClassName : string = 'x-sortable-item';
+import { VNode } from '@cycle/dom';
 
 export type Transform<T, U> = (s : Stream<T>) => Stream<U>
+export type EventHandler = (node : VNode, event : MouseEvent, options : SortableOptions) => VNode;
 
 export interface SortableOptions {
     /**
