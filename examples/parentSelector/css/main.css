@@ -1,0 +1,9 @@
+#app {
+    font-size: 35px;
+}
+
+.class {
+    margin: 20px 0px;
+    padding: 5px;
+    background: lightgray;
+}

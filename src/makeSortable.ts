@@ -2,10 +2,11 @@ import xs, { Stream } from 'xstream';
 import { DOMSource, VNode, VNodeData } from '@cycle/dom';
 
 import { SortableOptions, itemClassName, Transform } from './definitions';
+import { applyDefaults } from './helpers';
 
-export type Event = [any, number, string];
-export type EventHandler =
-    (i : number, event : any, node : VNode, options? : SortableOptions) => VNode;
+type EventHandler = any;
+type Dimensions = any;
+const itemSelector : string = '.' + itemClassName;
 
 /**
  * Can be composed with a Stream of VNodes to make them sortable via drag&drop
@@ -15,17 +16,15 @@ export type EventHandler =
  */
 export function makeSortable(dom : DOMSource, options? : SortableOptions) : Transform<VNode, VNode>
 {
-    return function(sortable : Stream<VNode>) : Stream<VNode>
-    {
-        return sortable
+    return sortable => sortable
         .map(node => {
-            const processedNode : VNode = Object.assign({}, node, {
-                    children: !node.children ? [] : node.children
-                        .map(c => addClassName(c, itemClassName))
-                        .map((c, i) => Object.assign(c, { key: i }))
-                });
+            const defaults : SortableOptions = applyDefaults(options, node);
+/*
+* Old code
+*
+*/
 
-            const items : DOMSource = dom.select(itemSelector);
+            const items : DOMSource = dom.select('.' + itemClassName);
             const handles : DOMSource = options && options.handle ?
                 dom.select(options.handle) : undefined;
 
@@ -59,10 +58,9 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
             );
 
             return sortableEvent$
-                .fold((acc, curr) => applyEvent(curr, acc, options), processedNode);
+                .fold((acc, curr) => applyEvent(curr, acc, options), node);
         })
         .flatten();
-    };
 }
 
 export function emitBetween(start$ : Stream<any>, end$ : Stream<any>)
