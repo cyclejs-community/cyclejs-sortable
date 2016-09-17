@@ -2,7 +2,7 @@ import xs, { Stream } from 'xstream';
 import { DOMSource, VNode, VNodeData } from '@cycle/dom';
 
 import { SortableOptions, Transform, EventHandler } from './definitions';
-import { applyDefaults } from './helpers';
+import { applyDefaults, addKeys } from './helpers';
 import { handleEvent } from './eventHandlers';
 import { emitBetween } from './xstreamHelpers';
 
@@ -17,6 +17,7 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
     return sortable => sortable
         .map(node => {
             const defaults : SortableOptions = applyDefaults(options, node);
+            const newNode : VNode = addKeys(node, defaults);
 
             const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
                 .events('mousedown');
@@ -31,7 +32,7 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
 
             const event$ : Stream<MouseEvent> = xs.merge(mousedown$, mouseup$, mousemove$);
 
-            return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), node);
+            return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), newNode);
         })
         .flatten();
 }

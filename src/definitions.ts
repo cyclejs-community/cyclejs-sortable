@@ -49,3 +49,17 @@ export interface MouseOffset
     x : number;
     y : number;
 }
+
+export interface ItemDimensions
+{
+    width : number;
+    height : number;
+}
+
+export interface Intersection
+{
+    xmin : number;
+    ymin : number;
+    xmax : number;
+    ymax : number;
+}

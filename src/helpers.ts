@@ -1,6 +1,6 @@
 import { VNode, VNodeData } from '@cycle/dom';
 import select from 'snabbdom-selector';
-import { SortableOptions, MouseOffset } from './definitions';
+import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './definitions';
 
 /**
  * Takes the maybe undefined options and fills them with defaults
@@ -23,6 +23,20 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
         itemSelector: itemSelector,
         ghostClass: itemClass,
     }, options);
+}
+
+/**
+ * Adds keys to the VNodes to make them able to swap
+ * @param {VNode} node the root VNode
+ * @param {SortableOptions} options the non-null options
+ * @return {VNode} a new VNode with the keys
+ */
+export function addKeys(node : VNode, options : SortableOptions) : VNode
+{
+    const parent : VNode = select(options.parentSelector, node)[0];
+    return replaceNode(node, options.parentSelector, Object.assign({}, parent, {
+        children: parent.children.map((c, i) => Object.assign({}, c, { key: i }))
+    }));
 }
 
 /**
@@ -83,7 +97,7 @@ export function replaceNode(root : VNode, selector : string, replacement : VNode
  * @param {ClientRect} itemRect the bounding client rect of the item
  * @return {string} the style value
  */
-export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, itemRect : ClientRect) : string
+export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, itemRect : ItemDimensions) : string
 {
     return 'z-index: 5; margin: 0; pointer-events: none; position: absolute; width: '
         + itemRect.width + 'px; ' + 'height: ' + itemRect.height + 'px; top: '
@@ -121,12 +135,31 @@ export function addAttributes(e : VNode, newAttr : { [attr : string]: any }) : V
 }
 
 /**
+ * Removes the given attribute from the VNode
+ * @param {VNode} node the VNode
+ * @param {string} attributeName the name of the attribute
+ * @return {VNode} a new VNode without the attribute
+ */
+export function removeAttribute(node : VNode, attributeName : string) : VNode
+{
+    if (!node.data || !node.data.attrs) { return node; }
+    return Object.assign({}, node, {
+        data: Object.assign({}, node.data, {
+            attrs: Object.keys(node.data.attrs)
+                .filter(k => k !== attributeName)
+                .map(k => ({ [k]: node.data.attrs[k] }))
+                .reduce((acc, curr) => Object.assign(acc, curr), {})
+        })
+    });
+}
+
+/**
  * Adds the given additions savely to the VNode
  * @param {VNode} node the VNode to add the additions on
  * @param {any} addition the new additions
  * @return {VNode} the newly created VNode
  */
-function addToData(node : VNode, additions : { [key : string]: any }) : VNode
+export function addToData(node : VNode, additions : { [key : string]: any }) : VNode
 {
     const hasData : boolean = node.data !== undefined;
     const key : string = Object.keys(additions)[0];
@@ -152,7 +185,7 @@ export function getClientRect(element : Element) : ClientRect
         + parseFloat(styles.paddingBottom.slice(0, -2));
     const clientRect : ClientRect = element.getBoundingClientRect();
 
-    return { //For whatever reason, but Object.assign does not work here
+    return { //Object.assign does not work here
         top: clientRect.top,
         left: clientRect.left,
         bottom: clientRect.bottom,
@@ -160,4 +193,47 @@ export function getClientRect(element : Element) : ClientRect
         width: clientRect.width - paddingX,
         height: clientRect.height - paddingY
     };
+}
+
+/**
+ * Calculates the intersection of two elements
+ * @param {Element} e1 the first element
+ * @param {Element} e2 the first element
+ * @return {Intersection} the intersection or undefined if there is no intersecton
+ */
+export function getIntersection(e1 : Element, e2 : Element) : Intersection
+{
+    const c1 : ClientRect = e1.getBoundingClientRect();
+    const c2 : ClientRect = e2.getBoundingClientRect();
+
+    const intersection : Intersection = {
+        xmin: Math.max(c1.left, c2.left),
+        ymin: Math.max(c1.top, c2.top),
+        xmax: Math.min(c1.right, c2.right),
+        ymax: Math.min(c1.bottom, c2.bottom)
+    };
+
+    if (intersection.xmin >= intersection.xmax || intersection.ymin >= intersection.ymax) {
+        return undefined;
+    }
+    return intersection;
+}
+
+/**
+ * Calculates the area of the given rectangle
+ */
+export function getArea(intersection : Intersection) : number
+{
+    if (intersection === undefined) { return 0; }
+    return (intersection.xmax - intersection.xmin) * (intersection.ymax - intersection.ymin);
+}
+
+/**
+ * Crops the value between min and max
+ */
+export function crop(value : number, min : number, max : number) : number
+{
+    if (value < min) { return min; }
+    if (value > max) { return max; }
+    return value;
 }

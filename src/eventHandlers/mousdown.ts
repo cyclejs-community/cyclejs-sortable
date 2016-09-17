@@ -19,12 +19,15 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
     const index : number = getIndex(item);
     const ghostAttrs : { [name : string]: string } = {
         'data-mouseoffset': JSON.stringify(mouseOffset),
+        'data-itemdimensions': JSON.stringify({ width: itemRect.width, height: itemRect.height }),
         'data-itemindex': index.toString(),
         'style': getGhostStyle(event, mouseOffset, itemRect)
     };
 
     const children : VNode[] = [
-        ...parent.children,
+        ...parent.children.slice(0, index),
+        addAttributes(parent.children[index], { 'style': 'opacity: 0;' }),
+        ...parent.children.slice(index + 1),
         addAttributes(parent.children[index], ghostAttrs)
     ];
 
