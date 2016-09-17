@@ -18,8 +18,8 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
         getParentNode(root, options.handle).sel : '.' + itemClass;
 
     return Object.assign({
-        parentSelector: root.sel.substr(root.sel.indexOf('.') + 1),
-        handle: '.' + itemClass,
+        parentSelector: root.sel,
+        handle: itemSelector,
         itemSelector: itemSelector,
         ghostClass: itemClass,
     }, options);

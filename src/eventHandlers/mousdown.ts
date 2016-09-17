@@ -19,6 +19,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
     const index : number = getIndex(item);
     const ghostAttrs : { [name : string]: string } = {
         'data-mouseoffset': JSON.stringify(mouseOffset),
+        'data-itemindex': index.toString(),
         'style': getGhostStyle(event, mouseOffset, itemRect)
     };
 

@@ -22,7 +22,7 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
                 .events('mousedown');
 
             const mouseup$ : Stream<MouseEvent> = mousedown$
-                .mapTo(dom.select('html').events('mouseup'))
+                .mapTo(dom.select('body').events('mouseup'))
                 .flatten();
 
             const mousemove$ : Stream<MouseEvent> = dom.select('body')
