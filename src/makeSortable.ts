@@ -21,7 +21,15 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
             const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
                 .events('mousedown');
 
-            const event$ : Stream<MouseEvent> = xs.merge(mousedown$);
+            const mouseup$ : Stream<MouseEvent> = mousedown$
+                .mapTo(dom.select('html').events('mouseup'))
+                .flatten();
+
+            const mousemove$ : Stream<MouseEvent> = dom.select('body')
+                .events('mousemove')
+                .compose(emitBetween(mousedown$, mouseup$));
+
+            const event$ : Stream<MouseEvent> = xs.merge(mousedown$, mouseup$, mousemove$);
 
             return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), node);
         })

@@ -3,10 +3,6 @@ import { VNode } from '@cycle/dom';
 import { EventHandler, SortableOptions } from './definitions';
 import { mousedownHandler } from './eventHandlers/mousdown';
 
-const eventHandlerMapping : { [type : string]: EventHandler } = {
-    'mousedown': mousedownHandler
-};
-
 /**
  * Uses the event.type property to forward the event to the right handler
  * @param {VNode} the root VNode of the DOMSource
@@ -16,5 +12,11 @@ const eventHandlerMapping : { [type : string]: EventHandler } = {
  */
 export function handleEvent(node : VNode, event : MouseEvent, options : SortableOptions) : VNode
 {
+    const eventHandlerMapping : { [type : string]: EventHandler } = {
+        'mousedown': mousedownHandler,
+        'mouseup': n => n,
+        'mousemove': n => n
+    };
+
     return eventHandlerMapping[event.type](node, event, options);
 }

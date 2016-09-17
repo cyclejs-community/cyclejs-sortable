@@ -38,3 +38,14 @@ export interface SortableOptions {
      */
     ghostClass? : string;
 }
+
+/**
+ * Contains the offset from the cursor to the top left of the item
+ * x and y are negative or zero, so you have to add them to the current mouse position
+ * @type {MouseOffset}
+ */
+export interface MouseOffset
+{
+    x : number;
+    y : number;
+}

@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/SuperManitu/cyclejs-sortable#readme",
   "dependencies": {
+    "snabbdom-selector": "^0.4.0",
     "xstream": "^6.2.0"
   },
   "devDependencies": {
