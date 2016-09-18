@@ -106,6 +106,16 @@ export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, ite
 }
 
 /**
+ * Prevents the page from randomly selecting text when dragging
+ * @return {string} the content of the style attribute
+ */
+export function getBodyStyle() : string
+{
+    return '-webkit-user-select: none; -moz-user-select: none;' +
+        ' -ms-user-select: none; user-select: none; overflow: hidden;';
+}
+
+/**
  * Finds the parent element that matches the given selector
  * @param {Element} node the current element
  * @param {string} selector a valid CSS selector
@@ -222,14 +232,4 @@ export function getIntersection(e1 : Element, e2 : Element) : Intersection
 export function getArea(intersection : Intersection) : number
 {
     return (intersection.xmax - intersection.xmin) * (intersection.ymax - intersection.ymin);
-}
-
-/**
- * Crops the value between min and max
- */
-export function crop(value : number, min : number, max : number) : number
-{
-    if (value < min) { return min; }
-    if (value > max) { return max; }
-    return value;
 }
