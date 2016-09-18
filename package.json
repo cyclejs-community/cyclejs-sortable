@@ -1,11 +1,11 @@
 {
   "name": "cyclejs-sortable",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Makes all children of a vdom-node sortable via drag and drop",
   "main": "build/makeSortable.js",
   "typings": "build/makeSortable.d.ts",
   "scripts": {
-    "build": "tsc -d src/makeSortable.ts",
+    "build": "tsc -d && browserify build/src/makeSortable.js -o build/makeSortable.js -t [ babelify --presets [ es2015 ] ] && rimraf build/src && rimraf build/examples",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src",
     "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector",
@@ -34,8 +34,11 @@
     "@cycle/base": "^4.1.1",
     "@cycle/dom": "^12.2.5",
     "@cycle/xstream-run": "^3.1.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "jsdoc": "^3.4.1",
+    "rimraf": "^2.5.4",
     "typedoc": "^0.4.5",
     "typescript": "^2.0.0"
   }
