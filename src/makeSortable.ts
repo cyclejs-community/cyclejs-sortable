@@ -6,6 +6,8 @@ import { applyDefaults, addKeys } from './helpers';
 import { handleEvent } from './eventHandlers';
 import { emitBetween } from './xstreamHelpers';
 
+export { SortableOptions, Transform, EventHandler, EventDetails } from './definitions';
+
 /**
  * Can be composed with a Stream of VNodes to make them sortable via drag&drop
  * @param {DOMSource} dom The preselected root VNode of the sortable, also indicates the area in which the ghost can be dragged
