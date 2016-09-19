@@ -11,6 +11,9 @@ import { replaceNode, removeAttribute, findParent } from '../helpers';
 export const mouseupHandler : EventHandler = (node, event, options) => {
     const parent : VNode = select(options.parentSelector, node)[0];
     const ghost : VNode = parent.children[parent.children.length - 1];
+
+    if (!parent || !ghost) { return node; }
+
     const itemIndex : number = parseInt(ghost.data.attrs['data-itemindex']);
 
     const body : Element = findParent(event.target as Element, 'body');

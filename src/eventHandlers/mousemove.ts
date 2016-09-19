@@ -26,7 +26,7 @@ export const mousemoveHandler : EventHandler = (node, event, options) => {
         .reduce((acc, curr) => curr[0] > acc[0] ? curr : acc)[1];
 
     const ghostAttrs : { [attr : string]: string } = {
-        'style': getGhostStyle(event, mouseOffset, itemDimensions),
+        'style': getGhostStyle(event, mouseOffset, ghost.elm as Element),
         'data-itemindex': newIndex.toString()
     };
 

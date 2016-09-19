@@ -97,12 +97,14 @@ export function replaceNode(root : VNode, selector : string, replacement : VNode
  * @param {ClientRect} itemRect the bounding client rect of the item
  * @return {string} the style value
  */
-export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, itemRect : ItemDimensions) : string
+export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, item : Element) : string
 {
+    const itemRect : ClientRect = item.getBoundingClientRect();
+    const body : Element = findParent(item, 'body');
     return 'z-index: 5; margin: 0; pointer-events: none; position: absolute; width: '
         + itemRect.width + 'px; ' + 'height: ' + itemRect.height + 'px; top: '
-        + (event.clientY + mouseOffset.y + (event.target as Element).scrollTop) + 'px; left: '
-        + (event.clientX + mouseOffset.x) + 'px;';
+        + (event.clientY + mouseOffset.y + body.scrollTop) + 'px; left: '
+        + (event.clientX + mouseOffset.x + body.scrollLeft) + 'px;';
 }
 
 /**
@@ -179,30 +181,6 @@ export function addToData(node : VNode, additions : { [key : string]: any }) : V
     return Object.assign({}, node, {
         data: data
     });
-}
-
-/**
- * Returns the dimensions of the element without the padding on width and height
- * @param {Element} element
- * @return {ClientRect}
- */
-export function getClientRect(element : Element) : ClientRect
-{
-    const styles : CSSStyleDeclaration = window.getComputedStyle(element);
-    const paddingX : number = parseFloat(styles.paddingLeft.slice(0, -2))
-        + parseFloat(styles.paddingRight.slice(0, -2));
-    const paddingY : number = parseFloat(styles.paddingTop.slice(0, -2))
-        + parseFloat(styles.paddingBottom.slice(0, -2));
-    const clientRect : ClientRect = element.getBoundingClientRect();
-
-    return { //Object.assign does not work here
-        top: clientRect.top,
-        left: clientRect.left,
-        bottom: clientRect.bottom,
-        right: clientRect.right,
-        width: clientRect.width - paddingX,
-        height: clientRect.height - paddingY
-    };
 }
 
 /**
