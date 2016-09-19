@@ -50,6 +50,17 @@ export interface MouseOffset
     y : number;
 }
 
+/**
+ * Defines the object available on a custom updateOrder event
+ * @type {EventDetails}
+ */
+export interface EventDetails
+{
+    newOrder : number[];
+    oldIndex : number;
+    newIndex : number;
+}
+
 export interface ItemDimensions
 {
     width : number;

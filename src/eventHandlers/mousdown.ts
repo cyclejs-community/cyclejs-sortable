@@ -26,6 +26,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
         'data-mouseoffset': JSON.stringify(mouseOffset),
         'data-itemdimensions': JSON.stringify({ width: itemRect.width, height: itemRect.height }),
         'data-itemindex': index.toString(),
+        'data-originalIndex': index.toString(),
         'style': getGhostStyle(event, mouseOffset, itemRect)
     };
 
@@ -34,7 +35,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
         addAttributes(parent.children[index], { 'style': 'opacity: 0;' }),
         ...parent.children.slice(index + 1),
         addAttributes(parent.children[index], ghostAttrs)
-    ];
+    ].map((c, i) => addAttributes(c, { 'data-index' : i }));
 
     return replaceNode(node, options.parentSelector, Object.assign({}, parent, {
         children: children
