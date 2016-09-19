@@ -22,7 +22,31 @@ export const mouseupHandler : EventHandler = (node, event, options) => {
         ...parent.children.slice(itemIndex + 1, -1)
     ];
 
+    const indexes : number[] = newChildren
+        .map(c => c.data.attrs['data-index'])
+        .map(s => parseInt(s));
+
+    const tuple : [number, number] = [
+        parseInt(ghost.data.attrs['data-originalIndex']),
+        parseInt(ghost.data.attrs['data-itemindex'])
+    ];
+
+    const changed : boolean = tuple[0] !== tuple[1];
+
+    if (changed) {
+        const customEvent : CustomEvent = new CustomEvent('updateOrder', {
+            bubbles: true,
+            detail: {
+                newOrder: indexes,
+                oldIndex: tuple[0],
+                newIndex: tuple[1]
+            }
+        });
+
+        parent.elm.dispatchEvent(customEvent);
+    }
+
     return replaceNode(node, options.parentSelector, Object.assign({}, parent, {
-        children: newChildren
+        children: newChildren.map(c => removeAttribute(c, 'data-index'))
     }));
 };

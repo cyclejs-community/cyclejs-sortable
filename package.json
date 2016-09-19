@@ -8,9 +8,10 @@
     "build": "tsc -d && browserify build/src/makeSortable.js -o build/makeSortable.js -t [ babelify --presets [ es2015 ] ] && concatinator -f build/src/makeSortable.d.ts build/src/definitions.d.ts -o build/makeSortable.d.ts && rimraf build/src && rimraf build/examples",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src",
-    "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector",
+    "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector && npm run examples:updateEvent",
     "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/build/index.js",
-    "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/build/index.js"
+    "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/build/index.js",
+    "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/build/index.js"
   },
   "repository": {
     "type": "git",

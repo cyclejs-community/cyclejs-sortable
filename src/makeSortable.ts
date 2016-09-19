@@ -1,7 +1,7 @@
 import xs, { Stream } from 'xstream';
 import { DOMSource, VNode, VNodeData } from '@cycle/dom';
 
-import { SortableOptions, Transform, EventHandler } from './definitions';
+import { SortableOptions, Transform, EventHandler, EventDetails } from './definitions';
 import { applyDefaults, addKeys } from './helpers';
 import { handleEvent } from './eventHandlers';
 import { emitBetween } from './xstreamHelpers';
@@ -36,4 +36,17 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
             return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), newNode);
         })
         .flatten();
+}
+
+/**
+ * Returns a stream of swapped indices
+ * @param {DOMSource} dom a DOMSource containing the sortable
+ * @param {string} parentSelector a valid CSS selector for the sortable parent (not the items)
+ * @return {Stream<EventDetails>} an object containing the new positions @see EventDetails
+ */
+export function getUpdateEvent(dom : DOMSource, parentSelector : string) : Stream<EventDetails>
+{
+    return dom.select(parentSelector)
+        .events('updateOrder')
+        .map(ev => ev.detail);
 }
