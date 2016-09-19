@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -d && browserify build/src/makeSortable.js -o build/makeSortable.js -t [ babelify --presets [ es2015 ] ] && concatinator -f build/src/makeSortable.d.ts build/src/definitions.d.ts -o build/makeSortable.d.ts && rimraf build/src && rimraf build/examples",
     "build:examples": "tsc",
-    "documentation": "typedoc --out docs src",
+    "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
     "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector && npm run examples:updateEvent",
     "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/build/index.js",
     "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/build/index.js",
@@ -41,6 +41,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "concatinator": "^1.0.16",
+    "cp-cli": "^1.0.2",
     "rimraf": "^2.5.4",
     "typedoc": "^0.4.5",
     "typescript": "^2.0.0"
