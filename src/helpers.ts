@@ -13,12 +13,12 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
     const sortableRoot : VNode = options && options.parentSelector ?
         select(options.parentSelector, root)[0] : root;
 
-    const itemClass : string = (sortableRoot.children[0] as VNode).sel.split('.')[1];
+    const itemClass : string = (sortableRoot.children[0] as VNode).data.props.className.split(' ')[0];
     const itemSelector : string = options && options.handle ?
-        getParentNode(root, options.handle).sel : '.' + itemClass;
+        '.' + getParentNode(root, options.handle).data.props.className.split(' ').join('.') : '.' + itemClass;
 
     return Object.assign({
-        parentSelector: root.sel,
+        parentSelector: '.' + root.data.props.className.split(' ').join('.'),
         handle: itemSelector,
         itemSelector: itemSelector,
         ghostClass: itemClass,

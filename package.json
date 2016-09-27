@@ -1,6 +1,6 @@
 {
   "name": "cyclejs-sortable",
-  "version": "1.2.8",
+  "version": "1.3.0",
   "description": "Makes all children of a vdom-node sortable via drag and drop",
   "main": "build/src/makeSortable.js",
   "typings": "build/src/makeSortable.d.ts",
@@ -8,6 +8,7 @@
     "build": "tsc -d && rimraf build/examples",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
+    "publish": "npm run build && npm run documentation && npm publish",
     "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector && npm run examples:updateEvent",
     "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/build/index.js",
     "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/build/index.js",

@@ -13,8 +13,10 @@ export const mousemoveHandler : EventHandler = (node, event, options) => {
     const ghost : VNode = parent.children[parent.children.length - 1];
 
     const mouseOffset : MouseOffset = JSON.parse(ghost.data.attrs['data-mouseoffset']);
-    const itemDimensions : ItemDimensions = JSON.parse(ghost.data.attrs['data-itemdimensions']);
     const itemIndex : number = parseInt(ghost.data.attrs['data-itemindex']);
+    const item : VNode = parent.children[itemIndex] as VNode;
+    const itemIntersection : number = getArea(getIntersection(item.elm as Element, ghost.elm as Element));
+    const itemArea : number = getArea(getIntersection(item.elm as Element, item.elm as Element));
 
     const intersectionAreas : [number, number][] = parent.children
         .slice(0, -1)
@@ -22,8 +24,14 @@ export const mousemoveHandler : EventHandler = (node, event, options) => {
         .map<Intersection>(e => getIntersection(e, ghost.elm as Element))
         .map<[number, number]>((e, i) => [getArea(e), i]);
 
-    const newIndex : number = intersectionAreas
-        .reduce((acc, curr) => curr[0] > acc[0] ? curr : acc)[1];
+    const maxIntersection : [number, number] = intersectionAreas
+        .reduce((acc, curr) => curr[0] > acc[0] ? curr : acc);
+
+    const maxElement : Element = (parent.children[maxIntersection[1]] as VNode).elm as Element;
+    const maxArea : number = getArea(getIntersection(maxElement, maxElement));
+
+    const newIndex : number = maxIntersection[1] === itemIndex ? itemIndex :
+        (-itemIntersection > maxArea - itemArea ? maxIntersection[1] : itemIndex);
 
     const ghostAttrs : { [attr : string]: string } = {
         'style': getGhostStyle(event, mouseOffset, ghost.elm as Element),
