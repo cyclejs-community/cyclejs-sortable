@@ -28,15 +28,17 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
 /**
  * Adds keys to the VNodes to make them able to swap
  * @param {VNode} node the root VNode
- * @param {SortableOptions} options the non-null options
+ * @param {key} can be used to specify a inital key
  * @return {VNode} a new VNode with the keys
  */
-export function addKeys(node : VNode, options : SortableOptions) : VNode
+export function addKeys(node : VNode, key : string = 'key') : VNode
 {
-    const parent : VNode = select(options.parentSelector, node)[0];
-    return replaceNode(node, options.parentSelector, Object.assign({}, parent, {
-        children: parent.children.map((c, i) => Object.assign({}, c, { key: i }))
-    }));
+    if (!node.children) { return Object.assign({}, node, { key: key }); }
+
+    return Object.assign({}, node, {
+        key: key,
+        children: node.children.map((c, i) => addKeys(c, key + i))
+    });
 }
 
 /**

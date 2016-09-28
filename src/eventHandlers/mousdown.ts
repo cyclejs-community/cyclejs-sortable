@@ -2,13 +2,14 @@ import { VNode } from '@cycle/dom';
 import select from 'snabbdom-selector';
 import { EventHandler, MouseOffset } from '../definitions';
 
-import { getIndex, getGhostStyle, findParent, addAttributes, replaceNode, getBodyStyle } from '../helpers';
+import { getIndex, getGhostStyle, findParent, addAttributes, replaceNode, getBodyStyle, addKeys } from '../helpers';
 
 /**
  * Used to create the ghost and hide the item dragged
  * @type {EventHandler}
  */
 export const mousedownHandler : EventHandler = (node, event, options) => {
+    const newNode : VNode = addKeys(node);
     const item : Element = findParent(event.target as Element, options.itemSelector);
     const itemRect : ClientRect = item.getBoundingClientRect();
     const mouseOffset : MouseOffset = {
@@ -19,7 +20,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
     const body : Element = findParent(event.target as Element, 'body');
     body.setAttribute('style', getBodyStyle());
 
-    const parent : VNode = select(options.parentSelector, node)[0];
+    const parent : VNode = select(options.parentSelector, newNode)[0];
     const index : number = getIndex(item);
 
     const ghostAttrs : { [name : string]: string } = {
@@ -37,7 +38,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
         addAttributes(parent.children[index], ghostAttrs)
     ].map((c, i) => addAttributes(c, { 'data-index' : i }));
 
-    return replaceNode(node, options.parentSelector, Object.assign({}, parent, {
+    return replaceNode(newNode, options.parentSelector, Object.assign({}, parent, {
         children: children
     }));
 };

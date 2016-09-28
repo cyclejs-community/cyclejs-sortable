@@ -1,4 +1,5 @@
 import xs, { Stream } from 'xstream';
+import delay from 'xstream/extra/delay';
 import { DOMSource, VNode, VNodeData } from '@cycle/dom';
 
 import { SortableOptions, Transform, EventHandler, EventDetails } from './definitions';
@@ -19,7 +20,6 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
     return sortable => sortable
         .map(node => {
             const defaults : SortableOptions = applyDefaults(options, node);
-            const newNode : VNode = addKeys(node, defaults);
 
             const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
                 .events('mousedown');
@@ -35,7 +35,7 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
 
             const event$ : Stream<MouseEvent> = xs.merge(mousedown$, mouseup$, mousemove$);
 
-            return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), newNode);
+            return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), node);
         })
         .flatten();
 }
@@ -50,5 +50,6 @@ export function getUpdateEvent(dom : DOMSource, parentSelector : string) : Strea
 {
     return dom.select(parentSelector)
         .events('updateOrder')
+        .compose(delay(10)) //Allow mouseup to execute properly
         .map(ev => ev.detail);
 }
