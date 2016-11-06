@@ -1,9 +1,9 @@
 # cyclejs-sortable
 Makes all children of a selected component sortable
 
-Github Repo: https://github.com/SuperManitu/cyclejs-sortable
+Github Repo: https://github.com/cyclejs-community/cyclejs-sortable
 
-Full documentation: https://supermanitu.github.io/cyclejs-sortable/
+Full documentation: https://cyclejs-community.github.io/cyclejs-sortable/
 
 NPM: https://www.npmjs.com/package/cyclejs-sortable
 
@@ -29,7 +29,7 @@ function main(sources)
             div(['three']),
             div(['four'])
         ]))
-        .compose(makeSortable(DOM))
+        .compose(makeSortable(sources.DOM))
     }
 }
 ```
