@@ -29,11 +29,11 @@
   },
   "homepage": "https://github.com/SuperManitu/cyclejs-sortable#readme",
   "peerDepenencies": {
-    "@cycle/dom": ">=16.0.0",
-    "xstream": ">=10.3.0"
+    "@cycle/dom": ">=16.0.0"
   },
   "dependencies": {
-    "snabbdom-selector": "^1.1.1"
+    "snabbdom-selector": "^1.1.1",
+    "xstream": "^10.3.0"
   },
   "devDependencies": {
     "@cycle/dom": "^16.0.0",
@@ -44,7 +44,6 @@
     "cp-cli": "^1.0.2",
     "rimraf": "^2.5.4",
     "typedoc": "^0.5.8",
-    "typescript": "^2.2.1",
-    "xstream": "^10.3.0"
+    "typescript": "^2.2.1"
   }
 }

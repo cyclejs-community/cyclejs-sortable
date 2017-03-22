@@ -1,8 +1,8 @@
 import xs, { Stream } from 'xstream';
 import delay from 'xstream/extra/delay';
-import { DOMSource, VNode, VNodeData } from '@cycle/dom';
+import { DOMSource, VNode } from '@cycle/dom';
 
-import { SortableOptions, Transform, EventHandler, EventDetails } from './definitions';
+import { SortableOptions, Transform, EventDetails } from './definitions';
 import { applyDefaults, addKeys } from './helpers';
 import { handleEvent } from './eventHandlers';
 import { emitBetween } from './xstreamHelpers';

@@ -8,7 +8,6 @@ export interface SortableOptions {
     /**
      * Optional, has to be a valid CSS selector.
      * Used to select a child of the root VNode as parent of the sortable
-     * Currently works only with a simple CSS class selector
      * @default the root VNode of the given DOMSource
      * @type {string}
      */
