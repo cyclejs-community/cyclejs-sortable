@@ -16,10 +16,10 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
     const itemSelector : string = options.handle ? ''
         : (options.parentSelector ?
             firstClass(select(options.parentSelector, root)[0] as VNode)
-            : firstClass(root.children[0] as VNode));
+            : firstClass(root));
 
     return {
-        parentSelector: options.parentSelector || root.sel,
+        parentSelector: options.parentSelector || '.' + classNameFromVNode(root).split(' ').join('.'),
         handle: options.handle || itemSelector,
         ghostClass: options.ghostClass || ''
     };
