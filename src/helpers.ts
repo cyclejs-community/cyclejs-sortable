@@ -31,7 +31,7 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
  * @param {key} can be used to specify a inital key
  * @return {VNode} a new VNode with the keys
  */
-export function addKeys(node : VNode, key : string = 'key') : VNode
+export function addKeys(node : VNode, key : string = Math.random().toString()) : VNode
 {
     if (!node.children) {
         return { ...node, key };
@@ -102,11 +102,22 @@ export function replaceNode(root : VNode, selector : string, replacement : VNode
 export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, item : Element) : string
 {
     const itemRect : ClientRect = item.getBoundingClientRect();
-    const body : Element = findParent(item, 'body');
     return 'z-index: 5; margin: 0; pointer-events: none; position: absolute; width: '
         + itemRect.width + 'px; ' + 'height: ' + itemRect.height + 'px; top: '
-        + (event.clientY + mouseOffset.y + body.scrollTop) + 'px; left: '
-        + (event.clientX + mouseOffset.x + body.scrollLeft) + 'px;';
+        + (event.clientY + mouseOffset.y + document.body.scrollTop) + 'px; left: '
+        + (event.clientX + mouseOffset.x + document.body.scrollLeft) + 'px;';
+}
+
+/**
+ * Returns the updated style for this ghost element
+ */
+export function updateGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, ghost : Element) : string
+{
+    const prevStyle : string = ghost.getAttribute('style');
+    
+    return prevStyle.substring(0, prevStyle.indexOf(' top:')) + ' top: '
+        + (event.clientY + mouseOffset.y + document.body.scrollTop) + 'px; left: '
+        + (event.clientX + mouseOffset.x + document.body.scrollLeft) + 'px;';
 }
 
 /**

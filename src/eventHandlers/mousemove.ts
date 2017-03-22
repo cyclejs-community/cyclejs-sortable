@@ -2,7 +2,7 @@ import { VNode } from '@cycle/dom';
 import { select } from 'snabbdom-selector';
 import { EventHandler, MouseOffset, ItemDimensions, Intersection } from '../definitions';
 
-import { getGhostStyle, findParent, getIntersection, getArea, addAttributes, replaceNode } from '../helpers';
+import { updateGhostStyle, findParent, getIntersection, getArea, addAttributes, replaceNode } from '../helpers';
 
 /**
  * Used to adjust the position of the ghost and swap the items if needed
@@ -34,7 +34,7 @@ export const mousemoveHandler : EventHandler = (node, event, options) => {
         (-itemIntersection > maxArea - itemArea ? maxIntersection[1] : itemIndex);
 
     const ghostAttrs : { [attr : string]: string } = {
-        'style': getGhostStyle(event, mouseOffset, ghost.elm as Element),
+        'style': updateGhostStyle(event, mouseOffset, ghost.elm as Element),
         'data-itemindex': newIndex.toString()
     };
 
