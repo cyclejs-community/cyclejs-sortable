@@ -1,5 +1,6 @@
 import { VNode, VNodeData } from '@cycle/dom';
-import select from 'snabbdom-selector';
+import { select } from 'snabbdom-selector';
+
 import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './definitions';
 
 /**
@@ -33,12 +34,13 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
  */
 export function addKeys(node : VNode, key : string = 'key') : VNode
 {
-    if (!node.children) { return Object.assign({}, node, { key: key }); }
+    if (!node.children) {
+        return { ...node, key };
+    }
 
-    return Object.assign({}, node, {
-        key: key,
-        children: node.children.map((c, i) => addKeys(c, key + i))
-    });
+    const children : VNode[] = node.children.map((c, i) => addKeys(c, key + '-' + i));
+
+    return { ...node, key, children };
 }
 
 /**
