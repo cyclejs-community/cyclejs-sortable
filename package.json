@@ -10,9 +10,9 @@
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
     "prepublish": "npm run build && npm run documentation",
     "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector && npm run examples:updateEvent",
-    "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/build/index.js",
-    "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/build/index.js",
-    "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/build/index.js"
+    "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/index.js && open-cli examples/simple/index.html",
+    "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/index.js && open-cli examples/parentSelector/index.html",
+    "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/index.js && open-cli examples/updateEvent/index.html"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "cp-cli": "^1.0.2",
+    "open-cli": "^1.0.5",
     "rimraf": "^2.5.4",
     "typedoc": "^0.5.8",
     "typescript": "^2.2.1"
