@@ -8,6 +8,7 @@ export interface SortableOptions {
     /**
      * Optional, has to be a valid CSS selector.
      * Used to select a child of the root VNode as parent of the sortable
+     * The items are always the children of that VNode (are not allowed to be strings)
      * @default the root VNode of the given DOMSource
      * @type {string}
      */
@@ -20,14 +21,6 @@ export interface SortableOptions {
      * @type {string}
      */
     handle? : string;
-
-    /**
-     * Optional, used to define the sortable items, has to be a valid CSS selector.
-     * Used to define the item
-     * @default string the first class of the first child of the parent vnode
-     * @type {string}
-     */
-    itemSelector? : string;
 
     /**
      * Optional, has to be a CSS class name

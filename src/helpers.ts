@@ -11,16 +11,15 @@ import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './de
  */
 export function applyDefaults(options : SortableOptions, root : VNode) : SortableOptions
 {
-    const firstClass : (n : VNode) => string = node => classNameFromVNode(node.children[0] as VNode).split(' ')[0];
+    const firstClass : (n : VNode) => string = node => '.' + classNameFromVNode(node.children[0] as VNode).split(' ')[0];
 
-    const itemSelector : string = options.itemSelector ||
-        (options.parentSelector ?
-            firstClass(select(options.parentSelector)[0] as VNode).children
-            : firstClass(root.children[0] as VNode);
+    const itemSelector : string = options.handle ? ''
+        : (options.parentSelector ?
+            firstClass(select(options.parentSelector, root)[0] as VNode)
+            : firstClass(root.children[0] as VNode));
 
     return {
         parentSelector: options.parentSelector || root.sel,
-        itemSelector: itemSelector,
         handle: options.handle || itemSelector,
         ghostClass: options.ghostClass || ''
     };
@@ -38,7 +37,7 @@ export function addKeys(node : VNode, key : string = 'key') : VNode
         return { ...node, key };
     }
 
-    const children : VNode[] = node.children.map((c, i) => addKeys(c, key + '-' + i));
+    const children : VNode[] = (node.children as VNode[]).map((c, i) => addKeys(c, key + '-' + i));
 
     return { ...node, key, children };
 }
@@ -54,7 +53,7 @@ export function getParentNode(root : VNode, selector : string) : VNode
 {
     if (root.children === undefined) { return undefined; }
 
-    const childMatch : boolean = root.children
+    const childMatch : boolean = (root.children as VNode[])
         .reduce((acc, curr) => !acc && select(selector, curr)[0] === curr ? true : false, false);
 
     if (childMatch) { return root; }
@@ -78,10 +77,9 @@ export function replaceNode(root : VNode, selector : string, replacement : VNode
     }
     if (!root.children) { return root; }
 
-    return Object.assign({}, root, {
-        children: root.children
-            .map(e => replaceNode(e, selector, replacement))
-    });
+    const children : VNode[] = (root.children as VNode[]).map(e => replaceNode(e, selector, replacement));
+
+    return { ...root, children };
 }
 
 /**

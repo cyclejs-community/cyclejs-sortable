@@ -1,5 +1,5 @@
 import { VNode } from '@cycle/dom';
-import select from 'snabbdom-selector';
+import { select } from 'snabbdom-selector';
 import { EventHandler, MouseOffset, ItemDimensions, Intersection } from '../definitions';
 
 import { getGhostStyle, findParent, getIntersection, getArea, addAttributes, replaceNode } from '../helpers';
@@ -10,7 +10,7 @@ import { getGhostStyle, findParent, getIntersection, getArea, addAttributes, rep
  */
 export const mousemoveHandler : EventHandler = (node, event, options) => {
     const parent : VNode = select(options.parentSelector, node)[0];
-    const ghost : VNode = parent.children[parent.children.length - 1];
+    const ghost : VNode = parent.children[parent.children.length - 1] as VNode;
 
     const mouseOffset : MouseOffset = JSON.parse(ghost.data.attrs['data-mouseoffset']);
     const itemIndex : number = parseInt(ghost.data.attrs['data-itemindex']);
@@ -38,13 +38,13 @@ export const mousemoveHandler : EventHandler = (node, event, options) => {
         'data-itemindex': newIndex.toString()
     };
 
-    const filteredChildren : VNode[] = parent.children
+    const filteredChildren : VNode[] = (parent.children as VNode[])
         .filter((e, i) => i !== itemIndex)
         .slice(0, -1);
 
     const newChildren : VNode[] = [
         ...filteredChildren.slice(0, newIndex),
-        parent.children[itemIndex],
+        parent.children[itemIndex] as VNode,
         ...filteredChildren.slice(newIndex, filteredChildren.length)
     ];
 
