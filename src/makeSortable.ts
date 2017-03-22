@@ -19,7 +19,7 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
 {
     return sortable => sortable
         .map(node => {
-            const defaults : SortableOptions = applyDefaults(options, node);
+            const defaults : SortableOptions = applyDefaults(options || {}, node);
 
             const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
                 .events('mousedown');

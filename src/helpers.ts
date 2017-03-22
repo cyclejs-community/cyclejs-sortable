@@ -1,5 +1,5 @@
 import { VNode, VNodeData } from '@cycle/dom';
-import { select } from 'snabbdom-selector';
+import { select, classNameFromVNode } from 'snabbdom-selector';
 
 import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './definitions';
 
@@ -11,19 +11,19 @@ import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './de
  */
 export function applyDefaults(options : SortableOptions, root : VNode) : SortableOptions
 {
-    const sortableRoot : VNode = options && options.parentSelector ?
-        select(options.parentSelector, root)[0] : root;
+    const firstClass : (n : VNode) => string = node => classNameFromVNode(node.children[0] as VNode).split(' ')[0];
 
-    const itemClass : string = (sortableRoot.children[0] as VNode).data.props.className.split(' ')[0];
-    const itemSelector : string = options && options.handle ?
-        '.' + getParentNode(root, options.handle).data.props.className.split(' ').join('.') : '.' + itemClass;
+    const itemSelector : string = options.itemSelector ||
+        (options.parentSelector ?
+            firstClass(select(options.parentSelector)[0] as VNode).children
+            : firstClass(root.children[0] as VNode);
 
-    return Object.assign({
-        parentSelector: '.' + root.data.props.className.split(' ').join('.'),
-        handle: itemSelector,
+    return {
+        parentSelector: options.parentSelector || root.sel,
         itemSelector: itemSelector,
-        ghostClass: itemClass,
-    }, options);
+        handle: options.handle || itemSelector,
+        ghostClass: options.ghostClass || ''
+    };
 }
 
 /**

@@ -16,15 +16,15 @@ export interface SortableOptions {
     /**
      * Optional, has to be a valid CSS selector.
      * Used to define a drag handle on the sortable items
-     * @default the whole item (the first CSS class of the first item is used as selector)
+     * @default string the whole item
      * @type {string}
      */
     handle? : string;
 
     /**
-     * Optional, only used in conjunction with @see {handle}, has to be a valid CSS selector.
+     * Optional, used to define the sortable items, has to be a valid CSS selector.
      * Used to define the item
-     * @default the parent of the handle
+     * @default string the first class of the first child of the parent vnode
      * @type {string}
      */
     itemSelector? : string;
