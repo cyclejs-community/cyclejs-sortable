@@ -74,7 +74,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_makesortable_.html#getupdateevent" class="tsd-kind-icon">get<wbr>Update<wbr>Event</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,7 +92,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/makeSortable.ts#L49">src/makeSortable.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/64c0894/src/makeSortable.ts#L51">src/makeSortable.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -120,17 +120,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="makesortable" class="tsd-anchor"></a>
 					<h3>make<wbr>Sortable</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">make<wbr>Sortable<span class="tsd-signature-symbol">(</span>dom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DOMSource</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_src_definitions_.sortableoptions.html" class="tsd-signature-type">SortableOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_definitions_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">make<wbr>Sortable&lt;T&gt;<span class="tsd-signature-symbol">(</span>dom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DOMSource</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_src_definitions_.sortableoptions.html" class="tsd-signature-type">SortableOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/makeSortable.ts#L18">src/makeSortable.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/64c0894/src/makeSortable.ts#L19">src/makeSortable.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -138,6 +138,12 @@
 									<p>Can be composed with a Stream of VNodes to make them sortable via drag&amp;drop</p>
 								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -153,8 +159,26 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_src_definitions_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
 							<p>A function to be composed with a view VNode stream</p>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-siganture">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5>s: <span class="tsd-signature-type">T</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -209,7 +233,7 @@
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_src_makesortable_.html#getupdateevent" class="tsd-kind-icon">get<wbr>Update<wbr>Event</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a>
 					</li>
 				</ul>
