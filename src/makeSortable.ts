@@ -1,6 +1,7 @@
 import xs, { Stream } from 'xstream';
 import delay from 'xstream/extra/delay';
 import { DOMSource, VNode } from '@cycle/dom';
+import { adapt } from '@cycle/run/lib/adapt';
 
 import { SortableOptions, Transform, EventDetails } from './definitions';
 import { applyDefaults, addKeys } from './helpers';
@@ -15,21 +16,21 @@ export { SortableOptions, Transform, EventHandler, EventDetails } from './defini
  * @param {SortableOptions} options  @see {SortableOptions}
  * @return {Transform<VNode, VNode>} A function to be composed with a view VNode stream
  */
-export function makeSortable(dom : DOMSource, options? : SortableOptions) : Transform<VNode, VNode>
+export function makeSortable<T>(dom : DOMSource, options? : SortableOptions) : (s : T) => T
 {
-    return sortable => sortable
+    return sortable => adapt(
+        (xs.fromObservable(sortable as any) as Stream<VNode>)
         .map(node => {
             const defaults : SortableOptions = applyDefaults(options || {}, node);
 
-            const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
-                .events('mousedown') as Stream<MouseEvent>;
+            const mousedown$ : Stream<MouseEvent> = xs.fromObservable(dom.select(defaults.handle).events('mousedown')) as Stream<MouseEvent>;
 
             const mouseup$ : Stream<MouseEvent> = mousedown$
-                .mapTo(dom.select('body').events('mouseup').take(1))
+                .mapTo(xs.fromObservable(dom.select('body').events('mouseup').take(1)))
                 .flatten() as Stream<MouseEvent>;
 
             const mousemove$ : Stream<MouseEvent> = mousedown$
-                .mapTo(dom.select('body').events('mousemove'))
+                .mapTo(xs.fromObservable(dom.select('body').events('mousemove')))
                 .flatten()
                 .compose(emitBetween(mousedown$, mouseup$)) as Stream<MouseEvent>;
 
@@ -37,7 +38,8 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
 
             return event$.fold((acc, curr) => handleEvent(acc, curr, defaults), node);
         })
-        .flatten();
+        .flatten()
+    );
 }
 
 /**

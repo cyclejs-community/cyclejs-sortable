@@ -24,7 +24,7 @@ function main({ DOM } : Sources) : Sinks
             li('.li', '', ['Option 6']),
         ])
     )
-    .compose(makeSortable(DOM));
+    .compose(makeSortable<Stream<VNode>>(DOM));
 
     const update$ : Stream<VNode> = getUpdateEvent(DOM, '.ul')
         .map(o => 'You changed item Number ' + (o.oldIndex + 1) + ' to postion ' + (o.newIndex + 1))

@@ -1,6 +1,6 @@
-import xs, { Stream } from 'xstream';
-import { run } from '@cycle/run';
-import { ul, li, div, h3, makeDOMDriver, DOMSource, VNode } from '@cycle/dom';
+import { Observable } from 'rxjs';
+import { run } from '@cycle/rxjs-run';
+import { ul, li, div, h3, p, makeDOMDriver, DOMSource, VNode } from '@cycle/dom';
 
 import { makeSortable } from '../../../src/makeSortable';
 
@@ -9,14 +9,15 @@ type Sources = {
 };
 
 type Sinks = {
-    DOM : Stream<VNode>;
+    DOM : Observable<VNode>;
 };
 
 function main({ DOM } : Sources) : Sinks
 {
-    const vdom$ : Stream<VNode> = xs.of(
+    const vdom$ : Observable<VNode> = Observable.of(
         div([
             h3('Horizontal too!'),
+            p('this is running with RxJS'),
             ul('.ul', [
                 li('.li', '', ['Option 1']),
                 li('.li', '', ['Option 2']),
@@ -27,7 +28,7 @@ function main({ DOM } : Sources) : Sinks
             ])
         ])
     )
-    .compose(makeSortable(DOM, {
+    .let(makeSortable<Observable<VNode>>(DOM, {
         parentSelector: '.ul'
     }));
 

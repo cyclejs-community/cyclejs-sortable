@@ -33,18 +33,20 @@
     "@cycle/dom": ">=16.0.0"
   },
   "dependencies": {
+    "@cycle/run": "^3.0.0",
     "snabbdom-selector": "^1.1.1",
     "xstream": "^10.3.0"
   },
   "devDependencies": {
     "@cycle/dom": "^16.0.0",
-    "@cycle/run": "^3.0.0",
+    "@cycle/rxjs-run": "^7.0.0",
     "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "cp-cli": "^1.0.2",
     "open-cli": "^1.0.5",
     "rimraf": "^2.5.4",
+    "rxjs": "^5.2.0",
     "typedoc": "^0.5.8",
     "typescript": "^2.2.1"
   }

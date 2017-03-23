@@ -24,7 +24,7 @@ function main({ DOM } : Sources) : Sinks
             li('.li', '', ['Option 6']),
         ])
     )
-    .compose(makeSortable(DOM));
+    .compose(makeSortable<Stream<VNode>>(DOM));
 
     return {
         DOM: vdom$

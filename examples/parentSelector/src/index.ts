@@ -27,7 +27,7 @@ function main({ DOM } : Sources) : Sinks
             ])
         ])
     )
-    .compose(makeSortable(DOM, {
+    .compose(makeSortable<Stream<VNode>>(DOM, {
         parentSelector: '.ul'
     }));
 
