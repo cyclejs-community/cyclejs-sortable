@@ -9,8 +9,9 @@
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
     "prepublish": "npm run build && npm run documentation",
-    "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector && npm run examples:updateEvent",
+    "examples": "npm run build:examples && npm run examples:simple && npm run examples:horizontal && npm run examples:parentSelector && npm run examples:updateEvent",
     "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/index.js && open-cli examples/simple/index.html",
+    "examples:horizontal": "browserify build/examples/horizontal/src/index.js -o examples/horizontal/index.js && open-cli examples/horizontal/index.html",
     "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/index.js && open-cli examples/parentSelector/index.html",
     "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/index.js && open-cli examples/updateEvent/index.html"
   },

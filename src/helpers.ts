@@ -104,8 +104,8 @@ export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, ite
     const itemRect : ClientRect = item.getBoundingClientRect();
     return 'z-index: 5; margin: 0; pointer-events: none; position: absolute; width: '
         + itemRect.width + 'px; ' + 'height: ' + itemRect.height + 'px; top: '
-        + (event.clientY + mouseOffset.y + document.body.scrollTop) + 'px; left: '
-        + (event.clientX + mouseOffset.x + document.body.scrollLeft) + 'px;';
+        + (event.clientY + mouseOffset.y + window.screenY) + 'px; left: '
+        + (event.clientX + mouseOffset.x + window.scrollX) + 'px;';
 }
 
 /**
@@ -116,8 +116,8 @@ export function updateGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, 
     const prevStyle : string = ghost.getAttribute('style');
     
     return prevStyle.substring(0, prevStyle.indexOf(' top:')) + ' top: '
-        + (event.clientY + mouseOffset.y + document.body.scrollTop) + 'px; left: '
-        + (event.clientX + mouseOffset.x + document.body.scrollLeft) + 'px;';
+        + (event.clientY + mouseOffset.y + window.scrollY) + 'px; left: '
+        + (event.clientX + mouseOffset.x + window.scrollX) + 'px;';
 }
 
 /**
