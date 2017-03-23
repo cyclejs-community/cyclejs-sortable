@@ -1,16 +1,16 @@
 import xs, { Stream } from 'xstream';
-import Cycle from '@cycle/xstream-run';
+import { run } from '@cycle/run';
 import { ul, li, makeDOMDriver, DOMSource, VNode } from '@cycle/dom';
 
 import { makeSortable } from '../../../src/makeSortable';
 
-interface Sources {
+type Sources = {
     DOM : DOMSource;
-}
+};
 
-interface Sinks {
+type Sinks = {
     DOM : Stream<VNode>;
-}
+};
 
 function main({ DOM } : Sources) : Sinks
 {
@@ -31,6 +31,6 @@ function main({ DOM } : Sources) : Sinks
     };
 }
 
-Cycle.run(main, {
+run(main, {
     DOM: makeDOMDriver('#app')
 });

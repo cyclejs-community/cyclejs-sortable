@@ -1,8 +1,8 @@
 import xs, { Stream } from 'xstream';
 import delay from 'xstream/extra/delay';
-import { DOMSource, VNode, VNodeData } from '@cycle/dom';
+import { DOMSource, VNode } from '@cycle/dom';
 
-import { SortableOptions, Transform, EventHandler, EventDetails } from './definitions';
+import { SortableOptions, Transform, EventDetails } from './definitions';
 import { applyDefaults, addKeys } from './helpers';
 import { handleEvent } from './eventHandlers';
 import { emitBetween } from './xstreamHelpers';
@@ -19,19 +19,19 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
 {
     return sortable => sortable
         .map(node => {
-            const defaults : SortableOptions = applyDefaults(options, node);
+            const defaults : SortableOptions = applyDefaults(options || {}, node);
 
             const mousedown$ : Stream<MouseEvent> = dom.select(defaults.handle)
-                .events('mousedown');
+                .events('mousedown') as Stream<MouseEvent>;
 
             const mouseup$ : Stream<MouseEvent> = mousedown$
                 .mapTo(dom.select('body').events('mouseup').take(1))
-                .flatten();
+                .flatten() as Stream<MouseEvent>;
 
             const mousemove$ : Stream<MouseEvent> = mousedown$
                 .mapTo(dom.select('body').events('mousemove'))
                 .flatten()
-                .compose(emitBetween(mousedown$, mouseup$));
+                .compose(emitBetween(mousedown$, mouseup$)) as Stream<MouseEvent>;
 
             const event$ : Stream<MouseEvent> = xs.merge(mousedown$, mouseup$, mousemove$);
 
@@ -48,8 +48,8 @@ export function makeSortable(dom : DOMSource, options? : SortableOptions) : Tran
  */
 export function getUpdateEvent(dom : DOMSource, parentSelector : string) : Stream<EventDetails>
 {
-    return dom.select(parentSelector)
-        .events('updateOrder')
+    return (dom.select(parentSelector)
+        .events('updateOrder') as Stream<any>)
         .compose(delay(10)) //Allow mouseup to execute properly
         .map(ev => ev.detail);
 }

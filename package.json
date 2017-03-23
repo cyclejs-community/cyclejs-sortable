@@ -8,11 +8,12 @@
     "build": "tsc -d && rimraf build/examples",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
-    "publish": "npm run build && npm run documentation && npm publish",
-    "examples": "npm run build:examples && npm run examples:simple && npm run examples:parentSelector && npm run examples:updateEvent",
-    "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/build/index.js",
-    "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/build/index.js",
-    "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/build/index.js"
+    "prepublish": "npm run build && npm run documentation",
+    "examples": "npm run build:examples && npm run examples:simple && npm run examples:horizontal && npm run examples:parentSelector && npm run examples:updateEvent",
+    "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/index.js && open-cli examples/simple/index.html",
+    "examples:horizontal": "browserify build/examples/horizontal/src/index.js -o examples/horizontal/index.js && open-cli examples/horizontal/index.html",
+    "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/index.js && open-cli examples/parentSelector/index.html",
+    "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/index.js && open-cli examples/updateEvent/index.html"
   },
   "repository": {
     "type": "git",
@@ -29,24 +30,22 @@
   },
   "homepage": "https://github.com/SuperManitu/cyclejs-sortable#readme",
   "peerDepenencies": {
-    "@cycle/dom": "^12.2.5",
-    "xstream": "^6.2.0"
+    "@cycle/dom": ">=16.0.0"
   },
   "dependencies": {
-    "snabbdom-selector": "^0.4.0"
+    "snabbdom-selector": "^1.1.1",
+    "xstream": "^10.3.0"
   },
   "devDependencies": {
-    "@cycle/base": "^4.1.1",
-    "@cycle/dom": "^12.2.5",
-    "@cycle/xstream-run": "^3.1.0",
+    "@cycle/dom": "^16.0.0",
+    "@cycle/run": "^3.0.0",
     "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.3.0",
-    "browserify": "^13.1.0",
-    "concatinator": "^1.0.16",
+    "browserify": "^14.1.0",
     "cp-cli": "^1.0.2",
+    "open-cli": "^1.0.5",
     "rimraf": "^2.5.4",
-    "typedoc": "0.5.0",
-    "typescript": "^2.0.0",
-    "xstream": "^6.2.0"
+    "typedoc": "^0.5.8",
+    "typescript": "^2.2.1"
   }
 }

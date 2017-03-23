@@ -1,5 +1,6 @@
 import { VNode, VNodeData } from '@cycle/dom';
-import select from 'snabbdom-selector';
+import { select, classNameFromVNode } from 'snabbdom-selector';
+
 import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './definitions';
 
 /**
@@ -10,19 +11,18 @@ import { SortableOptions, MouseOffset, ItemDimensions, Intersection } from './de
  */
 export function applyDefaults(options : SortableOptions, root : VNode) : SortableOptions
 {
-    const sortableRoot : VNode = options && options.parentSelector ?
-        select(options.parentSelector, root)[0] : root;
+    const firstClass : (n : VNode) => string = node => '.' + classNameFromVNode(node.children[0] as VNode).split(' ')[0];
 
-    const itemClass : string = (sortableRoot.children[0] as VNode).data.props.className.split(' ')[0];
-    const itemSelector : string = options && options.handle ?
-        '.' + getParentNode(root, options.handle).data.props.className.split(' ').join('.') : '.' + itemClass;
+    const itemSelector : string = options.handle ? ''
+        : (options.parentSelector ?
+            firstClass(select(options.parentSelector, root)[0] as VNode)
+            : firstClass(root));
 
-    return Object.assign({
-        parentSelector: '.' + root.data.props.className.split(' ').join('.'),
-        handle: itemSelector,
-        itemSelector: itemSelector,
-        ghostClass: itemClass,
-    }, options);
+    return {
+        parentSelector: options.parentSelector || '.' + classNameFromVNode(root).split(' ').join('.'),
+        handle: options.handle || itemSelector,
+        ghostClass: options.ghostClass || ''
+    };
 }
 
 /**
@@ -31,14 +31,15 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
  * @param {key} can be used to specify a inital key
  * @return {VNode} a new VNode with the keys
  */
-export function addKeys(node : VNode, key : string = 'key') : VNode
+export function addKeys(node : VNode, key : string = Math.random().toString()) : VNode
 {
-    if (!node.children) { return Object.assign({}, node, { key: key }); }
+    if (!node.children) {
+        return { ...node, key };
+    }
 
-    return Object.assign({}, node, {
-        key: key,
-        children: node.children.map((c, i) => addKeys(c, key + i))
-    });
+    const children : VNode[] = (node.children as VNode[]).map((c, i) => addKeys(c, key + '-' + i));
+
+    return { ...node, key, children };
 }
 
 /**
@@ -52,7 +53,7 @@ export function getParentNode(root : VNode, selector : string) : VNode
 {
     if (root.children === undefined) { return undefined; }
 
-    const childMatch : boolean = root.children
+    const childMatch : boolean = (root.children as VNode[])
         .reduce((acc, curr) => !acc && select(selector, curr)[0] === curr ? true : false, false);
 
     if (childMatch) { return root; }
@@ -76,10 +77,9 @@ export function replaceNode(root : VNode, selector : string, replacement : VNode
     }
     if (!root.children) { return root; }
 
-    return Object.assign({}, root, {
-        children: root.children
-            .map(e => replaceNode(e, selector, replacement))
-    });
+    const children : VNode[] = (root.children as VNode[]).map(e => replaceNode(e, selector, replacement));
+
+    return { ...root, children };
 }
 
 /**
@@ -102,11 +102,22 @@ export function replaceNode(root : VNode, selector : string, replacement : VNode
 export function getGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, item : Element) : string
 {
     const itemRect : ClientRect = item.getBoundingClientRect();
-    const body : Element = findParent(item, 'body');
     return 'z-index: 5; margin: 0; pointer-events: none; position: absolute; width: '
         + itemRect.width + 'px; ' + 'height: ' + itemRect.height + 'px; top: '
-        + (event.clientY + mouseOffset.y + body.scrollTop) + 'px; left: '
-        + (event.clientX + mouseOffset.x + body.scrollLeft) + 'px;';
+        + (event.clientY + mouseOffset.y + window.screenY) + 'px; left: '
+        + (event.clientX + mouseOffset.x + window.scrollX) + 'px;';
+}
+
+/**
+ * Returns the updated style for this ghost element
+ */
+export function updateGhostStyle(event : MouseEvent, mouseOffset : MouseOffset, ghost : Element) : string
+{
+    const prevStyle : string = ghost.getAttribute('style');
+    
+    return prevStyle.substring(0, prevStyle.indexOf(' top:')) + ' top: '
+        + (event.clientY + mouseOffset.y + window.scrollY) + 'px; left: '
+        + (event.clientX + mouseOffset.x + window.scrollX) + 'px;';
 }
 
 /**

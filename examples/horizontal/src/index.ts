@@ -1,6 +1,6 @@
 import xs, { Stream } from 'xstream';
 import { run } from '@cycle/run';
-import { ul, li, div, span, makeDOMDriver, DOMSource, VNode } from '@cycle/dom';
+import { ul, li, div, h3, makeDOMDriver, DOMSource, VNode } from '@cycle/dom';
 
 import { makeSortable } from '../../../src/makeSortable';
 
@@ -16,14 +16,14 @@ function main({ DOM } : Sources) : Sinks
 {
     const vdom$ : Stream<VNode> = xs.of(
         div([
-            span('.test', 'Test, should not move'),
+            h3('Horizontal too!'),
             ul('.ul', [
-                li('.class', '', ['Option 1']),
-                li('.class', '', ['Option 2']),
-                li('.class', '', ['Option 3']),
-                li('.class', '', ['Option 4']),
-                li('.class', '', ['Option 5']),
-                li('.class', '', ['Option 6']),
+                li('.li', '', ['Option 1']),
+                li('.li', '', ['Option 2']),
+                li('.li', '', ['Option 3']),
+                li('.li', '', ['Option 4']),
+                li('.li', '', ['Option 5']),
+                li('.li', '', ['Option 6']),
             ])
         ])
     )

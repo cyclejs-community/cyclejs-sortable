@@ -1,7 +1,7 @@
 import { VNode } from '@cycle/dom';
 
 import { EventHandler, SortableOptions } from './definitions';
-import { mousedownHandler } from './eventHandlers/mousdown';
+import { mousedownHandler } from './eventHandlers/mousedown';
 import { mouseupHandler } from './eventHandlers/mouseup';
 import { mousemoveHandler } from './eventHandlers/mousemove';
 

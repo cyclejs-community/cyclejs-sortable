@@ -1,5 +1,5 @@
 import { VNode } from '@cycle/dom';
-import select from 'snabbdom-selector';
+import { select } from 'snabbdom-selector';
 import { EventHandler, MouseOffset } from '../definitions';
 
 import { getIndex, getGhostStyle, findParent, addAttributes, replaceNode, getBodyStyle, addKeys } from '../helpers';
@@ -10,7 +10,7 @@ import { getIndex, getGhostStyle, findParent, addAttributes, replaceNode, getBod
  */
 export const mousedownHandler : EventHandler = (node, event, options) => {
     const newNode : VNode = addKeys(node);
-    const item : Element = findParent(event.target as Element, options.itemSelector);
+    const item : Element = findParent(event.target as Element, options.parentSelector + ' > *');
     const itemRect : ClientRect = item.getBoundingClientRect();
     const mouseOffset : MouseOffset = {
         x: itemRect.left - event.clientX,
@@ -31,14 +31,14 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
         'style': getGhostStyle(event, mouseOffset, item)
     };
 
+    const items : VNode[] = parent.children as VNode[];
+
     const children : VNode[] = [
-        ...parent.children.slice(0, index),
-        addAttributes(parent.children[index], { 'style': 'opacity: 0;' }),
-        ...parent.children.slice(index + 1),
-        addAttributes(parent.children[index], ghostAttrs)
+        ...items.slice(0, index),
+        addAttributes(items[index], { 'style': 'opacity: 0;' }),
+        ...items.slice(index + 1),
+        addAttributes(items[index], ghostAttrs)
     ].map((c, i) => addAttributes(c, { 'data-index' : i }));
 
-    return replaceNode(newNode, options.parentSelector, Object.assign({}, parent, {
-        children: children
-    }));
+    return replaceNode(newNode, options.parentSelector, { ...parent, children });
 };
