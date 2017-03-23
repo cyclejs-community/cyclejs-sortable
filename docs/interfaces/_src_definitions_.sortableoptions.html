@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_definitions_.html">&quot;definitions&quot;</a>
+					<a href="../modules/_src_definitions_.html">&quot;src/definitions&quot;</a>
 				</li>
 				<li>
-					<a href="_definitions_.sortableoptions.html">SortableOptions</a>
+					<a href="_src_definitions_.sortableoptions.html">SortableOptions</a>
 				</li>
 			</ul>
 			<h1>Interface SortableOptions</h1>
@@ -84,10 +84,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.sortableoptions.html#ghostclass" class="tsd-kind-icon">ghost<wbr>Class</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.sortableoptions.html#handle" class="tsd-kind-icon">handle</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.sortableoptions.html#itemselector" class="tsd-kind-icon">item<wbr>Selector</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.sortableoptions.html#parentselector" class="tsd-kind-icon">parent<wbr>Selector</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#ghostclass" class="tsd-kind-icon">ghost<wbr>Class</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#handle" class="tsd-kind-icon">handle</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#parentselector" class="tsd-kind-icon">parent<wbr>Selector</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,7 +100,7 @@
 					<div class="tsd-signature tsd-kind-icon">ghost<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L39">definitions.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/definitions.ts#L31">src/definitions.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -125,7 +124,7 @@
 					<div class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L23">definitions.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/definitions.ts#L23">src/definitions.ts:23</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -135,31 +134,7 @@
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
-							<dd><p>the whole item (the first CSS class of the first item is used as selector)</p>
-							</dd>
-							<dt>type</dt>
-							<dd><p>{string}</p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="itemselector" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> item<wbr>Selector</h3>
-					<div class="tsd-signature tsd-kind-icon">item<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L31">definitions.ts:31</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Optional, only used in conjunction with @see {handle}, has to be a valid CSS selector.
-							Used to define the item</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p>the parent of the handle</p>
+							<dd><p>string the whole item</p>
 							</dd>
 							<dt>type</dt>
 							<dd><p>{string}</p>
@@ -173,14 +148,14 @@
 					<div class="tsd-signature tsd-kind-icon">parent<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L15">definitions.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/definitions.ts#L15">src/definitions.ts:15</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Optional, has to be a valid CSS selector.
 								Used to select a child of the root VNode as parent of the sortable
-							Currently works only with a simple CSS class selector</p>
+							The items are always the children of that VNode (are not allowed to be strings)</p>
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
@@ -200,72 +175,81 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_horizontal_src_index_.html">"examples/horizontal/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_parentselector_src_index_.html">"examples/parent<wbr>Selector/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_simple_src_index_.html">"examples/simple/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_updateevent_src_index_.html">"examples/update<wbr>Event/src/index"</a>
+					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_definitions_.html">"definitions"</a>
+						<a href="../modules/_src_definitions_.html">"src/definitions"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_.html">"event<wbr>Handlers"</a>
+						<a href="../modules/_src_eventhandlers_.html">"src/event<wbr>Handlers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_mousdown_.html">"event<wbr>Handlers/mousdown"</a>
+						<a href="../modules/_src_eventhandlers_mousedown_.html">"src/event<wbr>Handlers/mousedown"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_mousemove_.html">"event<wbr>Handlers/mousemove"</a>
+						<a href="../modules/_src_eventhandlers_mousemove_.html">"src/event<wbr>Handlers/mousemove"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_mouseup_.html">"event<wbr>Handlers/mouseup"</a>
+						<a href="../modules/_src_eventhandlers_mouseup_.html">"src/event<wbr>Handlers/mouseup"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_helpers_.html">"helpers"</a>
+						<a href="../modules/_src_helpers_.html">"src/helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_makesortable_.html">"make<wbr>Sortable"</a>
+						<a href="../modules/_src_makesortable_.html">"src/make<wbr>Sortable"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_xstreamhelpers_.html">"xstream<wbr>Helpers"</a>
+						<a href="../modules/_src_xstreamhelpers_.html">"src/xstream<wbr>Helpers"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.eventdetails.html" class="tsd-kind-icon">Event<wbr>Details</a>
+						<a href="_src_definitions_.eventdetails.html" class="tsd-kind-icon">Event<wbr>Details</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.intersection.html" class="tsd-kind-icon">Intersection</a>
+						<a href="_src_definitions_.intersection.html" class="tsd-kind-icon">Intersection</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.itemdimensions.html" class="tsd-kind-icon">Item<wbr>Dimensions</a>
+						<a href="_src_definitions_.itemdimensions.html" class="tsd-kind-icon">Item<wbr>Dimensions</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.mouseoffset.html" class="tsd-kind-icon">Mouse<wbr>Offset</a>
+						<a href="_src_definitions_.mouseoffset.html" class="tsd-kind-icon">Mouse<wbr>Offset</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.sortableoptions.html" class="tsd-kind-icon">Sortable<wbr>Options</a>
+						<a href="_src_definitions_.sortableoptions.html" class="tsd-kind-icon">Sortable<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.sortableoptions.html#ghostclass" class="tsd-kind-icon">ghost<wbr>Class</a>
+								<a href="_src_definitions_.sortableoptions.html#ghostclass" class="tsd-kind-icon">ghost<wbr>Class</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.sortableoptions.html#handle" class="tsd-kind-icon">handle</a>
+								<a href="_src_definitions_.sortableoptions.html#handle" class="tsd-kind-icon">handle</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.sortableoptions.html#itemselector" class="tsd-kind-icon">item<wbr>Selector</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.sortableoptions.html#parentselector" class="tsd-kind-icon">parent<wbr>Selector</a>
+								<a href="_src_definitions_.sortableoptions.html#parentselector" class="tsd-kind-icon">parent<wbr>Selector</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_definitions_.html#eventhandler" class="tsd-kind-icon">Event<wbr>Handler</a>
+						<a href="../modules/_src_definitions_.html#eventhandler" class="tsd-kind-icon">Event<wbr>Handler</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_definitions_.html#transform" class="tsd-kind-icon">Transform</a>
+						<a href="../modules/_src_definitions_.html#transform" class="tsd-kind-icon">Transform</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;eventHandlers&quot; | cyclejs-sortable</title>
+	<title>MouseOffset | cyclejs-sortable</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,71 +56,75 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_eventhandlers_.html">&quot;eventHandlers&quot;</a>
+					<a href="../modules/_src_definitions_.html">&quot;src/definitions&quot;</a>
+				</li>
+				<li>
+					<a href="_src_definitions_.mouseoffset.html">MouseOffset</a>
 				</li>
 			</ul>
-			<h1>External module &quot;eventHandlers&quot;</h1>
+			<h1>Interface MouseOffset</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Contains the offset from the cursor to the top left of the item
+						x and y are negative or zero, so you have to add them to the current mouse position</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>type</dt>
+						<dd><p>{MouseOffset}</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">MouseOffset</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Functions</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_eventhandlers_.html#handleevent" class="tsd-kind-icon">handle<wbr>Event</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.mouseoffset.html#x" class="tsd-kind-icon">x</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.mouseoffset.html#y" class="tsd-kind-icon">y</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="handleevent" class="tsd-anchor"></a>
-					<h3>handle<wbr>Event</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">handle<wbr>Event<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span>, event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span>, options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_definitions_.sortableoptions.html" class="tsd-signature-type">SortableOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/eventHandlers.ts#L15">eventHandlers.ts:15</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Uses the event.type property to forward the event to the right handler</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>node: <span class="tsd-signature-type">VNode</span></h5>
-								</li>
-								<li>
-									<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the event that should be handled</p>
-									</div>
-								</li>
-								<li>
-									<h5>options: <a href="../interfaces/_definitions_.sortableoptions.html" class="tsd-signature-type">SortableOptions</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>a valid SortableOptions object, it and its properties have to be defined</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">VNode</span></h4>
-							<p>The new root VNode</p>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="x" class="tsd-anchor"></a>
+					<h3>x</h3>
+					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/definitions.ts#L41">src/definitions.ts:41</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="y" class="tsd-anchor"></a>
+					<h3>y</h3>
+					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/definitions.ts#L42">src/definitions.ts:42</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -131,35 +135,77 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_definitions_.html">"definitions"</a>
+						<a href="../modules/_examples_horizontal_src_index_.html">"examples/horizontal/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_parentselector_src_index_.html">"examples/parent<wbr>Selector/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_simple_src_index_.html">"examples/simple/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_examples_updateevent_src_index_.html">"examples/update<wbr>Event/src/index"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_eventhandlers_.html">"event<wbr>Handlers"</a>
+						<a href="../modules/_src_definitions_.html">"src/definitions"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_eventhandlers_mousdown_.html">"event<wbr>Handlers/mousdown"</a>
+						<a href="../modules/_src_eventhandlers_.html">"src/event<wbr>Handlers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_eventhandlers_mousemove_.html">"event<wbr>Handlers/mousemove"</a>
+						<a href="../modules/_src_eventhandlers_mousedown_.html">"src/event<wbr>Handlers/mousedown"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_eventhandlers_mouseup_.html">"event<wbr>Handlers/mouseup"</a>
+						<a href="../modules/_src_eventhandlers_mousemove_.html">"src/event<wbr>Handlers/mousemove"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_helpers_.html">"helpers"</a>
+						<a href="../modules/_src_eventhandlers_mouseup_.html">"src/event<wbr>Handlers/mouseup"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_makesortable_.html">"make<wbr>Sortable"</a>
+						<a href="../modules/_src_helpers_.html">"src/helpers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_xstreamhelpers_.html">"xstream<wbr>Helpers"</a>
+						<a href="../modules/_src_makesortable_.html">"src/make<wbr>Sortable"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_src_xstreamhelpers_.html">"src/xstream<wbr>Helpers"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_eventhandlers_.html#handleevent" class="tsd-kind-icon">handle<wbr>Event</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_definitions_.eventdetails.html" class="tsd-kind-icon">Event<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_definitions_.intersection.html" class="tsd-kind-icon">Intersection</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_definitions_.itemdimensions.html" class="tsd-kind-icon">Item<wbr>Dimensions</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_definitions_.mouseoffset.html" class="tsd-kind-icon">Mouse<wbr>Offset</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_src_definitions_.mouseoffset.html#x" class="tsd-kind-icon">x</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_src_definitions_.mouseoffset.html#y" class="tsd-kind-icon">y</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_definitions_.sortableoptions.html" class="tsd-kind-icon">Sortable<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_src_definitions_.html#eventhandler" class="tsd-kind-icon">Event<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_src_definitions_.html#transform" class="tsd-kind-icon">Transform</a>
 					</li>
 				</ul>
 			</nav>

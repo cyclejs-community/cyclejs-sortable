@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EventDetails | cyclejs-sortable</title>
+	<title>&quot;src/makeSortable&quot; | cyclejs-sortable</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,85 +56,107 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_definitions_.html">&quot;definitions&quot;</a>
-				</li>
-				<li>
-					<a href="_definitions_.eventdetails.html">EventDetails</a>
+					<a href="_src_makesortable_.html">&quot;src/makeSortable&quot;</a>
 				</li>
 			</ul>
-			<h1>Interface EventDetails</h1>
+			<h1>External module &quot;src/makeSortable&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Defines the object available on a custom updateOrder event</p>
-					</div>
-					<dl class="tsd-comment-tags">
-						<dt>type</dt>
-						<dd><p>{EventDetails}</p>
-						</dd>
-					</dl>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">EventDetails</span>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.eventdetails.html#newindex" class="tsd-kind-icon">new<wbr>Index</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.eventdetails.html#neworder" class="tsd-kind-icon">new<wbr>Order</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_definitions_.eventdetails.html#oldindex" class="tsd-kind-icon">old<wbr>Index</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_makesortable_.html#getupdateevent" class="tsd-kind-icon">get<wbr>Update<wbr>Event</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="newindex" class="tsd-anchor"></a>
-					<h3>new<wbr>Index</h3>
-					<div class="tsd-signature tsd-kind-icon">new<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L61">definitions.ts:61</a></li>
-						</ul>
-					</aside>
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="getupdateevent" class="tsd-anchor"></a>
+					<h3>get<wbr>Update<wbr>Event</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Update<wbr>Event<span class="tsd-signature-symbol">(</span>dom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DOMSource</span>, parentSelector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stream</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_src_definitions_.eventdetails.html" class="tsd-signature-type">EventDetails</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/makeSortable.ts#L49">src/makeSortable.ts:49</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a stream of swapped indices</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dom: <span class="tsd-signature-type">DOMSource</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>a DOMSource containing the sortable</p>
+									</div>
+								</li>
+								<li>
+									<h5>parentSelector: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>a valid CSS selector for the sortable parent (not the items)</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Stream</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_src_definitions_.eventdetails.html" class="tsd-signature-type">EventDetails</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>an object containing the new positions @see EventDetails</p>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="neworder" class="tsd-anchor"></a>
-					<h3>new<wbr>Order</h3>
-					<div class="tsd-signature tsd-kind-icon">new<wbr>Order<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L59">definitions.ts:59</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="oldindex" class="tsd-anchor"></a>
-					<h3>old<wbr>Index</h3>
-					<div class="tsd-signature tsd-kind-icon">old<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/664aa96/src/definitions.ts#L60">definitions.ts:60</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="makesortable" class="tsd-anchor"></a>
+					<h3>make<wbr>Sortable</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">make<wbr>Sortable<span class="tsd-signature-symbol">(</span>dom<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DOMSource</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_src_definitions_.sortableoptions.html" class="tsd-signature-type">SortableOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_definitions_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/327a1d3/src/makeSortable.ts#L18">src/makeSortable.ts:18</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Can be composed with a Stream of VNodes to make them sortable via drag&amp;drop</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dom: <span class="tsd-signature-type">DOMSource</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The preselected root VNode of the sortable, also indicates the area in which the ghost can be dragged</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_src_definitions_.sortableoptions.html" class="tsd-signature-type">SortableOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>@see {SortableOptions}</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_src_definitions_.html#transform" class="tsd-signature-type">Transform</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A function to be composed with a view VNode stream</p>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -144,69 +166,51 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_examples_horizontal_src_index_.html">"examples/horizontal/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_examples_parentselector_src_index_.html">"examples/parent<wbr>Selector/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_examples_simple_src_index_.html">"examples/simple/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_examples_updateevent_src_index_.html">"examples/update<wbr>Event/src/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_src_definitions_.html">"src/definitions"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_src_eventhandlers_.html">"src/event<wbr>Handlers"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_src_eventhandlers_mousedown_.html">"src/event<wbr>Handlers/mousedown"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_src_eventhandlers_mousemove_.html">"src/event<wbr>Handlers/mousemove"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_src_eventhandlers_mouseup_.html">"src/event<wbr>Handlers/mouseup"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_src_helpers_.html">"src/helpers"</a>
+					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_definitions_.html">"definitions"</a>
+						<a href="_src_makesortable_.html">"src/make<wbr>Sortable"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_.html">"event<wbr>Handlers"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_mousdown_.html">"event<wbr>Handlers/mousdown"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_mousemove_.html">"event<wbr>Handlers/mousemove"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_eventhandlers_mouseup_.html">"event<wbr>Handlers/mouseup"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_helpers_.html">"helpers"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_makesortable_.html">"make<wbr>Sortable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_xstreamhelpers_.html">"xstream<wbr>Helpers"</a>
+						<a href="_src_xstreamhelpers_.html">"src/xstream<wbr>Helpers"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.eventdetails.html" class="tsd-kind-icon">Event<wbr>Details</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.eventdetails.html#newindex" class="tsd-kind-icon">new<wbr>Index</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.eventdetails.html#neworder" class="tsd-kind-icon">new<wbr>Order</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_definitions_.eventdetails.html#oldindex" class="tsd-kind-icon">old<wbr>Index</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_src_makesortable_.html#getupdateevent" class="tsd-kind-icon">get<wbr>Update<wbr>Event</a>
 					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.intersection.html" class="tsd-kind-icon">Intersection</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.itemdimensions.html" class="tsd-kind-icon">Item<wbr>Dimensions</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.mouseoffset.html" class="tsd-kind-icon">Mouse<wbr>Offset</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_definitions_.sortableoptions.html" class="tsd-kind-icon">Sortable<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_definitions_.html#eventhandler" class="tsd-kind-icon">Event<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_definitions_.html#transform" class="tsd-kind-icon">Transform</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a>
 					</li>
 				</ul>
 			</nav>
