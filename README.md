@@ -7,6 +7,14 @@ Full documentation: https://cyclejs-community.github.io/cyclejs-sortable/
 
 NPM: https://www.npmjs.com/package/cyclejs-sortable
 
+## Examples
+
+You can check out live versions of the [examples](./examples/) here:
+- [simple](./examples/simple/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/simple/
+- [horizontal](./examples/horizontal/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/horizontal/
+- [parentSelector](./examples/parentSelector/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/parentSelector/
+- [updateEvent](./examples/updateEvent/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/updateEvent/
+
 ## Required Polyfills
 The code uses a few ES6 features, so you might need an es6 polyfill like `babel-polyfill`
 
