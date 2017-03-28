@@ -9,7 +9,6 @@ import { getIndex, getGhostStyle, findParent, addAttributes, replaceNode, getBod
  * @type {EventHandler}
  */
 export const mousedownHandler : EventHandler = (node, event, options) => {
-    const newNode : VNode = addKeys(node);
     const item : Element = findParent(event.target as Element, options.parentSelector + ' > *');
     const itemRect : ClientRect = item.getBoundingClientRect();
     const mouseOffset : MouseOffset = {
@@ -20,7 +19,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
     const body : Element = findParent(event.target as Element, 'body');
     body.setAttribute('style', getBodyStyle());
 
-    const parent : VNode = select(options.parentSelector, newNode)[0];
+    const parent : VNode = select(options.parentSelector, node)[0];
     const index : number = getIndex(item);
 
     const ghostAttrs : { [name : string]: string } = {
@@ -37,8 +36,8 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
         ...items.slice(0, index),
         addAttributes(items[index], { 'style': 'opacity: 0;' }),
         ...items.slice(index + 1),
-        addAttributes(items[index], ghostAttrs)
+            addAttributes({ ...items[index], elm: undefined }, ghostAttrs)
     ].map((c, i) => addAttributes(c, { 'data-index' : i }));
 
-    return replaceNode(newNode, options.parentSelector, { ...parent, children });
+    return replaceNode(node, options.parentSelector, { ...parent, children });
 };

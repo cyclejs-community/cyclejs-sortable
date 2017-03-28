@@ -10,6 +10,14 @@ import { emitBetween } from './xstreamHelpers';
 
 export { SortableOptions, Transform, EventHandler, EventDetails } from './definitions';
 
+function augmentEvent(ev : any) : any {
+    const touch : any = (ev as any).touches[0];
+    ev.clientX = touch.clientX;
+    ev.clientY = touch.clientY;
+    return ev;
+}
+
+
 /**
  * Can be composed with a Stream of VNodes to make them sortable via drag&drop
  * @param {DOMSource} dom The preselected root VNode of the sortable, also indicates the area in which the ghost can be dragged
@@ -20,17 +28,27 @@ export function makeSortable<T>(dom : DOMSource, options? : SortableOptions) : (
 {
     return sortable => adapt(
         (xs.fromObservable(sortable as any) as Stream<VNode>)
+        .map(addKeys)
         .map(node => {
             const defaults : SortableOptions = applyDefaults(options || {}, node);
 
-            const mousedown$ : Stream<MouseEvent> = xs.fromObservable(dom.select(defaults.handle).events('mousedown')) as Stream<MouseEvent>;
+            const mousedown$ : Stream<MouseEvent> = xs.merge(
+                xs.fromObservable(dom.select(defaults.handle).events('mousedown')),
+                xs.fromObservable(dom.select(defaults.handle).events('touchstart'))
+                    .map(augmentEvent)
+            ) as Stream<MouseEvent>;
 
-            const mouseup$ : Stream<MouseEvent> = mousedown$
-                .mapTo(xs.fromObservable(dom.select('body').events('mouseup').take(1)))
-                .flatten() as Stream<MouseEvent>;
+            const mouseup$ : Stream<MouseEvent> = xs.merge(
+                    xs.fromObservable(dom.select('body').events('mouseup')).take(1),
+                    xs.fromObservable(dom.select(defaults.handle).events('touchend')).debug('end')
+                ) as Stream<MouseEvent>;
 
             const mousemove$ : Stream<MouseEvent> = mousedown$
-                .mapTo(xs.fromObservable(dom.select('body').events('mousemove')))
+                .mapTo(xs.merge(
+                    xs.fromObservable(dom.select('body').events('mousemove')),
+                    xs.fromObservable(dom.select(defaults.handle).events('touchmove'))
+                        .map(augmentEvent)
+                ))
                 .flatten()
                 .compose(emitBetween(mousedown$, mouseup$)) as Stream<MouseEvent>;
 
@@ -49,9 +67,9 @@ export function makeSortable<T>(dom : DOMSource, options? : SortableOptions) : (
  * @return {Stream<EventDetails>} an object containing the new positions @see EventDetails
  */
 export function getUpdateEvent(dom : DOMSource, parentSelector : string) : Stream<EventDetails>
-{
-    return (dom.select(parentSelector)
-        .events('updateOrder') as Stream<any>)
+    {
+        return (dom.select(parentSelector)
+            .events('updateOrder') as Stream<any>)
         .compose(delay(10)) //Allow mouseup to execute properly
         .map(ev => ev.detail);
-}
+    }

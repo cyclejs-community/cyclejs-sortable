@@ -17,7 +17,10 @@ export function handleEvent(node : VNode, event : MouseEvent, options : Sortable
     const eventHandlerMapping : { [type : string]: EventHandler } = {
         'mousedown': mousedownHandler,
         'mouseup': mouseupHandler,
-        'mousemove': mousemoveHandler
+        'mousemove': mousemoveHandler,
+        'touchstart': mousedownHandler,
+        'touchend': mouseupHandler,
+        'touchmove': mousemoveHandler
     };
 
     return eventHandlerMapping[event.type](node, event, options);
