@@ -40,6 +40,7 @@ function handleEvent(node, event, options) {
     const eventHandlerMapping = {
         'mousedown': mousedown_1.mousedownHandler,
         'mouseup': mouseup_1.mouseupHandler,
+        'mouseleave': mouseup_1.mouseupHandler,
         'mousemove': mousemove_1.mousemoveHandler,
         'touchstart': mousedown_1.mousedownHandler,
         'touchend': mouseup_1.mouseupHandler,
@@ -413,7 +414,9 @@ function makeSortable(dom, options) {
         const defaults = helpers_1.applyDefaults(options || {}, node);
         const mousedown$ = xstream_1.default.merge(xstream_1.default.fromObservable(dom.select(defaults.handle).events('mousedown')), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchstart'))
             .map(augmentEvent));
-        const mouseup$ = xstream_1.default.merge(xstream_1.default.fromObservable(dom.select('body').events('mouseup')).take(1), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchend')).debug('end'));
+        const mouseup$ = mousedown$
+            .mapTo(xstream_1.default.merge(xstream_1.default.fromObservable(dom.select('body').events('mouseleave')), xstream_1.default.fromObservable(dom.select('body').events('mouseup')), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchend')))
+            .take(1)).flatten();
         const mousemove$ = mousedown$
             .mapTo(xstream_1.default.merge(xstream_1.default.fromObservable(dom.select('body').events('mousemove')), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchmove'))
             .map(augmentEvent)))
