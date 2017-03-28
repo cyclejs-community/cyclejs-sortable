@@ -38,10 +38,15 @@ export function makeSortable<T>(dom : DOMSource, options? : SortableOptions) : (
                     .map(augmentEvent)
             ) as Stream<MouseEvent>;
 
-            const mouseup$ : Stream<MouseEvent> = xs.merge(
-                    xs.fromObservable(dom.select('body').events('mouseup')).take(1),
-                    xs.fromObservable(dom.select(defaults.handle).events('touchend')).debug('end')
-                ) as Stream<MouseEvent>;
+            const mouseup$ : Stream<MouseEvent> = mousedown$
+                .mapTo(
+                    xs.merge(
+                        xs.fromObservable(dom.select('body').events('mouseleave')),
+                        xs.fromObservable(dom.select('body').events('mouseup')),
+                        xs.fromObservable(dom.select(defaults.handle).events('touchend'))
+                    )
+                    .take(1)
+                ).flatten() as Stream<MouseEvent>;
 
             const mousemove$ : Stream<MouseEvent> = mousedown$
                 .mapTo(xs.merge(
