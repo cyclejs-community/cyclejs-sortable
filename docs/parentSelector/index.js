@@ -407,7 +407,8 @@ function makeSortable(dom, options) {
     return sortable => adapt_1.adapt(xstream_1.default.fromObservable(sortable)
         .map(node => {
         const defaults = helpers_1.applyDefaults(options || {}, node);
-        const mousedown$ = xstream_1.default.fromObservable(dom.select(defaults.handle).events('mousedown'));
+        const mousedown$ = xstream_1.default.merge(xstream_1.default.fromObservable(dom.select(defaults.handle).events('mousedown')), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchstart'))
+            .map(ev => Object.assign({}, ev, ev.touches[0])));
         const mouseup$ = mousedown$
             .mapTo(xstream_1.default.fromObservable(dom.select('body').events('mouseup').take(1)))
             .flatten();

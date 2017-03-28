@@ -40,7 +40,10 @@ function handleEvent(node, event, options) {
     const eventHandlerMapping = {
         'mousedown': mousedown_1.mousedownHandler,
         'mouseup': mouseup_1.mouseupHandler,
-        'mousemove': mousemove_1.mousemoveHandler
+        'mousemove': mousemove_1.mousemoveHandler,
+        'touchstart': mousedown_1.mousedownHandler,
+        'touchend': mouseup_1.mouseupHandler,
+        'touchmove': mousemove_1.mousemoveHandler
     };
     return eventHandlerMapping[event.type](node, event, options);
 }
@@ -56,7 +59,6 @@ const helpers_1 = require("../helpers");
  * @type {EventHandler}
  */
 exports.mousedownHandler = (node, event, options) => {
-    const newNode = helpers_1.addKeys(node);
     const item = helpers_1.findParent(event.target, options.parentSelector + ' > *');
     const itemRect = item.getBoundingClientRect();
     const mouseOffset = {
@@ -65,7 +67,7 @@ exports.mousedownHandler = (node, event, options) => {
     };
     const body = helpers_1.findParent(event.target, 'body');
     body.setAttribute('style', helpers_1.getBodyStyle());
-    const parent = snabbdom_selector_1.select(options.parentSelector, newNode)[0];
+    const parent = snabbdom_selector_1.select(options.parentSelector, node)[0];
     const index = helpers_1.getIndex(item);
     const ghostAttrs = {
         'data-mouseoffset': JSON.stringify(mouseOffset),
@@ -79,9 +81,9 @@ exports.mousedownHandler = (node, event, options) => {
         ...items.slice(0, index),
         helpers_1.addAttributes(items[index], { 'style': 'opacity: 0;' }),
         ...items.slice(index + 1),
-        helpers_1.addAttributes(items[index], ghostAttrs)
+        helpers_1.addAttributes(Object.assign({}, items[index], { elm: undefined }), ghostAttrs)
     ].map((c, i) => helpers_1.addAttributes(c, { 'data-index': i }));
-    return helpers_1.replaceNode(newNode, options.parentSelector, Object.assign({}, parent, { children }));
+    return helpers_1.replaceNode(node, options.parentSelector, Object.assign({}, parent, { children }));
 };
 
 },{"../helpers":6,"snabbdom-selector":121}],4:[function(require,module,exports){
@@ -392,6 +394,12 @@ const adapt_1 = require("@cycle/run/lib/adapt");
 const helpers_1 = require("./helpers");
 const eventHandlers_1 = require("./eventHandlers");
 const xstreamHelpers_1 = require("./xstreamHelpers");
+function augmentEvent(ev) {
+    const touch = ev.touches[0];
+    ev.clientX = touch.clientX;
+    ev.clientY = touch.clientY;
+    return ev;
+}
 /**
  * Can be composed with a Stream of VNodes to make them sortable via drag&drop
  * @param {DOMSource} dom The preselected root VNode of the sortable, also indicates the area in which the ghost can be dragged
@@ -400,14 +408,15 @@ const xstreamHelpers_1 = require("./xstreamHelpers");
  */
 function makeSortable(dom, options) {
     return sortable => adapt_1.adapt(xstream_1.default.fromObservable(sortable)
+        .map(helpers_1.addKeys)
         .map(node => {
         const defaults = helpers_1.applyDefaults(options || {}, node);
-        const mousedown$ = xstream_1.default.fromObservable(dom.select(defaults.handle).events('mousedown'));
-        const mouseup$ = mousedown$
-            .mapTo(xstream_1.default.fromObservable(dom.select('body').events('mouseup').take(1)))
-            .flatten();
+        const mousedown$ = xstream_1.default.merge(xstream_1.default.fromObservable(dom.select(defaults.handle).events('mousedown')), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchstart'))
+            .map(augmentEvent));
+        const mouseup$ = xstream_1.default.merge(xstream_1.default.fromObservable(dom.select('body').events('mouseup')).take(1), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchend')).debug('end'));
         const mousemove$ = mousedown$
-            .mapTo(xstream_1.default.fromObservable(dom.select('body').events('mousemove')))
+            .mapTo(xstream_1.default.merge(xstream_1.default.fromObservable(dom.select('body').events('mousemove')), xstream_1.default.fromObservable(dom.select(defaults.handle).events('touchmove'))
+            .map(augmentEvent)))
             .flatten()
             .compose(xstreamHelpers_1.emitBetween(mousedown$, mouseup$));
         const event$ = xstream_1.default.merge(mousedown$, mouseup$, mousemove$);
