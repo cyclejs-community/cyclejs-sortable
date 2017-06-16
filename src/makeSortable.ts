@@ -73,8 +73,9 @@ export function makeSortable<T>(dom : DOMSource, options? : SortableOptions) : (
  */
 export function getUpdateEvent(dom : DOMSource, parentSelector : string) : Stream<EventDetails>
     {
-        return (dom.select(parentSelector)
-            .events('updateOrder') as Stream<any>)
-        .compose(delay(10)) //Allow mouseup to execute properly
-        .map(ev => ev.detail);
+        return adapt(
+            (xs.fromObservable(dom.select(parentSelector).events('updateOrder')) as Stream<any>)
+                .compose(delay(10)) //Allow mouseup to execute properly
+                .map(ev => ev.detail)
+        );
     }
