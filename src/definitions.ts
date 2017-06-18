@@ -29,10 +29,18 @@ export interface SortableOptions {
     /**
      * Optional, has to be a CSS class name
      * Can be used to style the ghost item
-     * @default the first CSS class of the first item
+     * @default string ''
      * @type {string}
      */
     ghostClass?: string;
+
+    /**
+     * Optional, number of milliseconds to
+     * wait after mousedown/touchstart before selecting the item
+     * @default number in milliseconds, defaults to 0
+     * @type {number}
+     */
+    selectionDelay?: number;
 }
 
 /**
@@ -43,6 +51,20 @@ export interface SortableOptions {
 export interface MouseOffset {
     x: number;
     y: number;
+    itemLeft: number;
+    itemTop: number;
+    parentLeft: number;
+    parentTop: number;
+}
+
+/**
+ * Contains the offset from mousedown position
+ * distX and distY increase going down and to the left
+ * @type {StartPositionOffset}
+ */
+export interface StartPositionOffset extends MouseEvent {
+    distX: number;
+    distY: number;
 }
 
 /**

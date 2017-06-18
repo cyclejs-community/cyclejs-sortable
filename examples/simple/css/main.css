@@ -2,6 +2,13 @@
     font-size: 35px;
 }
 
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body, html {
     max-height: 100%;
     margin: 0;
@@ -13,13 +20,18 @@ body {
 
 ul {
     margin: 0;
+    position: relative;
 }
 
 li {
-    padding: 5px;
+    /*padding: 5px;*/
     background: lightgray;
 }
 
 li + li {
-    margin-top: 40px;
+    /*margin-top: 5px;*/
+}
+
+.ghost {
+    border: 1px solid black;
 }
