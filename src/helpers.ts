@@ -34,12 +34,12 @@ export function applyDefaults(options : SortableOptions, root : VNode) : Sortabl
 export function addKeys(node : VNode, key : string = Math.random().toString()) : VNode
 {
     if (!node.children) {
-        return { ...node, key };
+        return { ...node, key: node.key ? node.key : key };
     }
 
     const children : VNode[] = (node.children as VNode[]).map((c, i) => addKeys(c, key + '-' + i));
 
-    return { ...node, key, children };
+    return { ...node, key: node.key ? node.key : key, children };
 }
 
 /**
