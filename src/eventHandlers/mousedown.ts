@@ -19,7 +19,7 @@ export const mousedownHandler : EventHandler = (node, event, options) => {
     const body : Element = findParent(event.target as Element, 'body');
     body.setAttribute('style', getBodyStyle());
 
-    const parent : VNode = select(options.parentSelector, node)[0];
+    const parent : VNode = addKeys(select(options.parentSelector, node)[0]);
     const index : number = getIndex(item);
 
     const ghostAttrs : { [name : string]: string } = {

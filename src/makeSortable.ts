@@ -4,7 +4,7 @@ import { DOMSource, VNode } from '@cycle/dom';
 import { adapt } from '@cycle/run/lib/adapt';
 
 import { SortableOptions, Transform, EventDetails } from './definitions';
-import { applyDefaults, addKeys } from './helpers';
+import { applyDefaults } from './helpers';
 import { handleEvent } from './eventHandlers';
 import { emitBetween } from './xstreamHelpers';
 
@@ -17,7 +17,6 @@ function augmentEvent(ev : any) : any {
     return ev;
 }
 
-
 /**
  * Can be composed with a Stream of VNodes to make them sortable via drag&drop
  * @param {DOMSource} dom The preselected root VNode of the sortable, also indicates the area in which the ghost can be dragged
@@ -28,7 +27,6 @@ export function makeSortable<T>(dom : DOMSource, options? : SortableOptions) : (
 {
     return sortable => adapt(
         (xs.fromObservable(sortable as any) as Stream<VNode>)
-        .map(addKeys)
         .map(node => {
             const defaults : SortableOptions = applyDefaults(options || {}, node);
 
