@@ -4,7 +4,15 @@
   "description": "Makes all children of a vdom-node sortable via drag and drop",
   "main": "build/src/makeSortable.js",
   "typings": "build/src/makeSortable.d.ts",
+  "lint-staged": {
+    "*.{js,jsx,jsx,ts,tsx}": [
+      "npm run format",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
+    "format": "prettier --tab-width 4 --single-quote --write './src/**/*.{js,ts,tsx}'",
     "build": "tsc -d",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
@@ -42,7 +50,10 @@
     "@cycle/rxjs-run": "^7.0.0",
     "browserify": "^14.1.0",
     "cp-cli": "^1.0.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
     "open-cli": "^1.0.5",
+    "prettier": "^1.5.3",
     "rimraf": "^2.6.1",
     "rxjs": "^5.2.0",
     "typedoc": "^0.5.9",
