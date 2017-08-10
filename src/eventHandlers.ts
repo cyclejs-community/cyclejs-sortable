@@ -12,16 +12,19 @@ import { mousemoveHandler } from './eventHandlers/mousemove';
  * @param {SortableOptions} options a valid SortableOptions object, it and its properties have to be defined
  * @return {VNode} The new root VNode
  */
-export function handleEvent(node : VNode, event : MouseEvent, options : SortableOptions) : VNode
-{
-    const eventHandlerMapping : { [type : string]: EventHandler } = {
-        'mousedown': mousedownHandler,
-        'mouseup': mouseupHandler,
-        'mouseleave': mouseupHandler,
-        'mousemove': mousemoveHandler,
-        'touchstart': mousedownHandler,
-        'touchend': mouseupHandler,
-        'touchmove': mousemoveHandler
+export function handleEvent(
+    node: VNode,
+    event: MouseEvent,
+    options: SortableOptions
+): VNode {
+    const eventHandlerMapping: { [type: string]: EventHandler } = {
+        mousedown: mousedownHandler,
+        mouseup: mouseupHandler,
+        mouseleave: mouseupHandler,
+        mousemove: mousemoveHandler,
+        touchstart: mousedownHandler,
+        touchend: mouseupHandler,
+        touchmove: mousemoveHandler
     };
 
     return eventHandlerMapping[event.type](node, event, options);

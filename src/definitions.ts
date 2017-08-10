@@ -1,8 +1,12 @@
 import { Stream } from 'xstream';
 import { VNode } from '@cycle/dom';
 
-export type Transform<T, U> = (s : Stream<T>) => Stream<U>
-export type EventHandler = (node : VNode, event : MouseEvent, options : SortableOptions) => VNode;
+export type Transform<T, U> = (s: Stream<T>) => Stream<U>;
+export type EventHandler = (
+    node: VNode,
+    event: MouseEvent,
+    options: SortableOptions
+) => VNode;
 
 export interface SortableOptions {
     /**
@@ -12,7 +16,7 @@ export interface SortableOptions {
      * @default the root VNode of the given DOMSource
      * @type {string}
      */
-    parentSelector? : string;
+    parentSelector?: string;
 
     /**
      * Optional, has to be a valid CSS selector.
@@ -20,7 +24,7 @@ export interface SortableOptions {
      * @default string the whole item
      * @type {string}
      */
-    handle? : string;
+    handle?: string;
 
     /**
      * Optional, has to be a CSS class name
@@ -28,7 +32,7 @@ export interface SortableOptions {
      * @default the first CSS class of the first item
      * @type {string}
      */
-    ghostClass? : string;
+    ghostClass?: string;
 }
 
 /**
@@ -36,33 +40,29 @@ export interface SortableOptions {
  * x and y are negative or zero, so you have to add them to the current mouse position
  * @type {MouseOffset}
  */
-export interface MouseOffset
-{
-    x : number;
-    y : number;
+export interface MouseOffset {
+    x: number;
+    y: number;
 }
 
 /**
  * Defines the object available on a custom updateOrder event
  * @type {EventDetails}
  */
-export interface EventDetails
-{
-    newOrder : number[];
-    oldIndex : number;
-    newIndex : number;
+export interface EventDetails {
+    newOrder: number[];
+    oldIndex: number;
+    newIndex: number;
 }
 
-export interface ItemDimensions
-{
-    width : number;
-    height : number;
+export interface ItemDimensions {
+    width: number;
+    height: number;
 }
 
-export interface Intersection
-{
-    xmin : number;
-    ymin : number;
-    xmax : number;
-    ymax : number;
+export interface Intersection {
+    xmin: number;
+    ymin: number;
+    xmax: number;
+    ymax: number;
 }
