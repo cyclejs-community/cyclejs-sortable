@@ -105,7 +105,7 @@ export function makeSortable<T>(
                         .map(ev =>
                             xs
                                 .of(ev)
-                                .compose(delay(options.selectionDelay))
+                                .compose(delay(defaults.selectionDelay))
                                 .endWhen(xs.merge(up$, move$))
                         )
                         .flatten() as Stream<MouseEvent>;
