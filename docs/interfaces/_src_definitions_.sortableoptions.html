@@ -87,6 +87,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#ghostclass" class="tsd-kind-icon">ghost<wbr>Class</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#handle" class="tsd-kind-icon">handle</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#parentselector" class="tsd-kind-icon">parent<wbr>Selector</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_src_definitions_.sortableoptions.html#selectiondelay" class="tsd-kind-icon">selection<wbr>Delay</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,7 +101,7 @@
 					<div class="tsd-signature tsd-kind-icon">ghost<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/definitions.ts#L31">src/definitions.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/definitions.ts#L35">src/definitions.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -110,7 +111,7 @@
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>default</dt>
-							<dd><p>the first CSS class of the first item</p>
+							<dd><p>string &#39;&#39;</p>
 							</dd>
 							<dt>type</dt>
 							<dd><p>{string}</p>
@@ -124,7 +125,7 @@
 					<div class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/definitions.ts#L23">src/definitions.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/definitions.ts#L27">src/definitions.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -148,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">parent<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/definitions.ts#L15">src/definitions.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/definitions.ts#L19">src/definitions.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -163,6 +164,30 @@
 							</dd>
 							<dt>type</dt>
 							<dd><p>{string}</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="selectiondelay" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> selection<wbr>Delay</h3>
+					<div class="tsd-signature tsd-kind-icon">selection<wbr>Delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/definitions.ts#L43">src/definitions.ts:43</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Optional, number of milliseconds to
+							wait after mousedown/touchstart before selecting the item</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>number in milliseconds, defaults to 0</p>
+							</dd>
+							<dt>type</dt>
+							<dd><p>{number}</p>
 							</dd>
 						</dl>
 					</div>
@@ -220,9 +245,6 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_src_makesortable_.html">"src/make<wbr>Sortable"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_src_xstreamhelpers_.html">"src/xstream<wbr>Helpers"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -253,10 +275,16 @@
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_src_definitions_.sortableoptions.html#parentselector" class="tsd-kind-icon">parent<wbr>Selector</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_src_definitions_.sortableoptions.html#selectiondelay" class="tsd-kind-icon">selection<wbr>Delay</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_src_definitions_.startpositionoffset.html" class="tsd-kind-icon">Start<wbr>Position<wbr>Offset</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="../modules/_src_definitions_.html#eventhandler" class="tsd-kind-icon">Event<wbr>Handler</a>
 					</li>

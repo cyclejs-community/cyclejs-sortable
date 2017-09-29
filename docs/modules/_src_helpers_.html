@@ -74,6 +74,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_helpers_.html#addattributes" class="tsd-kind-icon">add<wbr>Attributes</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_helpers_.html#addghostclass" class="tsd-kind-icon">add<wbr>Ghost<wbr>Class</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_helpers_.html#addkeys" class="tsd-kind-icon">add<wbr>Keys</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_helpers_.html#addtodata" class="tsd-kind-icon">add<wbr>ToData</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_helpers_.html#applydefaults" class="tsd-kind-icon">apply<wbr>Defaults</a></li>
@@ -98,18 +99,18 @@
 					<a name="addattributes" class="tsd-anchor"></a>
 					<h3>add<wbr>Attributes</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Attributes<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span>, newAttr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Attributes<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span>, newAttr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, ghostClass<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L156">src/helpers.ts:156</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L208">src/helpers.ts:208</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Adds the given attribute savely to the VNode</p>
+									<p>Adds the given attribute safely to the VNode</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -124,6 +125,41 @@
 											<h5><span class="tsd-signature-symbol">[</span>attr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
 										</li>
 									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> ghostClass: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">VNode</span></h4>
+							<p>the newly created VNode</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="addghostclass" class="tsd-anchor"></a>
+					<h3>add<wbr>Ghost<wbr>Class</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Ghost<wbr>Class<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span>, ghostClass<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L225">src/helpers.ts:225</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds the given class safely to the VNode</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <span class="tsd-signature-type">VNode</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> ghostClass: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">VNode</span></h4>
@@ -141,7 +177,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L34">src/helpers.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L49">src/helpers.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -176,12 +212,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L187">src/helpers.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L263">src/helpers.ts:263</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Adds the given additions savely to the VNode</p>
+									<p>Adds the given additions safely to the VNode</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -216,7 +252,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L12">src/helpers.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L17">src/helpers.ts:17</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -251,7 +287,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L139">src/helpers.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L192">src/helpers.ts:192</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -289,7 +325,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L223">src/helpers.ts:223</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L304">src/helpers.ts:304</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -317,7 +353,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L127">src/helpers.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L179">src/helpers.ts:179</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -334,13 +370,13 @@
 					<a name="getghoststyle" class="tsd-anchor"></a>
 					<h3>get<wbr>Ghost<wbr>Style</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Ghost<wbr>Style<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span>, mouseOffset<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_definitions_.mouseoffset.html" class="tsd-signature-type">MouseOffset</a>, item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Ghost<wbr>Style<span class="tsd-signature-symbol">(</span>mouseOffset<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_definitions_.mouseoffset.html" class="tsd-signature-type">MouseOffset</a>, item<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L102">src/helpers.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L136">src/helpers.ts:136</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -350,12 +386,6 @@
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the mouse event that was triggered</p>
-									</div>
-								</li>
 								<li>
 									<h5>mouseOffset: <a href="../interfaces/_src_definitions_.mouseoffset.html" class="tsd-signature-type">MouseOffset</a></h5>
 									<div class="tsd-comment tsd-typography">
@@ -381,7 +411,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L90">src/helpers.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L125">src/helpers.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -410,7 +440,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L205">src/helpers.ts:205</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L287">src/helpers.ts:287</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -448,7 +478,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L52">src/helpers.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L71">src/helpers.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -487,7 +517,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L168">src/helpers.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L243">src/helpers.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -525,7 +555,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L73">src/helpers.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L101">src/helpers.ts:101</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -563,13 +593,13 @@
 					<a name="updateghoststyle" class="tsd-anchor"></a>
 					<h3>update<wbr>Ghost<wbr>Style</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Ghost<wbr>Style<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span>, mouseOffset<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_definitions_.mouseoffset.html" class="tsd-signature-type">MouseOffset</a>, ghost<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Ghost<wbr>Style<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_definitions_.startpositionoffset.html" class="tsd-signature-type">StartPositionOffset</a>, mouseOffset<span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_definitions_.mouseoffset.html" class="tsd-signature-type">MouseOffset</a>, ghost<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/helpers.ts#L114">src/helpers.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/helpers.ts#L158">src/helpers.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -580,7 +610,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
+									<h5>event: <a href="../interfaces/_src_definitions_.startpositionoffset.html" class="tsd-signature-type">StartPositionOffset</a></h5>
 								</li>
 								<li>
 									<h5>mouseOffset: <a href="../interfaces/_src_definitions_.mouseoffset.html" class="tsd-signature-type">MouseOffset</a></h5>
@@ -646,15 +676,15 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_src_makesortable_.html">"src/make<wbr>Sortable"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_src_xstreamhelpers_.html">"src/xstream<wbr>Helpers"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_src_helpers_.html#addattributes" class="tsd-kind-icon">add<wbr>Attributes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_src_helpers_.html#addghostclass" class="tsd-kind-icon">add<wbr>Ghost<wbr>Class</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_src_helpers_.html#addkeys" class="tsd-kind-icon">add<wbr>Keys</a>

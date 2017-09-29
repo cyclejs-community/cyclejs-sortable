@@ -74,8 +74,11 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_src_makesortable_.html#augmentevent" class="tsd-kind-icon">augment<wbr>Event</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_src_makesortable_.html#augmentstartdistance" class="tsd-kind-icon">augment<wbr>Start<wbr>Distance</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_src_makesortable_.html#getupdateevent" class="tsd-kind-icon">get<wbr>Update<wbr>Event</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_src_makesortable_.html#morethanonechild" class="tsd-kind-icon">more<wbr>Than<wbr>One<wbr>Child</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_src_makesortable_.html#notmorethanonechild" class="tsd-kind-icon">not<wbr>More<wbr>Than<wbr>One<wbr>Child</a></li>
 							</ul>
 						</section>
 					</div>
@@ -87,13 +90,13 @@
 					<a name="augmentevent" class="tsd-anchor"></a>
 					<h3>augment<wbr>Event</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">augment<wbr>Event<span class="tsd-signature-symbol">(</span>ev<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">augment<wbr>Event<span class="tsd-signature-symbol">(</span>ev<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/makeSortable.ts#L13">src/makeSortable.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/makeSortable.ts#L22">src/makeSortable.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -102,7 +105,36 @@
 									<h5>ev: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MouseEvent</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="augmentstartdistance" class="tsd-anchor"></a>
+					<h3>augment<wbr>Start<wbr>Distance</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">augment<wbr>Start<wbr>Distance<span class="tsd-signature-symbol">(</span>ev<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, startX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, startY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_src_definitions_.startpositionoffset.html" class="tsd-signature-type">StartPositionOffset</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/makeSortable.ts#L29">src/makeSortable.ts:29</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ev: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>startX: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>startY: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_src_definitions_.startpositionoffset.html" class="tsd-signature-type">StartPositionOffset</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -116,7 +148,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/makeSortable.ts#L72">src/makeSortable.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/makeSortable.ts#L153">src/makeSortable.ts:153</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -154,7 +186,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/701503d/src/makeSortable.ts#L26">src/makeSortable.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/makeSortable.ts#L53">src/makeSortable.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,6 +235,52 @@
 									</ul>
 								</li>
 							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="morethanonechild" class="tsd-anchor"></a>
+					<h3>more<wbr>Than<wbr>One<wbr>Child</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">more<wbr>Than<wbr>One<wbr>Child<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/makeSortable.ts#L39">src/makeSortable.ts:39</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <span class="tsd-signature-type">VNode</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="notmorethanonechild" class="tsd-anchor"></a>
+					<h3>not<wbr>More<wbr>Than<wbr>One<wbr>Child</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">not<wbr>More<wbr>Than<wbr>One<wbr>Child<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">VNode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-sortable/blob/fb2b2e7/src/makeSortable.ts#L43">src/makeSortable.ts:43</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <span class="tsd-signature-type">VNode</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -259,9 +337,6 @@
 					<li class="current tsd-kind-external-module">
 						<a href="_src_makesortable_.html">"src/make<wbr>Sortable"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_src_xstreamhelpers_.html">"src/xstream<wbr>Helpers"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -269,11 +344,20 @@
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_src_makesortable_.html#augmentevent" class="tsd-kind-icon">augment<wbr>Event</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_src_makesortable_.html#augmentstartdistance" class="tsd-kind-icon">augment<wbr>Start<wbr>Distance</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_src_makesortable_.html#getupdateevent" class="tsd-kind-icon">get<wbr>Update<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_src_makesortable_.html#makesortable" class="tsd-kind-icon">make<wbr>Sortable</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_src_makesortable_.html#morethanonechild" class="tsd-kind-icon">more<wbr>Than<wbr>One<wbr>Child</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_src_makesortable_.html#notmorethanonechild" class="tsd-kind-icon">not<wbr>More<wbr>Than<wbr>One<wbr>Child</a>
 					</li>
 				</ul>
 			</nav>
