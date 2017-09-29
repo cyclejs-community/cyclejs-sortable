@@ -3,6 +3,7 @@ import { select } from 'snabbdom-selector';
 import {
     EventHandler,
     MouseOffset,
+    StartPositionOffset,
     ItemDimensions,
     Intersection
 } from '../definitions';
@@ -24,10 +25,20 @@ export const mousemoveHandler: EventHandler = (node, event, options) => {
     const parent: VNode = select(options.parentSelector, node)[0];
     const ghost: VNode = parent.children[parent.children.length - 1] as VNode;
 
-    const mouseOffset: MouseOffset = JSON.parse(
-        ghost.data.attrs['data-mouseoffset']
-    );
-    const itemIndex: number = parseInt(ghost.data.attrs['data-itemindex']);
+    // Hack for now.  Immediately after the mouse down event if the mousemove
+    // handler gets called (as in the pointer gets moved very quickly) the ghost
+    // VNode may not have been attached to the element yet causing ghost.elm to
+    // be undefined, in which case we just return the node unchanged
+    if (!ghost.elm) {
+        return node;
+    }
+
+    const mouseOffset: MouseOffset = JSON.parse(ghost.data.attrs[
+        'data-mouseoffset'
+    ] as string);
+    const itemIndex: number = parseInt(ghost.data.attrs[
+        'data-itemindex'
+    ] as string);
     const item: VNode = parent.children[itemIndex] as VNode;
     const itemIntersection: number = getArea(
         getIntersection(item.elm as Element, ghost.elm as Element)
@@ -56,9 +67,12 @@ export const mousemoveHandler: EventHandler = (node, event, options) => {
             : -itemIntersection > maxArea - itemArea
               ? maxIntersection[1]
               : itemIndex;
-
     const ghostAttrs: { [attr: string]: string } = {
-        style: updateGhostStyle(event, mouseOffset, ghost.elm as Element),
+        style: updateGhostStyle(
+            event as StartPositionOffset,
+            mouseOffset,
+            ghost.elm as Element
+        ),
         'data-itemindex': newIndex.toString()
     };
 

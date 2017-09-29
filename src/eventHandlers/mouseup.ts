@@ -18,7 +18,9 @@ export const mouseupHandler: EventHandler = (node, event, options) => {
         return node;
     }
 
-    const itemIndex: number = parseInt(ghost.data.attrs['data-itemindex']);
+    const itemIndex: number = parseInt(ghost.data.attrs[
+        'data-itemindex'
+    ] as string);
 
     const body: Element = findParent(event.target as Element, 'body');
     body.removeAttribute('style');
@@ -30,12 +32,12 @@ export const mouseupHandler: EventHandler = (node, event, options) => {
     ];
 
     const indexes: number[] = newItems
-        .map(c => c.data.attrs['data-index'])
+        .map(c => c.data.attrs['data-index'] as string)
         .map(s => parseInt(s));
 
     const tuple: [number, number] = [
-        parseInt(ghost.data.attrs['data-originalIndex']),
-        parseInt(ghost.data.attrs['data-itemindex'])
+        parseInt(ghost.data.attrs['data-originalIndex'] as string),
+        parseInt(ghost.data.attrs['data-itemindex'] as string)
     ];
 
     if (tuple[0] !== tuple[1]) {

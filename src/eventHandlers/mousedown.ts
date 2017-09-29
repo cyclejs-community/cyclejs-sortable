@@ -1,12 +1,13 @@
 import { VNode } from '@cycle/dom';
 import { select } from 'snabbdom-selector';
-import { EventHandler, MouseOffset } from '../definitions';
+import { EventHandler, MouseOffset, SortableOptions } from '../definitions';
 
 import {
     getIndex,
     getGhostStyle,
     findParent,
     addAttributes,
+    addGhostClass,
     replaceNode,
     getBodyStyle,
     addKeys
@@ -22,17 +23,22 @@ export const mousedownHandler: EventHandler = (node, event, options) => {
         options.parentSelector + ' > *'
     );
     const itemRect: ClientRect = item.getBoundingClientRect();
+    const parentNode: Element = item.parentElement;
+    const parentRect: ClientRect = parentNode.getBoundingClientRect();
     const mouseOffset: MouseOffset = {
         x: itemRect.left - event.clientX,
-        y: itemRect.top - event.clientY
+        y: itemRect.top - event.clientY,
+        itemLeft: itemRect.left,
+        itemTop: itemRect.top,
+        parentLeft: parentRect.left,
+        parentTop: parentRect.top
     };
 
     const body: Element = findParent(event.target as Element, 'body');
     body.setAttribute('style', getBodyStyle());
 
-    const parent: VNode = addKeys(select(options.parentSelector, node)[0]);
+    const parent: VNode = select(options.parentSelector, node)[0];
     const index: number = getIndex(item);
-
     const ghostAttrs: { [name: string]: string } = {
         'data-mouseoffset': JSON.stringify(mouseOffset),
         'data-itemdimensions': JSON.stringify({
@@ -41,7 +47,7 @@ export const mousedownHandler: EventHandler = (node, event, options) => {
         }),
         'data-itemindex': index.toString(),
         'data-originalIndex': index.toString(),
-        style: getGhostStyle(event, mouseOffset, item)
+        style: getGhostStyle(mouseOffset, item)
     };
 
     const items: VNode[] = parent.children as VNode[];
@@ -50,7 +56,10 @@ export const mousedownHandler: EventHandler = (node, event, options) => {
         ...items.slice(0, index),
         addAttributes(items[index], { style: 'opacity: 0;' }),
         ...items.slice(index + 1),
-        addAttributes({ ...items[index], elm: undefined }, ghostAttrs)
+        addGhostClass(
+            addAttributes({ ...items[index], elm: undefined }, ghostAttrs),
+            options.ghostClass
+        )
     ].map((c, i) => addAttributes(c, { 'data-index': i }));
 
     return replaceNode(node, options.parentSelector, { ...parent, children });
