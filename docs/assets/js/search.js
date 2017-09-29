@@ -1047,297 +1047,12 @@ typedoc.search.data = {
         {
             id: 117,
             kind: 1,
-            name: '"docs/horizontal/src/index"',
-            url: 'modules/_docs_horizontal_src_index_.html',
-            classes: 'tsd-kind-external-module'
-        },
-        {
-            id: 118,
-            kind: 4194304,
-            name: 'Sources',
-            url: 'modules/_docs_horizontal_src_index_.html#sources',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index"'
-        },
-        {
-            id: 119,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_horizontal_src_index_.html#sources.__type-1',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index".Sources'
-        },
-        {
-            id: 120,
-            kind: 32,
-            name: 'DOM',
-            url:
-                'modules/_docs_horizontal_src_index_.html#sources.__type-1.dom-1',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index".Sources.__type'
-        },
-        {
-            id: 121,
-            kind: 4194304,
-            name: 'Sinks',
-            url: 'modules/_docs_horizontal_src_index_.html#sinks',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index"'
-        },
-        {
-            id: 122,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_horizontal_src_index_.html#sinks.__type',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index".Sinks'
-        },
-        {
-            id: 123,
-            kind: 32,
-            name: 'DOM',
-            url: 'modules/_docs_horizontal_src_index_.html#sinks.__type.dom',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index".Sinks.__type'
-        },
-        {
-            id: 124,
-            kind: 64,
-            name: 'main',
-            url: 'modules/_docs_horizontal_src_index_.html#main',
-            classes:
-                'tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/horizontal/src/index"'
-        },
-        {
-            id: 125,
-            kind: 1,
-            name: '"docs/parentSelector/src/index"',
-            url: 'modules/_docs_parentselector_src_index_.html',
-            classes: 'tsd-kind-external-module'
-        },
-        {
-            id: 126,
-            kind: 4194304,
-            name: 'Sources',
-            url: 'modules/_docs_parentselector_src_index_.html#sources',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index"'
-        },
-        {
-            id: 127,
-            kind: 65536,
-            name: '__type',
-            url:
-                'modules/_docs_parentselector_src_index_.html#sources.__type-1',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index".Sources'
-        },
-        {
-            id: 128,
-            kind: 32,
-            name: 'DOM',
-            url:
-                'modules/_docs_parentselector_src_index_.html#sources.__type-1.dom-1',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index".Sources.__type'
-        },
-        {
-            id: 129,
-            kind: 4194304,
-            name: 'Sinks',
-            url: 'modules/_docs_parentselector_src_index_.html#sinks',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index"'
-        },
-        {
-            id: 130,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_parentselector_src_index_.html#sinks.__type',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index".Sinks'
-        },
-        {
-            id: 131,
-            kind: 32,
-            name: 'DOM',
-            url:
-                'modules/_docs_parentselector_src_index_.html#sinks.__type.dom',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index".Sinks.__type'
-        },
-        {
-            id: 132,
-            kind: 64,
-            name: 'main',
-            url: 'modules/_docs_parentselector_src_index_.html#main',
-            classes:
-                'tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/parentSelector/src/index"'
-        },
-        {
-            id: 133,
-            kind: 1,
-            name: '"docs/simple/src/index"',
-            url: 'modules/_docs_simple_src_index_.html',
-            classes: 'tsd-kind-external-module'
-        },
-        {
-            id: 134,
-            kind: 4194304,
-            name: 'Sources',
-            url: 'modules/_docs_simple_src_index_.html#sources',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/simple/src/index"'
-        },
-        {
-            id: 135,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_simple_src_index_.html#sources.__type-1',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/simple/src/index".Sources'
-        },
-        {
-            id: 136,
-            kind: 32,
-            name: 'DOM',
-            url: 'modules/_docs_simple_src_index_.html#sources.__type-1.dom-1',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/simple/src/index".Sources.__type'
-        },
-        {
-            id: 137,
-            kind: 4194304,
-            name: 'Sinks',
-            url: 'modules/_docs_simple_src_index_.html#sinks',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/simple/src/index"'
-        },
-        {
-            id: 138,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_simple_src_index_.html#sinks.__type',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/simple/src/index".Sinks'
-        },
-        {
-            id: 139,
-            kind: 32,
-            name: 'DOM',
-            url: 'modules/_docs_simple_src_index_.html#sinks.__type.dom',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/simple/src/index".Sinks.__type'
-        },
-        {
-            id: 140,
-            kind: 64,
-            name: 'main',
-            url: 'modules/_docs_simple_src_index_.html#main',
-            classes:
-                'tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/simple/src/index"'
-        },
-        {
-            id: 141,
-            kind: 1,
-            name: '"docs/updateEvent/src/index"',
-            url: 'modules/_docs_updateevent_src_index_.html',
-            classes: 'tsd-kind-external-module'
-        },
-        {
-            id: 142,
-            kind: 4194304,
-            name: 'Sources',
-            url: 'modules/_docs_updateevent_src_index_.html#sources',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index"'
-        },
-        {
-            id: 143,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_updateevent_src_index_.html#sources.__type-1',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index".Sources'
-        },
-        {
-            id: 144,
-            kind: 32,
-            name: 'DOM',
-            url:
-                'modules/_docs_updateevent_src_index_.html#sources.__type-1.dom-1',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index".Sources.__type'
-        },
-        {
-            id: 145,
-            kind: 4194304,
-            name: 'Sinks',
-            url: 'modules/_docs_updateevent_src_index_.html#sinks',
-            classes:
-                'tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index"'
-        },
-        {
-            id: 146,
-            kind: 65536,
-            name: '__type',
-            url: 'modules/_docs_updateevent_src_index_.html#sinks.__type',
-            classes:
-                'tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index".Sinks'
-        },
-        {
-            id: 147,
-            kind: 32,
-            name: 'DOM',
-            url: 'modules/_docs_updateevent_src_index_.html#sinks.__type.dom',
-            classes:
-                'tsd-kind-variable tsd-parent-kind-type-literal tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index".Sinks.__type'
-        },
-        {
-            id: 148,
-            kind: 64,
-            name: 'main',
-            url: 'modules/_docs_updateevent_src_index_.html#main',
-            classes:
-                'tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported',
-            parent: '"docs/updateEvent/src/index"'
-        },
-        {
-            id: 149,
-            kind: 1,
             name: '"examples/horizontal/src/index"',
             url: 'modules/_examples_horizontal_src_index_.html',
             classes: 'tsd-kind-external-module'
         },
         {
-            id: 150,
+            id: 118,
             kind: 4194304,
             name: 'Sources',
             url: 'modules/_examples_horizontal_src_index_.html#sources',
@@ -1346,7 +1061,7 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index"'
         },
         {
-            id: 151,
+            id: 119,
             kind: 65536,
             name: '__type',
             url:
@@ -1356,7 +1071,7 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index".Sources'
         },
         {
-            id: 152,
+            id: 120,
             kind: 32,
             name: 'DOM',
             url:
@@ -1366,7 +1081,7 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index".Sources.__type'
         },
         {
-            id: 153,
+            id: 121,
             kind: 4194304,
             name: 'Sinks',
             url: 'modules/_examples_horizontal_src_index_.html#sinks',
@@ -1375,7 +1090,7 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index"'
         },
         {
-            id: 154,
+            id: 122,
             kind: 65536,
             name: '__type',
             url: 'modules/_examples_horizontal_src_index_.html#sinks.__type',
@@ -1384,7 +1099,7 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index".Sinks'
         },
         {
-            id: 155,
+            id: 123,
             kind: 32,
             name: 'DOM',
             url:
@@ -1394,7 +1109,7 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index".Sinks.__type'
         },
         {
-            id: 156,
+            id: 124,
             kind: 64,
             name: 'main',
             url: 'modules/_examples_horizontal_src_index_.html#main',
@@ -1403,14 +1118,14 @@ typedoc.search.data = {
             parent: '"examples/horizontal/src/index"'
         },
         {
-            id: 157,
+            id: 125,
             kind: 1,
             name: '"examples/parentSelector/src/index"',
             url: 'modules/_examples_parentselector_src_index_.html',
             classes: 'tsd-kind-external-module'
         },
         {
-            id: 158,
+            id: 126,
             kind: 4194304,
             name: 'Sources',
             url: 'modules/_examples_parentselector_src_index_.html#sources',
@@ -1419,7 +1134,7 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index"'
         },
         {
-            id: 159,
+            id: 127,
             kind: 65536,
             name: '__type',
             url:
@@ -1429,7 +1144,7 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index".Sources'
         },
         {
-            id: 160,
+            id: 128,
             kind: 32,
             name: 'DOM',
             url:
@@ -1439,7 +1154,7 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index".Sources.__type'
         },
         {
-            id: 161,
+            id: 129,
             kind: 4194304,
             name: 'Sinks',
             url: 'modules/_examples_parentselector_src_index_.html#sinks',
@@ -1448,7 +1163,7 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index"'
         },
         {
-            id: 162,
+            id: 130,
             kind: 65536,
             name: '__type',
             url:
@@ -1458,7 +1173,7 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index".Sinks'
         },
         {
-            id: 163,
+            id: 131,
             kind: 32,
             name: 'DOM',
             url:
@@ -1468,7 +1183,7 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index".Sinks.__type'
         },
         {
-            id: 164,
+            id: 132,
             kind: 64,
             name: 'main',
             url: 'modules/_examples_parentselector_src_index_.html#main',
@@ -1477,14 +1192,14 @@ typedoc.search.data = {
             parent: '"examples/parentSelector/src/index"'
         },
         {
-            id: 165,
+            id: 133,
             kind: 1,
             name: '"examples/simple/src/index"',
             url: 'modules/_examples_simple_src_index_.html',
             classes: 'tsd-kind-external-module'
         },
         {
-            id: 166,
+            id: 134,
             kind: 4194304,
             name: 'Sources',
             url: 'modules/_examples_simple_src_index_.html#sources',
@@ -1493,7 +1208,7 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index"'
         },
         {
-            id: 167,
+            id: 135,
             kind: 65536,
             name: '__type',
             url: 'modules/_examples_simple_src_index_.html#sources.__type-1',
@@ -1502,7 +1217,7 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index".Sources'
         },
         {
-            id: 168,
+            id: 136,
             kind: 32,
             name: 'DOM',
             url:
@@ -1512,7 +1227,7 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index".Sources.__type'
         },
         {
-            id: 169,
+            id: 137,
             kind: 4194304,
             name: 'Sinks',
             url: 'modules/_examples_simple_src_index_.html#sinks',
@@ -1521,7 +1236,7 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index"'
         },
         {
-            id: 170,
+            id: 138,
             kind: 65536,
             name: '__type',
             url: 'modules/_examples_simple_src_index_.html#sinks.__type',
@@ -1530,7 +1245,7 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index".Sinks'
         },
         {
-            id: 171,
+            id: 139,
             kind: 32,
             name: 'DOM',
             url: 'modules/_examples_simple_src_index_.html#sinks.__type.dom',
@@ -1539,7 +1254,7 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index".Sinks.__type'
         },
         {
-            id: 172,
+            id: 140,
             kind: 64,
             name: 'main',
             url: 'modules/_examples_simple_src_index_.html#main',
@@ -1548,14 +1263,14 @@ typedoc.search.data = {
             parent: '"examples/simple/src/index"'
         },
         {
-            id: 173,
+            id: 141,
             kind: 1,
             name: '"examples/updateEvent/src/index"',
             url: 'modules/_examples_updateevent_src_index_.html',
             classes: 'tsd-kind-external-module'
         },
         {
-            id: 174,
+            id: 142,
             kind: 4194304,
             name: 'Sources',
             url: 'modules/_examples_updateevent_src_index_.html#sources',
@@ -1564,7 +1279,7 @@ typedoc.search.data = {
             parent: '"examples/updateEvent/src/index"'
         },
         {
-            id: 175,
+            id: 143,
             kind: 65536,
             name: '__type',
             url:
@@ -1574,7 +1289,7 @@ typedoc.search.data = {
             parent: '"examples/updateEvent/src/index".Sources'
         },
         {
-            id: 176,
+            id: 144,
             kind: 32,
             name: 'DOM',
             url:
@@ -1584,7 +1299,7 @@ typedoc.search.data = {
             parent: '"examples/updateEvent/src/index".Sources.__type'
         },
         {
-            id: 177,
+            id: 145,
             kind: 4194304,
             name: 'Sinks',
             url: 'modules/_examples_updateevent_src_index_.html#sinks',
@@ -1593,7 +1308,7 @@ typedoc.search.data = {
             parent: '"examples/updateEvent/src/index"'
         },
         {
-            id: 178,
+            id: 146,
             kind: 65536,
             name: '__type',
             url: 'modules/_examples_updateevent_src_index_.html#sinks.__type',
@@ -1602,7 +1317,7 @@ typedoc.search.data = {
             parent: '"examples/updateEvent/src/index".Sinks'
         },
         {
-            id: 179,
+            id: 147,
             kind: 32,
             name: 'DOM',
             url:
@@ -1612,7 +1327,7 @@ typedoc.search.data = {
             parent: '"examples/updateEvent/src/index".Sinks.__type'
         },
         {
-            id: 180,
+            id: 148,
             kind: 64,
             name: 'main',
             url: 'modules/_examples_updateevent_src_index_.html#main',
