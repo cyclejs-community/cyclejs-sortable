@@ -140,7 +140,7 @@ export function makeSortable<T>(
                 })
                 .flatten()
         );
-        return adapt(out$);
+        return adapt(out$ as any);
     };
 }
 
@@ -154,11 +154,9 @@ export function getUpdateEvent(
     dom: DOMSource,
     parentSelector: string
 ): Stream<EventDetails> {
-    return adapt(
-        (xs.fromObservable(
-            dom.select(parentSelector).events('updateOrder')
-        ) as Stream<any>)
-            .compose(delay(10)) //Allow mouseup to execute properly
-            .map(ev => ev.detail)
-    );
+    return adapt((xs.fromObservable(
+        dom.select(parentSelector).events('updateOrder')
+    ) as Stream<any>)
+        .compose(delay(10)) //Allow mouseup to execute properly
+        .map(ev => ev.detail) as any);
 }

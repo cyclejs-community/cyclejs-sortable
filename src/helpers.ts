@@ -30,7 +30,10 @@ export function applyDefaults(
     return {
         parentSelector:
             options.parentSelector ||
-            '.' + classNameFromVNode(root).split(' ').join('.'),
+            '.' +
+                classNameFromVNode(root)
+                    .split(' ')
+                    .join('.'),
         handle: options.handle || itemSelector,
         ghostClass: options.ghostClass || '',
         selectionDelay: options.selectionDelay || 0
