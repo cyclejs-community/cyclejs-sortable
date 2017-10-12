@@ -37,7 +37,11 @@ function augmentStartDistance(
 }
 
 function moreThanOneChild(node: VNode) {
-    return !node.children || node.children.length > 1;
+    if (Array.isArray(node)) {
+        throw new Error('Composed stream should emit VNodes not arrays');
+    }
+
+    return !node || node.children.length > 1;
 }
 
 function notMoreThanOneChild(node: VNode) {

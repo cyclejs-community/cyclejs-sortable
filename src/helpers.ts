@@ -50,6 +50,8 @@ export function addKeys(
     node: VNode,
     key: string = Math.random().toString()
 ): VNode {
+    if (!node) return;
+
     if (!node.children) {
         return { ...node, key: node.key ? node.key : key };
     }
