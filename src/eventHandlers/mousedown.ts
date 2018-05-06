@@ -1,66 +1,86 @@
 import { VNode } from '@cycle/dom';
-import { select } from 'snabbdom-selector';
-import { EventHandler, MouseOffset, SortableOptions } from '../definitions';
 
-import {
-    getIndex,
-    getGhostStyle,
-    findParent,
-    addAttributes,
-    addGhostClass,
-    replaceNode,
-    getBodyStyle,
-    addKeys
-} from '../helpers';
+import { SortableOptions } from '../makeSortable';
+import { addDataEntry } from '../helpers';
 
-/**
- * Used to create the ghost and hide the item dragged
- * @type {EventHandler}
- */
-export const mousedownHandler: EventHandler = (node, event, options) => {
-    const item: Element = findParent(
-        event.target as Element,
-        options.parentSelector + ' > *'
-    );
-    const itemRect: ClientRect = item.getBoundingClientRect();
-    const parentNode: Element = item.parentElement;
-    const parentRect: ClientRect = parentNode.getBoundingClientRect();
-    const mouseOffset: MouseOffset = {
-        x: itemRect.left - event.clientX,
-        y: itemRect.top - event.clientY,
-        itemLeft: itemRect.left,
-        itemTop: itemRect.top,
-        parentLeft: parentRect.left,
-        parentTop: parentRect.top
-    };
+export const selectNames = [
+    '-webkit-touch-callout',
+    '-webkit-user-select',
+    '-khtml-user-select',
+    '-moz-user-select',
+    '-ms-user-select',
+    'user-select'
+];
 
-    const body: Element = findParent(event.target as Element, 'body');
-    body.setAttribute('style', getBodyStyle());
+export function mousedownHandler(
+    node: VNode,
+    ev: MouseEvent,
+    opts: SortableOptions
+): VNode {
+    const item: Element = ev.currentTarget as Element;
+    const indexClicked = [...item.parentElement.children].indexOf(item);
 
-    const parent: VNode = select(options.parentSelector, node)[0];
-    const index: number = getIndex(item);
-    const ghostAttrs: { [name: string]: string } = {
-        'data-mouseoffset': JSON.stringify(mouseOffset),
-        'data-itemdimensions': JSON.stringify({
-            width: itemRect.width,
-            height: itemRect.height
+    const children = node.children
+        .map(addData)
+        .map(hideSelected(indexClicked))
+        .concat(
+            createGhost(indexClicked, ev, item, node.children[
+                indexClicked
+            ] as VNode)
+        );
+
+    return {
+        ...addDataEntry(node, 'style', {
+            ...selectNames
+                .map(n => ({ [n]: 'none' }))
+                .reduce((a, c) => ({ ...a, ...c }), {}),
+            position: 'relative'
         }),
-        'data-itemindex': index.toString(),
-        'data-originalIndex': index.toString(),
-        style: getGhostStyle(mouseOffset, item)
+        children
     };
+}
 
-    const items: VNode[] = parent.children as VNode[];
+function addData(node: VNode, index: number): VNode {
+    return addDataEntry(node, 'dataset', {
+        originalIndex: index
+    });
+}
 
-    const children: VNode[] = [
-        ...items.slice(0, index),
-        addAttributes(items[index], { style: 'opacity: 0;' }),
-        ...items.slice(index + 1),
-        addGhostClass(
-            addAttributes({ ...items[index], elm: undefined }, ghostAttrs),
-            options.ghostClass
-        )
-    ].map((c, i) => addAttributes(c, { 'data-index': i }));
+function hideSelected(index: number): (node: VNode, i: number) => VNode {
+    return function(node, i) {
+        return i !== index
+            ? node
+            : addDataEntry(node, 'style', {
+                  opacity: 0
+              });
+    };
+}
 
-    return replaceNode(node, options.parentSelector, { ...parent, children });
-};
+function createGhost(
+    clicked: number,
+    ev: any,
+    item: Element,
+    node: VNode
+): VNode {
+    const rect = item.getBoundingClientRect();
+    const parentRect = item.parentElement.getBoundingClientRect();
+    const offsetX = ev.clientX - rect.left + parentRect.left;
+    const offsetY = ev.clientY - rect.top + parentRect.top;
+
+    return addDataEntry(
+        addDataEntry(node, 'dataset', {
+            offsetX,
+            offsetY,
+            item
+        }),
+        'style',
+        {
+            position: 'absolute',
+            left: ev.clientX - offsetX + 'px',
+            top: ev.clientY - offsetY + 'px',
+            width: rect.width + 'px',
+            height: rect.height + 'px',
+            'pointer-events': 'none'
+        }
+    );
+}

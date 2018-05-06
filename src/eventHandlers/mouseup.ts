@@ -1,61 +1,53 @@
 import { VNode } from '@cycle/dom';
-import { select } from 'snabbdom-selector';
 
-import { EventHandler } from '../definitions';
-import { replaceNode, removeAttribute, findParent } from '../helpers';
+import { SortableOptions } from '../makeSortable';
+import { addDataEntry } from '../helpers';
+import { selectNames } from './mousedown';
 
-/**
- * Used to remove the ghost element
- * @type {EventHandler}
- */
-export const mouseupHandler: EventHandler = (node, event, options) => {
-    const parent: VNode = select(options.parentSelector, node)[0];
-    const items: VNode[] = parent.children as VNode[];
+export function mouseupHandler(
+    node: VNode,
+    ev: MouseEvent,
+    opts: SortableOptions
+): VNode {
+    const children = node.children.slice(0, -1).map(cleanup);
 
-    const ghost: VNode = items[items.length - 1];
+    return {
+        ...deleteData(node, 'style', ['position'].concat(selectNames), true),
+        children
+    };
+}
 
-    if (!parent || !ghost) {
-        return node;
+function cleanup(node: VNode): VNode {
+    let n = deleteData(node, 'dataset', [
+        'offsetX',
+        'offsetY',
+        'originalIndex',
+        'item'
+    ]);
+    return deleteData(n, 'style', ['opacity'], true);
+}
+
+function deleteData(node: VNode, mod: string, keys: string[], b?: boolean): VNode {
+    let obj: any = {
+        ...node.data[mod]
+    };
+    for (let i = 0; i < keys.length; i++) {
+        if(b) {
+            obj[keys[i]] = '';
+        } else {
+            delete obj[keys[i]];
+        }
     }
 
-    const itemIndex: number = parseInt(ghost.data.attrs[
-        'data-itemindex'
-    ] as string);
-
-    const body: Element = findParent(event.target as Element, 'body');
-    body.removeAttribute('style');
-
-    const newItems: VNode[] = [
-        ...items.slice(0, itemIndex),
-        removeAttribute(items[itemIndex], 'style'),
-        ...items.slice(itemIndex + 1, -1)
-    ];
-
-    const indexes: number[] = newItems
-        .map(c => c.data.attrs['data-index'] as string)
-        .map(s => parseInt(s));
-
-    const tuple: [number, number] = [
-        parseInt(ghost.data.attrs['data-originalIndex'] as string),
-        parseInt(ghost.data.attrs['data-itemindex'] as string)
-    ];
-
-    if (tuple[0] !== tuple[1]) {
-        const customEvent: CustomEvent = new CustomEvent('updateOrder', {
-            bubbles: true,
-            detail: {
-                newOrder: indexes,
-                oldIndex: tuple[0],
-                newIndex: tuple[1]
-            }
-        });
-
-        parent.elm.dispatchEvent(customEvent);
+    if (Object.keys(obj).length === 0) {
+        obj = '';
     }
 
-    const children: VNode[] = newItems.map(c =>
-        removeAttribute(c, 'data-index')
-    );
-
-    return replaceNode(node, options.parentSelector, { ...parent, children });
-};
+    return {
+        ...node,
+        data: {
+            ...node.data,
+            [mod]: obj
+        }
+    };
+}

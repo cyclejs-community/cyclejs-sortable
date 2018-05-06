@@ -1,96 +1,82 @@
 import { VNode } from '@cycle/dom';
-import { select } from 'snabbdom-selector';
-import {
-    EventHandler,
-    MouseOffset,
-    StartPositionOffset,
-    ItemDimensions,
-    Intersection
-} from '../definitions';
 
-import {
-    updateGhostStyle,
-    findParent,
-    getIntersection,
-    getArea,
-    addAttributes,
-    replaceNode
-} from '../helpers';
+import { SortableOptions } from '../makeSortable';
+import { addDataEntry } from '../helpers';
 
-/**
- * Used to adjust the position of the ghost and swap the items if needed
- * @type {EventHandler}
- */
-export const mousemoveHandler: EventHandler = (node, event, options) => {
-    const parent: VNode = select(options.parentSelector, node)[0];
-    const ghost: VNode = parent.children[parent.children.length - 1] as VNode;
+export function mousemoveHandler(
+    node: VNode,
+    ev: MouseEvent,
+    opts: SortableOptions
+): VNode {
+    const item: Element = (node.children as any[])
+        .map(n => n.data.dataset.item)
+        .filter(n => !!n)[0];
 
-    // Hack for now.  Immediately after the mouse down event if the mousemove
-    // handler gets called (as in the pointer gets moved very quickly) the ghost
-    // VNode may not have been attached to the element yet causing ghost.elm to
-    // be undefined, in which case we just return the node unchanged
-    if (!ghost.elm) {
-        return node;
+    const siblings = [...item.parentElement.children];
+    const index = siblings.indexOf(item);
+    const itemArea = getArea(item);
+    const ghost = siblings[siblings.length - 1];
+    let swapIndex = index;
+
+    const children = node.children.slice(0) as VNode[];
+
+    if(index > 0 && getIntersection(ghost, siblings[index - 1], true) > 0) {
+        swapIndex = index - 1;
+    } else if(index < siblings.length - 2 && getIntersection(ghost, siblings[index + 1], false) > 0) {
+        swapIndex = index + 1;
     }
 
-    const mouseOffset: MouseOffset = JSON.parse(ghost.data.attrs[
-        'data-mouseoffset'
-    ] as string);
-    const itemIndex: number = parseInt(ghost.data.attrs[
-        'data-itemindex'
-    ] as string);
-    const item: VNode = parent.children[itemIndex] as VNode;
-    const itemIntersection: number = getArea(
-        getIntersection(item.elm as Element, ghost.elm as Element)
-    );
-    const itemArea: number = getArea(
-        getIntersection(item.elm as Element, item.elm as Element)
+    if (swapIndex !== index) {
+        const tmp = children[index];
+        children[index] = children[swapIndex];
+        children[swapIndex] = tmp;
+    }
+
+    children[children.length - 1] = updateGhost(
+        children[children.length - 1],
+        ev
     );
 
-    const intersectionAreas: [number, number][] = parent.children
-        .slice(0, -1)
-        .map<Element>(c => (c as VNode).elm as Element)
-        .map<Intersection>(e => getIntersection(e, ghost.elm as Element))
-        .map<[number, number]>((e, i) => [getArea(e), i]);
-
-    const maxIntersection: [number, number] = intersectionAreas.reduce(
-        (acc, curr) => (curr[0] > acc[0] ? curr : acc)
-    );
-
-    const maxElement: Element = (parent.children[maxIntersection[1]] as VNode)
-        .elm as Element;
-    const maxArea: number = getArea(getIntersection(maxElement, maxElement));
-
-    const newIndex: number =
-        maxIntersection[1] === itemIndex
-            ? itemIndex
-            : -itemIntersection > maxArea - itemArea
-              ? maxIntersection[1]
-              : itemIndex;
-    const ghostAttrs: { [attr: string]: string } = {
-        style: updateGhostStyle(
-            event as StartPositionOffset,
-            mouseOffset,
-            ghost.elm as Element
-        ),
-        'data-itemindex': newIndex.toString()
+    return {
+        ...node,
+        children
     };
+}
 
-    const filteredChildren: VNode[] = (parent.children as VNode[])
-        .filter((e, i) => i !== itemIndex)
-        .slice(0, -1);
+function getArea(item: Element): number {
+    const rect = item.getBoundingClientRect();
+    return rect.width * rect.height;
+}
 
-    const newChildren: VNode[] = [
-        ...filteredChildren.slice(0, newIndex),
-        parent.children[itemIndex] as VNode,
-        ...filteredChildren.slice(newIndex, filteredChildren.length)
-    ];
+function getIntersectionArea(rectA: any, rectB: any): number {
+    const area = (Math.min(rectA.right, rectB.right) - Math.max(rectA.left, rectB.left)) * (Math.min(rectA.bottom, rectB.bottom) - Math.max(rectA.top, rectB.top));
+    return area < 0 ? 0 : area;
+}
 
-    return replaceNode(
-        node,
-        options.parentSelector,
-        Object.assign({}, parent, {
-            children: [...newChildren, addAttributes(ghost, ghostAttrs)]
-        })
-    );
-};
+function getIntersection(ghost: Element, elm: Element, upper: boolean): number {
+    const f = 0.25;
+    const _a =  (upper ? ghost : elm).getBoundingClientRect();
+    const _b = (upper ? elm : ghost).getBoundingClientRect();
+    const a = { left: _a.left, right: _a.right, top: _a.top, bottom: _a.bottom };
+    const b = { left: _b.left, right: _b.right, top: _b.top, bottom: _b.bottom };
+
+    const aRight = { ...a, left: a.right - (a.right - a.left) * f };
+    const aBottom = { ...a, top: a.bottom - (a.bottom - a.top) * f };
+    const aEdge = { ...a, left: aRight.left, top: aBottom.top };
+
+    const bLeft = { ...b, right: b.left + (b.right - b.left) * f };
+    const bTop = { ...b, bottom: b.top + (b.bottom - b.top) * f };
+    const bEdge = { ...b, right: bLeft.right, bottom: bTop.bottom };
+
+    const area = getIntersectionArea(aRight, bLeft) + getIntersectionArea(aBottom, bTop) - getIntersectionArea(aEdge, bEdge);
+
+    return area < 0 ? 0 : area;
+}
+
+function updateGhost(node: VNode, ev: MouseEvent): VNode {
+    const { offsetX, offsetY } = node.data.dataset as any;
+    return addDataEntry(node, 'style', {
+        left: ev.clientX - offsetX + 'px',
+        top: ev.clientY - offsetY + 'px'
+    });
+}
