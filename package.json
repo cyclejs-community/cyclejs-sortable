@@ -15,7 +15,7 @@
     "format": "prettier --tab-width 4 --single-quote --write './{examples,src}/**/*.{ts,tsx}'",
     "build": "tsc -d",
     "build:examples": "tsc",
-    "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
+    "documentation": "typedoc --out docs src && touch docs/.nojekyll",
     "prepublishOnly": "npm run build && npm run documentation && cp-cli examples docs/",
     "examples": "npm run build:examples && npm run examples:simple && npm run examples:horizontal && npm run examples:parentSelector && npm run examples:updateEvent",
     "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/index.js && open-cli examples/simple/index.html",
