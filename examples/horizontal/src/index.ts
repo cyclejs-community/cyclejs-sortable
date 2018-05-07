@@ -13,14 +13,14 @@ import {
 
 import { makeSortable } from '../../../src/makeSortable';
 
-type Sources = {
+interface Sources {
     DOM: DOMSource;
-};
+}
 
-type Sinks = {
+interface Sinks {
     DOM?: Observable<VNode>;
-    sortable?: Observable<boolean>;
-};
+    drag?: Observable<boolean>;
+}
 
 function userSelectDriver(sort$): void {
     sort$.addListener({
@@ -40,11 +40,11 @@ function userSelectDriver(sort$): void {
 
 function main(sources: Sources): Sinks {
     const sinks = makeSortable(Child, {
-        itemSelector: '.li'
+        itemSelector: 'ul > li'
     })(sources);
 
     return {
-        ...sinks,
+        drag: sinks.drag,
         DOM: sinks.DOM.map(dom =>
             div([h3('Horizontal too!'), p('this is running with RxJS'), dom])
         )
@@ -53,13 +53,13 @@ function main(sources: Sources): Sinks {
 
 function Child({ DOM }: Sources): Sinks {
     const vdom$: Observable<VNode> = Observable.of(
-        ul('.ul', [
-            li('.li', '', ['Option 1']),
-            li('.li', '', ['Option 2']),
-            li('.li', '', ['Option 3']),
-            li('.li', '', ['Option 4']),
-            li('.li', '', ['Option 5']),
-            li('.li', '', ['Option 6'])
+        ul([
+            li(['Option 1']),
+            li(['Option 2']),
+            li(['Option 3']),
+            li(['Option 4']),
+            li(['Option 5']),
+            li(['Option 6'])
         ])
     );
 
@@ -70,5 +70,5 @@ function Child({ DOM }: Sources): Sinks {
 
 run(main, {
     DOM: makeDOMDriver('#app'),
-    sortable: userSelectDriver
+    drag: userSelectDriver
 });

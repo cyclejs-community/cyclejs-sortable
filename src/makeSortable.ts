@@ -96,7 +96,7 @@ export function makeSortable(
         return {
             ...sinks,
             DOM: adapt(vdom$),
-            sortable: adapt(dragInProgress$)
+            drag: adapt(dragInProgress$)
         };
     };
 }

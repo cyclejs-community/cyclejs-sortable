@@ -12,13 +12,6 @@ NPM: https://www.npmjs.com/package/cyclejs-sortable
 You can check out live versions of the [examples](./examples/) here:
 - [simple](./examples/simple/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/examples/simple/
 - [horizontal](./examples/horizontal/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/examples/horizontal/
-- [parentSelector](./examples/parentSelector/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/examples/parentSelector/
-- [updateEvent](./examples/updateEvent/src/index.ts): https://cyclejs-community.github.io/cyclejs-sortable/examples/updateEvent/
-
-## Required Polyfills
-The code uses a few ES6 features, so you might need an es6 polyfill like `babel-polyfill`
-
-The use the `updateOrder Event` in IE you have to add a CustomEvent constructor polyfill like https://www.npmjs.com/package/custom-event
 
 ## Installation
 
@@ -28,7 +21,12 @@ The use the `updateOrder Event` in IE you have to add a CustomEvent constructor 
 For more information see the [examples](https://github.com/SuperManitu/cyclejs-sortable/tree/master/examples)
 
 ```
-function main(sources)
+const main = isolate(
+    makeSortable(Component, { itemSelector: 'div > div' }),
+    'myScope'
+);
+
+function Component(sources)
 {
     return {
         DOM: xs.of(div([
@@ -36,8 +34,7 @@ function main(sources)
             div(['two']),
             div(['three']),
             div(['four'])
-        ]))
-        .compose(makeSortable(sources.DOM))
+        ]));
     }
 }
 ```
