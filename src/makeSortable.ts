@@ -67,8 +67,8 @@ export function makeSortable(
                     .compose<Stream<MouseEvent>>(
                         sources[options.TimeDriverKey]
                             ? sources[options.TimeDriverKey].delay(
-                                options.selectionDelay
-                            )
+                                  options.selectionDelay
+                              )
                             : delay(options.selectionDelay)
                     )
                     .endWhen(xs.merge(up$, move$))
@@ -89,9 +89,14 @@ export function makeSortable(
             )
             .flatten();
 
+        const dragInProgress$ = xs
+            .merge(mousedown$, mouseup$)
+            .fold(acc => !acc, false);
+
         return {
             ...sinks,
-            DOM: adapt(vdom$)
+            DOM: adapt(vdom$),
+            sortable: adapt(dragInProgress$)
         };
     };
 }

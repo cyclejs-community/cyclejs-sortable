@@ -12,13 +12,13 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "format": "prettier --tab-width 4 --single-quote --write './src/**/*.{js,ts,tsx}'",
+    "format": "prettier --tab-width 4 --single-quote --write './{examples,src}/**/*.{ts,tsx}'",
     "build": "tsc -d",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
     "prepublishOnly": "npm run build && npm run documentation && cp-cli examples docs/",
     "examples": "npm run build:examples && npm run examples:simple && npm run examples:horizontal && npm run examples:parentSelector && npm run examples:updateEvent",
-    "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/index.js",
+    "examples:simple": "browserify build/examples/simple/src/index.js -o examples/simple/index.js && open-cli examples/simple/index.html",
     "examples:horizontal": "browserify build/examples/horizontal/src/index.js -o examples/horizontal/index.js && open-cli examples/horizontal/index.html",
     "examples:parentSelector": "browserify build/examples/parentSelector/src/index.js -o examples/parentSelector/index.js && open-cli examples/parentSelector/index.html",
     "examples:updateEvent": "browserify build/examples/updateEvent/src/index.js -o examples/updateEvent/index.js && open-cli examples/updateEvent/index.html"
@@ -38,26 +38,25 @@
   },
   "homepage": "https://github.com/SuperManitu/cyclejs-sortable#readme",
   "peerDepenencies": {
-    "@cycle/dom": ">=18.3.0"
+    "@cycle/dom": ">=20.0.0"
   },
   "dependencies": {
     "@cycle/run": "^4.1.0",
-    "snabbdom-selector": "^2.0.1",
     "xstream": "^11.2.0"
   },
   "devDependencies": {
-    "@cycle/dom": "^20.2.0",
+    "@cycle/dom": "^20.4.0",
     "@cycle/rxjs-run": "^8.0.0",
     "@types/handlebars": "^4.0.37",
     "browserify": "^16.2.0",
     "cp-cli": "^1.1.2",
     "husky": "^0.14.3",
-    "lint-staged": "^7.0.4",
+    "lint-staged": "^7.1.0",
     "open-cli": "^1.0.5",
-    "prettier": "^1.12.0",
+    "prettier": "^1.12.1",
     "rimraf": "^2.6.2",
     "rxjs": "^5.5.10",
     "typedoc": "^0.11.1",
-    "typescript": "2.8.1"
+    "typescript": "2.8.3"
   }
 }

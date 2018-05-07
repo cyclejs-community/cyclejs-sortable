@@ -27,12 +27,17 @@ function cleanup(node: VNode): VNode {
     return deleteData(n, 'style', ['opacity'], true);
 }
 
-function deleteData(node: VNode, mod: string, keys: string[], b?: boolean): VNode {
+function deleteData(
+    node: VNode,
+    mod: string,
+    keys: string[],
+    b?: boolean
+): VNode {
     let obj: any = {
         ...node.data[mod]
     };
     for (let i = 0; i < keys.length; i++) {
-        if(b) {
+        if (b) {
             obj[keys[i]] = '';
         } else {
             delete obj[keys[i]];

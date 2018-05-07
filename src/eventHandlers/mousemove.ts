@@ -14,15 +14,18 @@ export function mousemoveHandler(
 
     const siblings = [...item.parentElement.children];
     const index = siblings.indexOf(item);
-    const itemArea = getArea(item);
     const ghost = siblings[siblings.length - 1];
+    const itemArea = getArea(ghost);
     let swapIndex = index;
 
     const children = node.children.slice(0) as VNode[];
 
-    if(index > 0 && getIntersection(ghost, siblings[index - 1], true) > 0) {
+    if (index > 0 && getIntersection(ghost, siblings[index - 1], true) > 0) {
         swapIndex = index - 1;
-    } else if(index < siblings.length - 2 && getIntersection(ghost, siblings[index + 1], false) > 0) {
+    } else if (
+        index < siblings.length - 2 &&
+        getIntersection(ghost, siblings[index + 1], false) > 0
+    ) {
         swapIndex = index + 1;
     }
 
@@ -49,26 +52,40 @@ function getArea(item: Element): number {
 }
 
 function getIntersectionArea(rectA: any, rectB: any): number {
-    const area = (Math.min(rectA.right, rectB.right) - Math.max(rectA.left, rectB.left)) * (Math.min(rectA.bottom, rectB.bottom) - Math.max(rectA.top, rectB.top));
+    let a =
+        Math.min(rectA.right, rectB.right) - Math.max(rectA.left, rectB.left);
+    a = a < 0 ? 0 : a;
+    const area =
+        a *
+        (Math.min(rectA.bottom, rectB.bottom) - Math.max(rectA.top, rectB.top));
     return area < 0 ? 0 : area;
 }
 
 function getIntersection(ghost: Element, elm: Element, upper: boolean): number {
     const f = 0.25;
-    const _a =  (upper ? ghost : elm).getBoundingClientRect();
+    const _a = (upper ? ghost : elm).getBoundingClientRect();
     const _b = (upper ? elm : ghost).getBoundingClientRect();
-    const a = { left: _a.left, right: _a.right, top: _a.top, bottom: _a.bottom };
-    const b = { left: _b.left, right: _b.right, top: _b.top, bottom: _b.bottom };
+    const a = {
+        left: _a.left,
+        right: _a.right,
+        top: _a.top,
+        bottom: _a.bottom
+    };
+    const b = {
+        left: _b.left,
+        right: _b.right,
+        top: _b.top,
+        bottom: _b.bottom
+    };
 
     const aRight = { ...a, left: a.right - (a.right - a.left) * f };
     const aBottom = { ...a, top: a.bottom - (a.bottom - a.top) * f };
-    const aEdge = { ...a, left: aRight.left, top: aBottom.top };
 
     const bLeft = { ...b, right: b.left + (b.right - b.left) * f };
     const bTop = { ...b, bottom: b.top + (b.bottom - b.top) * f };
-    const bEdge = { ...b, right: bLeft.right, bottom: bTop.bottom };
 
-    const area = getIntersectionArea(aRight, bLeft) + getIntersectionArea(aBottom, bTop) - getIntersectionArea(aEdge, bEdge);
+    const area =
+        getIntersectionArea(aRight, bLeft) + getIntersectionArea(aBottom, bTop);
 
     return area < 0 ? 0 : area;
 }
