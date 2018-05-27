@@ -1,13 +1,13 @@
 import { VNode } from '@cycle/dom';
 
-import { SortableOptions } from '../makeSortable';
+import { SortableOptions, UpdateOrder } from '../makeSortable';
 import { addDataEntry } from '../helpers';
 
 export function mousemoveHandler(
     node: VNode,
     ev: MouseEvent,
     opts: SortableOptions
-): VNode {
+): [VNode, undefined | UpdateOrder] {
     const item: Element = (node.children as any[])
         .map(n => n.data.dataset.item)
         .filter(n => !!n)[0];
@@ -29,10 +29,18 @@ export function mousemoveHandler(
         swapIndex = index + 1;
     }
 
+    let updateOrder = undefined;
+
     if (swapIndex !== index) {
         const tmp = children[index];
         children[index] = children[swapIndex];
         children[swapIndex] = tmp;
+
+        updateOrder = {
+            indexMap: [],
+            oldIndex: index,
+            swapIndex: index
+        };
     }
 
     children[children.length - 1] = updateGhost(
@@ -40,10 +48,13 @@ export function mousemoveHandler(
         ev
     );
 
-    return {
-        ...node,
-        children
-    };
+    return [
+        {
+            ...node,
+            children
+        },
+        updateOrder
+    ];
 }
 
 function getArea(item: Element): number {

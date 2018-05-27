@@ -16,7 +16,7 @@ export function mousedownHandler(
     node: VNode,
     ev: MouseEvent,
     opts: SortableOptions
-): VNode {
+): [VNode, undefined] {
     const item: Element = ev.currentTarget as Element;
     const indexClicked = [...item.parentElement.children].indexOf(item);
 
@@ -29,15 +29,18 @@ export function mousedownHandler(
             ] as VNode)
         );
 
-    return {
-        ...addDataEntry(node, 'style', {
-            ...selectNames
-                .map(n => ({ [n]: 'none' }))
-                .reduce((a, c) => ({ ...a, ...c }), {}),
-            position: 'relative'
-        }),
-        children
-    };
+    return [
+        {
+            ...addDataEntry(node, 'style', {
+                ...selectNames
+                    .map(n => ({ [n]: 'none' }))
+                    .reduce((a, c) => ({ ...a, ...c }), {}),
+                position: 'relative'
+            }),
+            children
+        },
+        undefined
+    ];
 }
 
 function addData(node: VNode, index: number): VNode {

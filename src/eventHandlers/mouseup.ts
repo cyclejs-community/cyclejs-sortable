@@ -8,13 +8,21 @@ export function mouseupHandler(
     node: VNode,
     ev: MouseEvent,
     opts: SortableOptions
-): VNode {
+): [VNode, undefined] {
     const children = node.children.slice(0, -1).map(cleanup);
 
-    return {
-        ...deleteData(node, 'style', ['position'].concat(selectNames), true),
-        children
-    };
+    return [
+        {
+            ...deleteData(
+                node,
+                'style',
+                ['position'].concat(selectNames),
+                true
+            ),
+            children
+        },
+        undefined
+    ];
 }
 
 function cleanup(node: VNode): VNode {

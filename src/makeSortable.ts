@@ -21,6 +21,12 @@ export interface SortableOptions {
     selectionDelay?: number;
 }
 
+export interface UpdateOrder {
+    indexMap: { [old: number]: number };
+    oldIndex: number;
+    newIndex: number;
+}
+
 export function toSortable(options: SortableOptions): HOC {
     return component => makeSortable(component, options);
 }
@@ -81,13 +87,47 @@ export function makeSortable(
             .map(start => move$.endWhen(mouseup$))
             .flatten();
 
-        const vdom$: Stream<VNode> = childDOM$
+        const data$: Stream<[VNode, UpdateOrder | undefined]> = childDOM$
             .map(dom =>
                 xs
                     .merge(mousedown$, mousemove$, mouseup$)
-                    .fold(eventHandler, dom)
+                    .fold(eventHandler, [dom, undefined])
             )
             .flatten();
+
+        const vdom$: Stream<VNode> = data$.map(([dom, _]) => dom);
+
+        const updateOrder$: Stream<UpdateOrder> = data$
+            .map(([_, x]) => x)
+            .filter(x => x !== undefined);
+
+        const updateAccumulated$: Stream<UpdateOrder> = mousedown$
+            .mapTo(updateOrder$
+                .fold(
+                    (acc, curr) => ({
+                        indexMap: acc.indexMap
+                            ? Object.keys(acc.indexMap)
+                                  .map(k => ({
+                                      [k]: curr.indexMap[acc.indexMap[k]]
+                                  }))
+                                  .reduce((a, c) => ({ ...a, ...c }), {})
+                            : curr.indexMap,
+                        oldIndex:
+                            acc.oldIndex === -1 ? curr.oldIndex : acc.oldIndex,
+                        newIndex: curr.newIndex
+                    }),
+                    {
+                        indexMap: undefined,
+                        oldIndex: -1,
+                        newIndex: -1
+                    }
+                )
+                .drop(1) as Stream<UpdateOrder>)
+            .flatten();
+
+        const updateDone$: Stream<UpdateOrder> = mouseup$
+            .compose(sampleCombine(updateAccumulated$))
+            .map(([_, x]) => x);
 
         const dragInProgress$ = xs
             .merge(mousedown$, mouseup$)
@@ -96,7 +136,9 @@ export function makeSortable(
         return {
             ...sinks,
             DOM: adapt(vdom$),
-            drag: adapt(dragInProgress$)
+            drag: adapt(dragInProgress$),
+            updateLive: adapt(updateOrder$),
+            updateDone$: adapt(updateDone$)
         };
     };
 }

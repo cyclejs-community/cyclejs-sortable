@@ -1,6 +1,6 @@
 import { VNode } from '@cycle/dom';
 
-import { SortableOptions } from './makeSortable';
+import { SortableOptions, UpdateOrder } from './makeSortable';
 
 import { mousedownHandler } from './eventHandlers/mousedown';
 import { mouseupHandler } from './eventHandlers/mouseup';
@@ -8,8 +8,8 @@ import { mousemoveHandler } from './eventHandlers/mousemove';
 
 export function handleEvent(
     options: SortableOptions
-): (node: VNode, event: MouseEvent) => VNode {
-    return function(node: VNode, event: MouseEvent): VNode {
+): (data: [VNode, any], event: MouseEvent) => [VNode, UpdateOrder | undefined] {
+    return function(data, event) {
         const eventHandlerMapping = {
             mousedown: mousedownHandler,
             touchstart: mousedownHandler,
@@ -19,6 +19,6 @@ export function handleEvent(
             mousemove: mousemoveHandler,
             touchmove: mousemoveHandler
         };
-        return eventHandlerMapping[event.type](node, event, options);
+        return eventHandlerMapping[event.type](data[0], event, options);
     };
 }
