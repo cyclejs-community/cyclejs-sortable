@@ -7,7 +7,7 @@
   "typings": "build/cjs/src/makeSortable.d.ts",
   "types": "build/cjs/src/makeSortable.d.ts",
   "lint-staged": {
-    "*.{js,jsx,jsx,ts,tsx}": [
+    "*.{ts,tsx}": [
       "prettier --tab-width 4 --single-quote --write",
       "git add"
     ]

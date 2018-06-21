@@ -39,12 +39,12 @@ function userSelectDriver(sort$): void {
 }
 
 function main(sources: Sources): Sinks {
-    const sinks = makeSortable(Child, {
+    const sinks: any = makeSortable(Child, {
         itemSelector: 'ul > li'
     })(sources);
 
     return {
-        drag: sinks.drag,
+        drag: sinks.dragging,
         DOM: sinks.DOM.map(dom =>
             div([h3('Horizontal too!'), p('this is running with RxJS'), dom])
         )

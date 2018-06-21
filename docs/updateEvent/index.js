@@ -41,15 +41,16 @@
             function(require, module, exports) {
                 'use strict';
                 Object.defineProperty(exports, '__esModule', { value: true });
-                const xstream_1 = require('xstream');
-                const run_1 = require('@cycle/run');
-                const dom_1 = require('@cycle/dom');
-                const makeSortable_1 = require('../../../src/makeSortable');
-                const sortable = makeSortable_1.makeSortable(Child, {
+                var xstream_1 = require('xstream');
+                var run_1 = require('@cycle/run');
+                var dom_1 = require('@cycle/dom');
+                var makeSortable_1 = require('../../../src/makeSortable');
+                var sortable = makeSortable_1.makeSortable(Child, {
                     itemSelector: '.li'
                 });
-                function Child({ DOM }) {
-                    const vdom$ = xstream_1.default.of(
+                function Child(_a) {
+                    var DOM = _a.DOM;
+                    var vdom$ = xstream_1.default.of(
                         dom_1.ul('.ul', [
                             dom_1.li('.li', '', ['Option 1']),
                             dom_1.li('.li', '', ['Option 2']),
@@ -64,16 +65,20 @@
                     };
                 }
                 function main(sources) {
-                    const sinks = sortable(sources);
-                    const vdom$ = xstream_1.default
+                    var sinks = sortable(sources);
+                    var vdom$ = xstream_1.default
                         .combine(
                             sinks.DOM,
                             sinks.dragging,
                             sinks.updateLive.startWith(undefined),
                             sinks.updateDone.startWith(undefined)
                         )
-                        .map(([childDOM, isDragging, lastUpdate, update]) =>
-                            dom_1.div([
+                        .map(function(_a) {
+                            var childDOM = _a[0],
+                                isDragging = _a[1],
+                                lastUpdate = _a[2],
+                                update = _a[3];
+                            return dom_1.div([
                                 dom_1.h2(['Event example']),
                                 childDOM,
                                 dom_1.p(['Is dragging: ' + isDragging]),
@@ -95,8 +100,8 @@
                                     : dom_1.p([
                                           'Last completed reordering: none'
                                       ])
-                            ])
-                        );
+                            ]);
+                        });
                     return {
                         DOM: vdom$
                     };
@@ -116,12 +121,12 @@
             function(require, module, exports) {
                 'use strict';
                 Object.defineProperty(exports, '__esModule', { value: true });
-                const mousedown_1 = require('./eventHandlers/mousedown');
-                const mouseup_1 = require('./eventHandlers/mouseup');
-                const mousemove_1 = require('./eventHandlers/mousemove');
+                var mousedown_1 = require('./eventHandlers/mousedown');
+                var mouseup_1 = require('./eventHandlers/mouseup');
+                var mousemove_1 = require('./eventHandlers/mousemove');
                 function handleEvent(options) {
                     return function(data, event) {
-                        const eventHandlerMapping = {
+                        var eventHandlerMapping = {
                             mousedown: mousedown_1.mousedownHandler,
                             touchstart: mousedown_1.mousedownHandler,
                             mouseleave: mouseup_1.mouseupHandler,
@@ -148,8 +153,20 @@
         3: [
             function(require, module, exports) {
                 'use strict';
+                var __assign =
+                    (this && this.__assign) ||
+                    Object.assign ||
+                    function(t) {
+                        for (var s, i = 1, n = arguments.length; i < n; i++) {
+                            s = arguments[i];
+                            for (var p in s)
+                                if (Object.prototype.hasOwnProperty.call(s, p))
+                                    t[p] = s[p];
+                        }
+                        return t;
+                    };
                 Object.defineProperty(exports, '__esModule', { value: true });
-                const helpers_1 = require('../helpers');
+                var helpers_1 = require('../helpers');
                 exports.selectNames = [
                     '-webkit-touch-callout',
                     '-webkit-user-select',
@@ -159,11 +176,11 @@
                     'user-select'
                 ];
                 function mousedownHandler(node, ev, opts) {
-                    const item = ev.currentTarget;
-                    const indexClicked = [
-                        ...item.parentElement.children
-                    ].indexOf(item);
-                    const children = node.children
+                    var item = ev.currentTarget;
+                    var indexClicked = Array.prototype.slice
+                        .call(item.parentElement.children)
+                        .indexOf(item);
+                    var children = node.children
                         .map(addData)
                         .map(hideSelected(indexClicked))
                         .concat(
@@ -175,23 +192,27 @@
                             )
                         );
                     return [
-                        Object.assign(
+                        __assign(
                             {},
                             helpers_1.addDataEntry(
                                 node,
                                 'style',
-                                Object.assign(
+                                __assign(
                                     {},
                                     exports.selectNames
-                                        .map(n => ({ [n]: 'none' }))
-                                        .reduce(
-                                            (a, c) => Object.assign({}, a, c),
-                                            {}
-                                        ),
+                                        .map(function(n) {
+                                            return (
+                                                (_a = {}), (_a[n] = 'none'), _a
+                                            );
+                                            var _a;
+                                        })
+                                        .reduce(function(a, c) {
+                                            return __assign({}, a, c);
+                                        }, {}),
                                     { position: 'relative' }
                                 )
                             ),
-                            { children }
+                            { children: children }
                         ),
                         undefined
                     ];
@@ -212,15 +233,15 @@
                     };
                 }
                 function createGhost(clicked, ev, item, node) {
-                    const rect = item.getBoundingClientRect();
-                    const parentRect = item.parentElement.getBoundingClientRect();
-                    const offsetX = ev.clientX - rect.left + parentRect.left;
-                    const offsetY = ev.clientY - rect.top + parentRect.top;
+                    var rect = item.getBoundingClientRect();
+                    var parentRect = item.parentElement.getBoundingClientRect();
+                    var offsetX = ev.clientX - rect.left + parentRect.left;
+                    var offsetY = ev.clientY - rect.top + parentRect.top;
                     return helpers_1.addDataEntry(
                         helpers_1.addDataEntry(node, 'dataset', {
-                            offsetX,
-                            offsetY,
-                            item
+                            offsetX: offsetX,
+                            offsetY: offsetY,
+                            item: item
                         }),
                         'style',
                         {
@@ -239,18 +260,36 @@
         4: [
             function(require, module, exports) {
                 'use strict';
+                var __assign =
+                    (this && this.__assign) ||
+                    Object.assign ||
+                    function(t) {
+                        for (var s, i = 1, n = arguments.length; i < n; i++) {
+                            s = arguments[i];
+                            for (var p in s)
+                                if (Object.prototype.hasOwnProperty.call(s, p))
+                                    t[p] = s[p];
+                        }
+                        return t;
+                    };
                 Object.defineProperty(exports, '__esModule', { value: true });
-                const helpers_1 = require('../helpers');
+                var helpers_1 = require('../helpers');
                 function mousemoveHandler(node, ev, opts) {
-                    const item = node.children
-                        .map(n => n.data.dataset.item)
-                        .filter(n => !!n)[0];
-                    const siblings = [...item.parentElement.children];
-                    const index = siblings.indexOf(item);
-                    const ghost = siblings[siblings.length - 1];
-                    const itemArea = getArea(ghost);
-                    let swapIndex = index;
-                    const children = node.children.slice(0);
+                    var item = node.children
+                        .map(function(n) {
+                            return n.data.dataset.item;
+                        })
+                        .filter(function(n) {
+                            return !!n;
+                        })[0];
+                    var siblings = Array.prototype.slice.call(
+                        item.parentElement.children
+                    );
+                    var index = siblings.indexOf(item);
+                    var ghost = siblings[siblings.length - 1];
+                    var itemArea = getArea(ghost);
+                    var swapIndex = index;
+                    var children = node.children.slice(0);
                     if (
                         index > 0 &&
                         getIntersection(ghost, siblings[index - 1], true) > 0
@@ -262,9 +301,9 @@
                     ) {
                         swapIndex = index + 1;
                     }
-                    let updateOrder = undefined;
+                    var updateOrder = undefined;
                     if (swapIndex !== index) {
-                        const tmp = children[index];
+                        var tmp = children[index];
                         children[index] = children[swapIndex];
                         children[swapIndex] = tmp;
                         updateOrder = {
@@ -277,59 +316,64 @@
                         children[children.length - 1],
                         ev
                     );
-                    return [Object.assign({}, node, { children }), updateOrder];
+                    return [
+                        __assign({}, node, { children: children }),
+                        updateOrder
+                    ];
                 }
                 exports.mousemoveHandler = mousemoveHandler;
                 function getArea(item) {
-                    const rect = item.getBoundingClientRect();
+                    var rect = item.getBoundingClientRect();
                     return rect.width * rect.height;
                 }
                 function getIntersectionArea(rectA, rectB) {
-                    let a =
+                    var a =
                         Math.min(rectA.right, rectB.right) -
                         Math.max(rectA.left, rectB.left);
                     a = a < 0 ? 0 : a;
-                    const area =
+                    var area =
                         a *
                         (Math.min(rectA.bottom, rectB.bottom) -
                             Math.max(rectA.top, rectB.top));
                     return area < 0 ? 0 : area;
                 }
                 function getIntersection(ghost, elm, upper) {
-                    const f = 0.25;
-                    const _a = (upper ? ghost : elm).getBoundingClientRect();
-                    const _b = (upper ? elm : ghost).getBoundingClientRect();
-                    const a = {
+                    var f = 0.25;
+                    var _a = (upper ? ghost : elm).getBoundingClientRect();
+                    var _b = (upper ? elm : ghost).getBoundingClientRect();
+                    var a = {
                         left: _a.left,
                         right: _a.right,
                         top: _a.top,
                         bottom: _a.bottom
                     };
-                    const b = {
+                    var b = {
                         left: _b.left,
                         right: _b.right,
                         top: _b.top,
                         bottom: _b.bottom
                     };
-                    const aRight = Object.assign({}, a, {
+                    var aRight = __assign({}, a, {
                         left: a.right - (a.right - a.left) * f
                     });
-                    const aBottom = Object.assign({}, a, {
+                    var aBottom = __assign({}, a, {
                         top: a.bottom - (a.bottom - a.top) * f
                     });
-                    const bLeft = Object.assign({}, b, {
+                    var bLeft = __assign({}, b, {
                         right: b.left + (b.right - b.left) * f
                     });
-                    const bTop = Object.assign({}, b, {
+                    var bTop = __assign({}, b, {
                         bottom: b.top + (b.bottom - b.top) * f
                     });
-                    const area =
+                    var area =
                         getIntersectionArea(aRight, bLeft) +
                         getIntersectionArea(aBottom, bTop);
                     return area < 0 ? 0 : area;
                 }
                 function updateGhost(node, ev) {
-                    const { offsetX, offsetY } = node.data.dataset;
+                    var _c = node.data.dataset,
+                        offsetX = _c.offsetX,
+                        offsetY = _c.offsetY;
                     return helpers_1.addDataEntry(node, 'style', {
                         left: ev.clientX - offsetX + 'px',
                         top: ev.clientY - offsetY + 'px'
@@ -341,12 +385,24 @@
         5: [
             function(require, module, exports) {
                 'use strict';
+                var __assign =
+                    (this && this.__assign) ||
+                    Object.assign ||
+                    function(t) {
+                        for (var s, i = 1, n = arguments.length; i < n; i++) {
+                            s = arguments[i];
+                            for (var p in s)
+                                if (Object.prototype.hasOwnProperty.call(s, p))
+                                    t[p] = s[p];
+                        }
+                        return t;
+                    };
                 Object.defineProperty(exports, '__esModule', { value: true });
-                const mousedown_1 = require('./mousedown');
+                var mousedown_1 = require('./mousedown');
                 function mouseupHandler(node, ev, opts) {
-                    const children = node.children.slice(0, -1).map(cleanup);
+                    var children = node.children.slice(0, -1).map(cleanup);
                     return [
-                        Object.assign(
+                        __assign(
                             {},
                             deleteData(
                                 node,
@@ -354,14 +410,14 @@
                                 ['position'].concat(mousedown_1.selectNames),
                                 true
                             ),
-                            { children }
+                            { children: children }
                         ),
                         undefined
                     ];
                 }
                 exports.mouseupHandler = mouseupHandler;
                 function cleanup(node) {
-                    let n = deleteData(node, 'dataset', [
+                    var n = deleteData(node, 'dataset', [
                         'offsetX',
                         'offsetY',
                         'originalIndex',
@@ -370,8 +426,8 @@
                     return deleteData(n, 'style', ['opacity'], true);
                 }
                 function deleteData(node, mod, keys, b) {
-                    let obj = Object.assign({}, node.data[mod]);
-                    for (let i = 0; i < keys.length; i++) {
+                    var obj = __assign({}, node.data[mod]);
+                    for (var i = 0; i < keys.length; i++) {
                         if (b) {
                             obj[keys[i]] = '';
                         } else {
@@ -381,9 +437,14 @@
                     if (Object.keys(obj).length === 0) {
                         obj = '';
                     }
-                    return Object.assign({}, node, {
-                        data: Object.assign({}, node.data, { [mod]: obj })
+                    return __assign({}, node, {
+                        data: __assign(
+                            {},
+                            node.data,
+                            ((_a = {}), (_a[mod] = obj), _a)
+                        )
                     });
+                    var _a;
                 }
             },
             { './mousedown': 3 }
@@ -391,27 +452,44 @@
         6: [
             function(require, module, exports) {
                 'use strict';
+                var __assign =
+                    (this && this.__assign) ||
+                    Object.assign ||
+                    function(t) {
+                        for (var s, i = 1, n = arguments.length; i < n; i++) {
+                            s = arguments[i];
+                            for (var p in s)
+                                if (Object.prototype.hasOwnProperty.call(s, p))
+                                    t[p] = s[p];
+                        }
+                        return t;
+                    };
                 Object.defineProperty(exports, '__esModule', { value: true });
                 function addKeys(node) {
-                    return Object.assign({}, node, {
-                        children: node.children.map((n, i) =>
-                            Object.assign({}, n, {
+                    return __assign({}, node, {
+                        children: node.children.map(function(n, i) {
+                            return __assign({}, n, {
                                 key: n.key ? n.key : '_sortable' + i
-                            })
-                        )
+                            });
+                        })
                     });
                 }
                 exports.addKeys = addKeys;
                 function addDataEntry(node, key, values) {
-                    return Object.assign({}, node, {
-                        data: Object.assign({}, node.data, {
-                            [key]: Object.assign(
+                    return __assign({}, node, {
+                        data: __assign(
+                            {},
+                            node.data,
+                            ((_a = {}),
+                            (_a[key] = __assign(
                                 {},
                                 node.data ? node.data[key] : {},
                                 values
-                            )
-                        })
+                            )),
+                            _a)
+                        )
                     });
+                    var _a;
                 }
                 exports.addDataEntry = addDataEntry;
             },
@@ -420,15 +498,29 @@
         7: [
             function(require, module, exports) {
                 'use strict';
+                var __assign =
+                    (this && this.__assign) ||
+                    Object.assign ||
+                    function(t) {
+                        for (var s, i = 1, n = arguments.length; i < n; i++) {
+                            s = arguments[i];
+                            for (var p in s)
+                                if (Object.prototype.hasOwnProperty.call(s, p))
+                                    t[p] = s[p];
+                        }
+                        return t;
+                    };
                 Object.defineProperty(exports, '__esModule', { value: true });
-                const xstream_1 = require('xstream');
-                const delay_1 = require('xstream/extra/delay');
-                const sampleCombine_1 = require('xstream/extra/sampleCombine');
-                const adapt_1 = require('@cycle/run/lib/adapt');
-                const helpers_1 = require('./helpers');
-                const eventHandler_1 = require('./eventHandler');
+                var xstream_1 = require('xstream');
+                var delay_1 = require('xstream/extra/delay');
+                var sampleCombine_1 = require('xstream/extra/sampleCombine');
+                var adapt_1 = require('@cycle/run/lib/adapt');
+                var helpers_1 = require('./helpers');
+                var eventHandler_1 = require('./eventHandler');
                 function toSortable(options) {
-                    return component => makeSortable(component, options);
+                    return function(component) {
+                        return makeSortable(component, options);
+                    };
                 }
                 exports.toSortable = toSortable;
                 function makeSortable(main, options) {
@@ -439,31 +531,29 @@
                         if (!options.TimeDriverKey) {
                             options.TimeDriverKey = 'Time';
                         }
-                        const sinks = main(sources);
-                        const eventHandler = eventHandler_1.handleEvent(
-                            options
-                        );
-                        const childDOM$ = xstream_1.default
+                        var sinks = main(sources);
+                        var eventHandler = eventHandler_1.handleEvent(options);
+                        var childDOM$ = xstream_1.default
                             .fromObservable(sinks[options.DOMDriverKey])
                             .map(helpers_1.addKeys);
-                        const down$ = getMouseStream(
+                        var down$ = getMouseStream(
                             sources[options.DOMDriverKey],
                             ['mousedown', 'touchstart'],
                             options.handle || options.itemSelector
                         );
-                        const up$ = getMouseStream(
+                        var up$ = getMouseStream(
                             sources[options.DOMDriverKey],
                             ['mouseleave', 'mouseup', 'touchend'],
                             'body'
                         );
-                        const move$ = getMouseStream(
+                        var move$ = getMouseStream(
                             sources[options.DOMDriverKey],
                             ['mousemove', 'touchmove'],
                             'body'
                         );
-                        const mousedown$ = down$
-                            .map(ev =>
-                                xstream_1.default
+                        var mousedown$ = down$
+                            .map(function(ev) {
+                                return xstream_1.default
                                     .of(ev)
                                     .compose(
                                         sources[options.TimeDriverKey]
@@ -476,75 +566,104 @@
                                     )
                                     .endWhen(
                                         xstream_1.default.merge(up$, move$)
-                                    )
-                            )
+                                    );
+                            })
                             .flatten();
-                        const mouseup$ = mousedown$
-                            .map(_ => up$.take(1))
+                        var mouseup$ = mousedown$
+                            .map(function(_) {
+                                return up$.take(1);
+                            })
                             .flatten();
-                        const mousemove$ = mousedown$
-                            .map(start => move$.endWhen(mouseup$))
+                        var mousemove$ = mousedown$
+                            .map(function(start) {
+                                return move$.endWhen(mouseup$);
+                            })
                             .flatten();
-                        const data$ = childDOM$
-                            .map(dom =>
-                                xstream_1.default
+                        var data$ = childDOM$
+                            .map(function(dom) {
+                                return xstream_1.default
                                     .merge(mousedown$, mousemove$, mouseup$)
-                                    .fold(eventHandler, [dom, undefined])
-                            )
+                                    .fold(eventHandler, [dom, undefined]);
+                            })
                             .flatten();
-                        const vdom$ = data$.map(([dom, _]) => dom);
-                        const updateOrder$ = data$
-                            .map(([_, x]) => x)
-                            .filter(x => x !== undefined);
-                        const updateAccumulated$ = mousedown$
-                            .map(() =>
-                                updateOrder$
+                        var vdom$ = data$.map(function(_a) {
+                            var dom = _a[0],
+                                _ = _a[1];
+                            return dom;
+                        });
+                        var updateOrder$ = data$
+                            .map(function(_a) {
+                                var _ = _a[0],
+                                    x = _a[1];
+                                return x;
+                            })
+                            .filter(function(x) {
+                                return x !== undefined;
+                            });
+                        var updateAccumulated$ = mousedown$
+                            .map(function() {
+                                return updateOrder$
                                     .fold(
-                                        (acc, curr) => ({
-                                            indexMap: acc.indexMap
-                                                ? Object.keys(acc.indexMap)
-                                                      .map(k => ({
-                                                          [k]:
-                                                              curr.indexMap[
-                                                                  acc.indexMap[
-                                                                      k
-                                                                  ]
-                                                              ]
-                                                      }))
-                                                      .reduce(
-                                                          (a, c) =>
-                                                              Object.assign(
+                                        function(acc, curr) {
+                                            return {
+                                                indexMap: acc.indexMap
+                                                    ? Object.keys(acc.indexMap)
+                                                          .map(function(k) {
+                                                              return (
+                                                                  (_a = {}),
+                                                                  (_a[k] =
+                                                                      curr.indexMap[
+                                                                          acc.indexMap[
+                                                                              k
+                                                                          ]
+                                                                      ]),
+                                                                  _a
+                                                              );
+                                                              var _a;
+                                                          })
+                                                          .reduce(function(
+                                                              a,
+                                                              c
+                                                          ) {
+                                                              return __assign(
                                                                   {},
                                                                   a,
                                                                   c
-                                                              ),
-                                                          {}
-                                                      )
-                                                : curr.indexMap,
-                                            oldIndex:
-                                                acc.oldIndex === -1
-                                                    ? curr.oldIndex
-                                                    : acc.oldIndex,
-                                            newIndex: curr.newIndex
-                                        }),
+                                                              );
+                                                          },
+                                                          {})
+                                                    : curr.indexMap,
+                                                oldIndex:
+                                                    acc.oldIndex === -1
+                                                        ? curr.oldIndex
+                                                        : acc.oldIndex,
+                                                newIndex: curr.newIndex
+                                            };
+                                        },
                                         {
                                             indexMap: undefined,
                                             oldIndex: -1,
                                             newIndex: -1
                                         }
                                     )
-                                    .drop(1)
-                            )
+                                    .drop(1);
+                            })
                             .flatten();
-                        const updateDone$ = mouseup$
+                        var updateDone$ = mouseup$
                             .compose(
                                 sampleCombine_1.default(updateAccumulated$)
                             )
-                            .map(([_, x]) => x);
-                        const dragInProgress$ = xstream_1.default
+                            .map(function(_a) {
+                                var _ = _a[0],
+                                    x = _a[1];
+                                return x;
+                            });
+                        var dragInProgress$ = xstream_1.default
                             .merge(mousedown$, mouseup$)
-                            .fold(acc => !acc, false);
-                        return Object.assign({}, sinks, {
+                            .fold(function(acc) {
+                                return !acc;
+                            }, false);
+                        return __assign({}, sinks, {
                             DOM: adapt_1.adapt(vdom$),
                             dragging: adapt_1.adapt(dragInProgress$),
                             updateLive: adapt_1.adapt(updateOrder$),
@@ -554,25 +673,28 @@
                 }
                 exports.makeSortable = makeSortable;
                 function getMouseStream(DOM, eventTypes, handle) {
-                    return xstream_1.default.merge(
-                        ...eventTypes
+                    return xstream_1.default.merge.apply(
+                        xstream_1.default,
+                        eventTypes
                             .slice(0, -1)
-                            .map(ev =>
-                                xstream_1.default.fromObservable(
+                            .map(function(ev) {
+                                return xstream_1.default.fromObservable(
                                     DOM.select(handle).events(ev)
-                                )
-                            ),
-                        xstream_1.default
-                            .fromObservable(
-                                DOM.select(handle).events(
-                                    eventTypes[eventTypes.length - 1]
-                                )
-                            )
-                            .map(augmentEvent)
+                                );
+                            })
+                            .concat([
+                                xstream_1.default
+                                    .fromObservable(
+                                        DOM.select(handle).events(
+                                            eventTypes[eventTypes.length - 1]
+                                        )
+                                    )
+                                    .map(augmentEvent)
+                            ])
                     );
                 }
                 function augmentEvent(ev) {
-                    const touch = ev.touches[0];
+                    var touch = ev.touches[0];
                     ev.clientX = touch.clientX;
                     ev.clientY = touch.clientY;
                     return ev;
