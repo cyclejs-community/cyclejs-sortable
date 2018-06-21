@@ -1,6 +1,6 @@
 {
   "name": "cyclejs-sortable",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Makes all children of a vdom-node sortable via drag and drop",
   "main": "build/cjs/src/makeSortable.js",
   "module": "build/es6/src/makeSortable.js",
