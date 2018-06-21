@@ -2,8 +2,10 @@
   "name": "cyclejs-sortable",
   "version": "3.0.0",
   "description": "Makes all children of a vdom-node sortable via drag and drop",
-  "main": "build/src/makeSortable.js",
-  "typings": "build/src/makeSortable.d.ts",
+  "main": "build/cjs/src/makeSortable.js",
+  "module": "build/es6/src/makeSortable.js",
+  "typings": "build/cjs/src/makeSortable.d.ts",
+  "types": "build/cjs/src/makeSortable.d.ts",
   "lint-staged": {
     "*.{js,jsx,jsx,ts,tsx}": [
       "prettier --tab-width 4 --single-quote --write",
@@ -13,7 +15,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "format": "prettier --tab-width 4 --single-quote --write './{examples,src}/**/*.{ts,tsx}'",
-    "build": "tsc -d",
+    "build": "tsc -d --outDir 'build/cjs' --module commonjs && tsc -d --outDir 'build/es6' --module es6",
     "build:examples": "tsc",
     "documentation": "typedoc --out docs src && touch docs/.nojekyll",
     "prepublishOnly": "npm run build && npm run documentation && cp-cli examples docs/",
