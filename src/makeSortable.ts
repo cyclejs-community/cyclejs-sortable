@@ -17,7 +17,6 @@ export interface SortableOptions {
     itemSelector: string;
     handle?: string;
     DOMDriverKey?: string;
-    TimeDriverKey?: string;
     selectionDelay?: number;
 }
 
@@ -47,9 +46,6 @@ export function makeSortable<Sources extends object, Sinks extends object>(
         if (!options.DOMDriverKey) {
             options.DOMDriverKey = 'DOM';
         }
-        if (!options.TimeDriverKey) {
-            options.TimeDriverKey = 'Time';
-        }
 
         const sinks: any = main(sources);
         const eventHandler = handleEvent(options);
@@ -78,13 +74,7 @@ export function makeSortable<Sources extends object, Sinks extends object>(
             .map(ev =>
                 xs
                     .of(ev)
-                    .compose<Stream<MouseEvent>>(
-                        sources[options.TimeDriverKey]
-                            ? sources[options.TimeDriverKey].delay(
-                                  options.selectionDelay
-                              )
-                            : delay(options.selectionDelay)
-                    )
+                    .compose<Stream<MouseEvent>>(delay(options.selectionDelay))
                     .endWhen(xs.merge(up$, move$))
             )
             .flatten();
