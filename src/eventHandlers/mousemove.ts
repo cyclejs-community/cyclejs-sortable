@@ -29,7 +29,7 @@ export function mousemoveHandler(
         swapIndex = index + 1;
     }
 
-    let updateOrder = undefined;
+    let updateOrder: UpdateOrder | undefined = undefined;
 
     if (swapIndex !== index) {
         const tmp = children[index];
@@ -39,7 +39,7 @@ export function mousemoveHandler(
         updateOrder = {
             indexMap: [],
             oldIndex: index,
-            swapIndex: index
+            newIndex: swapIndex
         };
     }
 

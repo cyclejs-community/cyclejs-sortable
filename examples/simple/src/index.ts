@@ -34,6 +34,6 @@ function Child({ DOM }: Sources): Sinks {
     };
 }
 
-run(main, {
+run(main as any, {
     DOM: makeDOMDriver('#app')
 });

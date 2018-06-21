@@ -8,10 +8,10 @@ import { adapt } from '@cycle/run/lib/adapt';
 import { addKeys } from './helpers';
 import { handleEvent } from './eventHandler';
 
-export type Sources = any;
-export type Sinks = any;
-export type Component = (s: Sources) => Sinks;
-export type HOC = (c: Component) => Component;
+export type Component<So, Si> = (s: So) => Si;
+export type HOC<So, Si> = (
+    c: Component<So, Si>
+) => Component<So, Si & SortableSinks>;
 
 export interface SortableOptions {
     itemSelector: string;
@@ -27,15 +27,23 @@ export interface UpdateOrder {
     newIndex: number;
 }
 
-export function toSortable(options: SortableOptions): HOC {
+export interface SortableSinks {
+    dragging: Stream<boolean>;
+    updateLive: Stream<UpdateOrder>;
+    updateDone: Stream<UpdateOrder>;
+}
+
+export function toSortable<Sources extends object, Sinks extends object>(
+    options: SortableOptions
+): HOC<Sources, Sinks> {
     return component => makeSortable(component, options);
 }
 
-export function makeSortable(
-    main: Component,
+export function makeSortable<Sources extends object, Sinks extends object>(
+    main: Component<Sources, Sinks>,
     options: SortableOptions
-): Component {
-    return function(sources: Sources): Sinks {
+): Component<Sources, Sinks & SortableSinks> {
+    return function(sources: Sources): Sinks & SortableSinks {
         if (!options.DOMDriverKey) {
             options.DOMDriverKey = 'DOM';
         }
@@ -43,7 +51,7 @@ export function makeSortable(
             options.TimeDriverKey = 'Time';
         }
 
-        const sinks = main(sources);
+        const sinks: any = main(sources);
         const eventHandler = handleEvent(options);
 
         const childDOM$: Stream<VNode> = xs
@@ -102,27 +110,36 @@ export function makeSortable(
             .filter(x => x !== undefined);
 
         const updateAccumulated$: Stream<UpdateOrder> = mousedown$
-            .mapTo(updateOrder$
-                .fold(
-                    (acc, curr) => ({
-                        indexMap: acc.indexMap
-                            ? Object.keys(acc.indexMap)
-                                  .map(k => ({
-                                      [k]: curr.indexMap[acc.indexMap[k]]
-                                  }))
-                                  .reduce((a, c) => ({ ...a, ...c }), {})
-                            : curr.indexMap,
-                        oldIndex:
-                            acc.oldIndex === -1 ? curr.oldIndex : acc.oldIndex,
-                        newIndex: curr.newIndex
-                    }),
-                    {
-                        indexMap: undefined,
-                        oldIndex: -1,
-                        newIndex: -1
-                    }
-                )
-                .drop(1) as Stream<UpdateOrder>)
+            .map(
+                () =>
+                    updateOrder$
+                        .fold(
+                            (acc, curr) => ({
+                                indexMap: acc.indexMap
+                                    ? Object.keys(acc.indexMap)
+                                          .map(k => ({
+                                              [k]:
+                                                  curr.indexMap[acc.indexMap[k]]
+                                          }))
+                                          .reduce(
+                                              (a, c) => ({ ...a, ...c }),
+                                              {}
+                                          )
+                                    : curr.indexMap,
+                                oldIndex:
+                                    acc.oldIndex === -1
+                                        ? curr.oldIndex
+                                        : acc.oldIndex,
+                                newIndex: curr.newIndex
+                            }),
+                            {
+                                indexMap: undefined,
+                                oldIndex: -1,
+                                newIndex: -1
+                            }
+                        )
+                        .drop(1) as Stream<UpdateOrder>
+            )
             .flatten();
 
         const updateDone$: Stream<UpdateOrder> = mouseup$
@@ -136,9 +153,9 @@ export function makeSortable(
         return {
             ...sinks,
             DOM: adapt(vdom$),
-            drag: adapt(dragInProgress$),
+            dragging: adapt(dragInProgress$),
             updateLive: adapt(updateOrder$),
-            updateDone$: adapt(updateDone$)
+            updateDone: adapt(updateDone$)
         };
     };
 }
