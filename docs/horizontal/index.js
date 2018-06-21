@@ -90,8 +90,18 @@ exports.selectNames = [
     '-ms-user-select',
     'user-select'
 ];
+function findParent(el, sel) {
+    var result = el;
+    while (!result.matches(sel)) {
+        if (result.matches('html')) {
+            throw new Error('no parent element found');
+        }
+        result = result.parentElement;
+    }
+    return result;
+}
 function mousedownHandler(node, ev, opts) {
-    var item = ev.currentTarget;
+    var item = findParent(ev.target, opts.itemSelector);
     var indexClicked = Array.prototype.slice
         .call(item.parentElement.children)
         .indexOf(item);
@@ -126,19 +136,27 @@ function hideSelected(index) {
 }
 function createGhost(clicked, ev, item, node) {
     var rect = item.getBoundingClientRect();
+    var style = getComputedStyle(item);
+    var padding = {
+        top: parseFloat(style.paddingTop) + parseFloat(style.borderTop),
+        left: parseFloat(style.paddingLeft) + parseFloat(style.borderLeft),
+        bottom: parseFloat(style.paddingBottom) + parseFloat(style.borderBottom),
+        right: parseFloat(style.paddingRight) + parseFloat(style.borderRight),
+    };
     var parentRect = item.parentElement.getBoundingClientRect();
-    var offsetX = ev.clientX - rect.left + parentRect.left;
-    var offsetY = ev.clientY - rect.top + parentRect.top;
+    var offsetX = ev.clientX - rect.left + parentRect.left + parseFloat(style.marginLeft);
+    var offsetY = ev.clientY - rect.top + parentRect.top + parseFloat(style.marginTop);
     return helpers_1.addDataEntry(helpers_1.addDataEntry(node, 'dataset', {
         offsetX: offsetX,
         offsetY: offsetY,
-        item: item
+        item: item,
+        ghost: true
     }), 'style', {
         position: 'absolute',
         left: ev.clientX - offsetX + 'px',
         top: ev.clientY - offsetY + 'px',
-        width: rect.width + 'px',
-        height: rect.height + 'px',
+        width: rect.width - padding.left - padding.right + 'px',
+        height: rect.height - padding.top - padding.bottom + 'px',
         'pointer-events': 'none'
     });
 }
@@ -161,7 +179,7 @@ function mousemoveHandler(node, ev, opts) {
         .filter(function (n) { return !!n; })[0];
     var siblings = Array.prototype.slice.call(item.parentElement.children);
     var index = siblings.indexOf(item);
-    var ghost = siblings[siblings.length - 1];
+    var ghost = siblings.filter(function (el) { return el.dataset.ghost; })[0];
     var itemArea = getArea(ghost);
     var swapIndex = index;
     var children = node.children.slice(0);
@@ -325,9 +343,6 @@ function makeSortable(main, options) {
         if (!options.DOMDriverKey) {
             options.DOMDriverKey = 'DOM';
         }
-        if (!options.TimeDriverKey) {
-            options.TimeDriverKey = 'Time';
-        }
         var sinks = main(sources);
         var eventHandler = eventHandler_1.handleEvent(options);
         var childDOM$ = xstream_1.default
@@ -340,9 +355,7 @@ function makeSortable(main, options) {
             .map(function (ev) {
             return xstream_1.default
                 .of(ev)
-                .compose(sources[options.TimeDriverKey]
-                ? sources[options.TimeDriverKey].delay(options.selectionDelay)
-                : delay_1.default(options.selectionDelay))
+                .compose(delay_1.default(options.selectionDelay))
                 .endWhen(xstream_1.default.merge(up$, move$));
         })
             .flatten();
