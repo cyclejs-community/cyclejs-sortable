@@ -12,12 +12,23 @@ export const selectNames = [
     'user-select'
 ];
 
+function findParent(el: Element, sel: string): Element {
+    let result = el;
+    while (!result.matches(sel)) {
+        if (result.matches('html')) {
+            throw new Error('no parent element found');
+        }
+        result = result.parentElement;
+    }
+    return result;
+}
+
 export function mousedownHandler(
     node: VNode,
     ev: MouseEvent,
     opts: SortableOptions
 ): [VNode, undefined] {
-    const item: Element = ev.currentTarget as Element;
+    const item: Element = findParent(ev.target as Element, opts.itemSelector);
     const indexClicked = Array.prototype.slice
         .call(item.parentElement.children)
         .indexOf(item);
