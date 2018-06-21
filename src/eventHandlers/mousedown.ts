@@ -18,7 +18,9 @@ export function mousedownHandler(
     opts: SortableOptions
 ): [VNode, undefined] {
     const item: Element = ev.currentTarget as Element;
-    const indexClicked = [...item.parentElement.children].indexOf(item);
+    const indexClicked = Array.prototype.slice
+        .call(item.parentElement.children)
+        .indexOf(item);
 
     const children = node.children
         .map(addData)

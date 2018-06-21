@@ -12,7 +12,7 @@ export function mousemoveHandler(
         .map(n => n.data.dataset.item)
         .filter(n => !!n)[0];
 
-    const siblings = [...item.parentElement.children];
+    const siblings = Array.prototype.slice.call(item.parentElement.children);
     const index = siblings.indexOf(item);
     const ghost = siblings[siblings.length - 1];
     const itemArea = getArea(ghost);

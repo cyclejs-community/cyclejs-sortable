@@ -2,10 +2,14 @@
     "compileOnSave": false,
     "compilerOptions":
     {
-        "module": "CommonJS",
+        "moduleResolution": "node",
         "sourceMap": true,
-        "target": "ES6",
-        "outDir": "build"
+        "target": "ES5",
+        "outDir": "build",
+        "lib": [
+            "ES6",
+            "DOM"
+        ]
     },
     "include": [
         "src/**/*.ts",
