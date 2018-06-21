@@ -12,9 +12,11 @@ export function mousemoveHandler(
         .map(n => n.data.dataset.item)
         .filter(n => !!n)[0];
 
-    const siblings = Array.prototype.slice.call(item.parentElement.children);
+    const siblings: Element[] = Array.prototype.slice.call(
+        item.parentElement.children
+    );
     const index = siblings.indexOf(item);
-    const ghost = siblings[siblings.length - 1];
+    const ghost = siblings.filter(el => (el as any).dataset.ghost)[0];
     const itemArea = getArea(ghost);
     let swapIndex = index;
 
